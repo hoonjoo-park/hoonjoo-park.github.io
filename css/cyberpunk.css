@@ -10937,6 +10937,7 @@ a.article-nav-next span {
 }
 .navbar-main {
   box-shadow: none;
+  min-height: 5.5rem;
 }
 .navbar-main .navbar-menu,
 .navbar-main .navbar-start,
@@ -10953,6 +10954,7 @@ a.article-nav-next span {
 }
 .navbar-main .navbar-start {
   justify-content: flex-start;
+  margin-left: 2rem;
   margin-right: auto;
 }
 .navbar-main .navbar-end {
@@ -10962,6 +10964,7 @@ a.article-nav-next span {
 .navbar-main .navbar-item {
   display: flex;
   align-items: center;
+  font-size: 1.3em;
   padding: 0 0.5rem;
   margin: 1.25rem 0.25rem;
 }
@@ -10981,7 +10984,7 @@ a.article-nav-next span {
   }
 }
 .navbar-logo img {
-  max-height: 1.75rem;
+  max-height: 2.5rem;
 }
 @media screen and (max-width: 768px) {
   footer.footer .level-start {
@@ -10999,7 +11002,7 @@ footer.footer .level-end .field {
   }
 }
 .footer-logo img {
-  max-height: 1.75rem;
+  max-height: 2.5rem;
 }
 .pagination {
   margin-top: 1.5rem;
