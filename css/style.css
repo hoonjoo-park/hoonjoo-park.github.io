@@ -5244,7 +5244,7 @@ fieldset[disabled] .button {
   }
 }
 .content li + li {
-  margin-top: 0.25em;
+  margin-top: 1.5em;
 }
 .content p:not(:last-child),
 .content dl:not(:last-child),
@@ -10940,6 +10940,13 @@ a.article-nav-next span {
 h1.title {
   margin-bottom: 2.5rem !important;
   font-weight: 700;
+}
+img.articleImage {
+  display: block;
+  height: auto;
+  max-width: 60%;
+  margin: 0 auto;
+  border-radius: 5px;
 }
 .navbar-main {
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);

@@ -3,7 +3,139 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
     
-        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-12-30T21:04:40.000Z" title="2021. 12. 31. 오전 6:04:40">2021-12-31</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-12-30T21:07:05.818Z" title="2021. 12. 31. 오전 6:07:05">2021-12-31</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a></span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/javascript/%E1%84%8F%E1%85%A9%E1%86%AF%E1%84%87%E1%85%A2%E1%86%A8%E1%84%80%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%86%E1%85%B5%E1%84%89%E1%85%B3%20(Callback%20&amp;%20Promise)/">콜백과 프로미스 (Callback &amp; Promise)</a></h1><div class="content"><hr>
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-12-31T11:01:40.000Z" title="2021. 12. 31. 오후 8:01:40">2021-12-31</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-12-31T11:08:01.750Z" title="2021. 12. 31. 오후 8:08:01">2021-12-31</time></span><span class="level-item"><a class="link-muted" href="/categories/CS/">CS</a><span> / </span><a class="link-muted" href="/categories/CS/Network/">Network</a></span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/cs/network/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%EC%9D%98%20%EA%B8%B0%EB%B3%B8/">네트워크의 기본</a></h1><div class="content"><hr>
+<h3 id="네트워크란-무엇인가"><a href="#네트워크란-무엇인가" class="headerlink" title="네트워크란 무엇인가?"></a>네트워크란 무엇인가?</h3><blockquote>
+<p>네트워크란, 한 마디로 “<strong>연결</strong>”을 의미한다.<br>학교도 선생님과 학생들을 이어주는 네트워크, 회사도, 집도 모두 네트워크의 일환이다.</p>
+</blockquote>
+<ol>
+<li><p><strong>컴퓨터 네트워크</strong></p>
+<img src="https://user-images.githubusercontent.com/67448481/147819191-ae7350d7-961c-4fb8-a8a0-7703dfbbf3f5.png" alt="네트워크" class="articleImage"/>
+
+<p>⇒ 하지만 컴퓨터 네트워크는 “<strong>데이터를 주고 받기 위한 네트워크</strong>”를 의미한다.</p>
+<p>카톡 메시지를 주고 받는 것, 인터넷에서 정보를 검색하거나 작성하는 것 모두 데이터의 전달 과정이 그 기반이 된다.</p>
+</li>
+<li><p>사설 네트워크 (인트라넷)</p>
+<blockquote>
+<p>사설 네트워크는 사용자의 제한을 두는 제한적인 네트워크다.</p>
+</blockquote>
+<p>⇒ 인트라넷, LAN 등이 이에 포함될 수 있다.</p>
+</li>
+<li><p>인터넷</p>
+<blockquote>
+<p>누구나 접속이 가능한 네트워크다</p>
+</blockquote>
+<p>⇒ 해커, 옆집 강아지(?), 할아버지 할머니 등등 브라우저를 통해 누구든지 인터넷에 접속할 수 있다.</p>
+</li>
+</ol>
+<hr>
+<h3 id="LAN과-WAN"><a href="#LAN과-WAN" class="headerlink" title="LAN과 WAN"></a>LAN과 WAN</h3><blockquote>
+<p>LAN과 WAN은 사설 네트워크(인트라넷 등)에 사용되는 네트워크다.</p>
+</blockquote>
+<ol>
+<li><p><strong>LAN</strong> (Local Area Network)</p>
+<p>⇒ 가까운 범위 내의 기기들을 라우터 등을 통해 연결시키고, 기기 간의 데이터 통신 등이 가능하도록 네트워크를 구성한다.</p>
+<blockquote>
+<p>즉, 가까운 거리에 있는 기계와 기계를 연결시킨다!</p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/67448481/147819184-a2b64553-c527-4a04-9c6b-18f5a75cd8d1.png" alt="물론 이와 같이 다양한 방식의 LAN 구성 방법도 존재한다." class="articleImage"/></li>
+<li><p><strong>WAN</strong> (Wide Area Network)</p>
+<p>⇒ 위의 LAN을 다른 거점의 LAN과 연결시킬 수 있도록 연결해주는 역할을 한다.<br>즉, LAN과 LAN의 연결을 돕는 징검다리라고 생각하면 편하다.</p>
+</li>
+</ol>
+<hr>
+<h3 id="인터넷"><a href="#인터넷" class="headerlink" title="인터넷"></a>인터넷</h3><blockquote>
+<p>그렇다면 근거리 기기간의 통신이 아닌, 각기 떨어져 있는 세상의 모든 사람들과 통신할 수 있는 방법은 뭘까? → <strong>바로 인터넷이다.</strong></p>
+</blockquote>
+<img src="https://user-images.githubusercontent.com/67448481/147819188-6ef9a2e6-1880-4877-bf63-33bf394076b3.png" alt="물론 이와 같이 다양한 방식의 LAN 구성 방법도 존재한다." class="articleImage"/>
+
+<ol>
+<li><strong>AS와 ISP</strong></li>
+</ol>
+<ul>
+<li><strong>AS</strong> : 자율 시스템(Autonomous System)<br>⇒ 전세계의 다양한 조직들이 운영하는 네트워크조직 등을 구성하는 네트워크 생태계</li>
+<li><strong>ISP</strong> : Internet Service Provider<br>⇒ 쉽게 설명하자면, 네트워크 서비스를 제공해주는 기업을 의미한다.<ul>
+<li>1티어 ISP로는 SKT, KT, LG U+ 등이 있다.</li>
+<li>하위 티어의 영세 ISP도 많은데, 이들의 통신은 어쩔 수 없이 1티어 ISP를 경유할 수밖에 없다<br>즉, 우리는 인터넷을 이용하고자 한다면… 1티어 ISP를 반드시 사용하게 된다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="서버와-클라이언트-그리고-애플리케이션"><a href="#서버와-클라이언트-그리고-애플리케이션" class="headerlink" title="서버와 클라이언트, 그리고 애플리케이션"></a>서버와 클라이언트, 그리고 애플리케이션</h3><blockquote>
+<p>인터넷을 통해 데이터를 주고받는다는 것은 알겠다.<br>그렇다면 그 데이터가 도대체 어떻게 저장되고 어디에 저장되는 것인가?</p>
+</blockquote>
+<ol>
+<li><p><strong>서버와 클라이언트</strong></p>
+<table>
+<thead>
+<tr>
+<th>클라이언트</th>
+<th>서버</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>일반적인 우리들의 컴퓨터</td>
+<td>굉장히 좋은 컴퓨터</td>
+</tr>
+<tr>
+<td>주로 서버에 데이터를 “요청(Reuest)”</td>
+<td>클라이언트로 부터 요청을 처리 (Response)</td>
+</tr>
+</tbody></table>
+<br>
+   ⇒ 클라이언트(우리)는 서버에 어떠한 특정 요청을 보내고 → 서버는 이러한 요청을 처리한 뒤 응답(Response)를 보내준다. 고객이 레스토랑에서 웨이터에게 주문을 하는 것과 같다고 보면 된다.   
+      
+   <aside> 이러한 이유 때문에 서버의 컴퓨터 성능은 고성능이 요구된다. </aside></li>
+<li><p><strong>애플리케이션</strong></p>
+<blockquote>
+<p>서버에서 데이터를 받아 처리하는 역할을 하는 것이 <strong>애플리케이션</strong>이다.<br>클라이언트 사이드에서 반환된 데이터를 받아내는 것 또한 클라이언트의 <strong>애플리케이션</strong>이다.</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h3 id="네트워크-아키텍처와-프로토콜"><a href="#네트워크-아키텍처와-프로토콜" class="headerlink" title="네트워크 아키텍처와 프로토콜"></a>네트워크 아키텍처와 프로토콜</h3><blockquote>
+<p>그럼 어떤 방식으로 데이터를 주고 받을까?<br>⇒ 네트워크를 통한 올바른 데이터 송수신을 위해선 규칙과 규약 등이 필요하다.</p>
+</blockquote>
+<ol>
+<li><p><strong>프로토콜</strong></p>
+<p>⇒ 우리가 한국어를 사용할 때 막 사용하는 것이 아니듯이, 네트워크 또한 통신을 할 때 자기가 원하는 대로 규칙없이 대화를 하지는 않는다.</p>
+<ul>
+<li>한국어에도 문법, 훈민정음, 발음, 상황에 따른 용법 등 다양한 규칙과 기준이 존재하듯, 네트워크 통신에도 이러한 다양한 규칙(프로토콜)들이 존재한다.</li>
+<li>즉, 프로토콜은 네트워크 통신을 위한 규약이자 규칙들의 단편들이다.</li>
+</ul>
+</li>
+<li><p><strong>네트워크 아키텍처</strong></p>
+<p>⇒ 위의 프로토콜들이 종합된 것이 네트워크 아키텍처다.<br>한국어, 영어와 같이 하나의 언어라고 생각하면 된다.</p>
+</li>
+<li><p><strong>TCP/IP</strong></p>
+<blockquote>
+<p>전세계적으로 영어가 공용어로 통하듯이, 대부분 통용되는 네트워크 아키텍처의 표준은 <strong>TCP/IP</strong>다.</p>
+</blockquote>
+<p>이러한 네트워크 아키텍처를 효율적으로 운용하기 위해 아키텍처는 프로토콜들을 단순히 집약해놓은 것이 아니라, 계층화 하여 기능별로 구분해 둔다.</p>
+<ul>
+<li><strong>TCP/IP의 계층</strong><ul>
+<li>애플리케이션 계층</li>
+<li>트랜스포트 계층</li>
+<li>인터넷층</li>
+<li>네트워크 인터페이스층</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="클라우드-네트워크"><a href="#클라우드-네트워크" class="headerlink" title="클라우드 네트워크"></a>클라우드 네트워크</h3><blockquote>
+<p>전통적인 방식은 회사 등이 자체적으로 서버를 구축하여 운용하고 관리하는 것이었다.<br>하지만 시대가 변함에 따라, 인터넷만 통해서 가상의 (물리적으로 떨어져있는) 서버를 구축할 수 있게 되었고, 우리는 이를 <strong>클라우드 서비스</strong>라고 부른다.</p>
+</blockquote>
+<ol>
+<li><strong>클라우드 서비스의 종류</strong></li>
+</ol>
+<ul>
+<li>Iaas : 하드웨어만 사용 가능</li>
+<li>Paas : 하드웨어와 OS, Middleware등의 시스템 플랫폼을 활용 가능하다.</li>
+<li>Saas : 하드웨어와 플랫폼 뿐만 아니라, 애플리케이션 기능까지 모두 사용 가능하다<br>⇒ 대표적인 예로 AWS를 들 수 있다.</li>
+</ul>
+<hr>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-12-30T21:04:40.000Z" title="2021. 12. 31. 오전 6:04:40">2021-12-31</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-12-31T11:08:23.580Z" title="2021. 12. 31. 오후 8:08:23">2021-12-31</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a><span> / </span><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/Javascript/">Javascript</a></span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/javascript/%E1%84%8F%E1%85%A9%E1%86%AF%E1%84%87%E1%85%A2%E1%86%A8%E1%84%80%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%86%E1%85%B5%E1%84%89%E1%85%B3%20(Callback%20&amp;%20Promise)/">콜백과 프로미스 (Callback &amp; Promise)</a></h1><div class="content"><hr>
 <h3 id="콜백-함수-Callback-Function"><a href="#콜백-함수-Callback-Function" class="headerlink" title="콜백 함수 (Callback Function)"></a>콜백 함수 (Callback Function)</h3><blockquote>
 <p>비동기 처리 방식의 문제점을 해결하기 위해, 특정 로직 수행이 완료됐을 때 원하는 동작을 실행시킬 수 있도록 하는 함수!</p>
 </blockquote>
@@ -80,7 +212,7 @@
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">idMaker</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> index = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) <span class="keyword">yield</span> index++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gen = idMaker(); <span class="comment">// &quot;Generator &#123; &#125;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(gen.next().value); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure></li>
 </ol>
 <hr>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-09-30T12:14:40.000Z" title="2021. 9. 30. 오후 9:14:40">2021-09-30</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-12-30T20:35:27.483Z" title="2021. 12. 31. 오전 5:35:27">2021-12-31</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a></span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/javascript/javascript-howItWorks/">Javascript는 어떻게 작동하는가?</a></h1><div class="content"><hr>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2021-09-30T12:14:40.000Z" title="2021. 9. 30. 오후 9:14:40">2021-09-30</time></span><span class="level-item">Updated&nbsp;<time dateTime="2021-12-31T11:08:33.019Z" title="2021. 12. 31. 오후 8:08:33">2021-12-31</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a><span> / </span><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/Javascript/">Javascript</a></span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/javascript/javascript-howItWorks/">Javascript는 어떻게 작동하는가?</a></h1><div class="content"><hr>
 <h3 id="💡-사전-지식"><a href="#💡-사전-지식" class="headerlink" title="💡 사전 지식"></a>💡 사전 지식</h3><ul>
 <li>Parse : 컴퓨터가 이해할 수 있도록 프로그래밍 언어가 데이터를 가공하고 읽기 위해 일정한 포맷으로 변환하는 것. (쉽게 말하면, 사람의 언어 구조 → 컴퓨터의 언어 구조로 변환되는 것이라 봐도 될 것 같다)</li>
 <li>Thread : 프로그램 내에서의 작업 또는 프로세스의 경로</li>
@@ -141,7 +273,7 @@
 <hr>
 </li>
 </ol>
-</div></article></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="HoonJoo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">HoonJoo</p><p class="is-size-6 is-block">프론트엔드 개발자</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Seoul, Songpa</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">2</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Category</p><a href="/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tag</p><a href="/tags"><p class="title">1</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/hoonjoo-park" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/"><span class="level-start"><span class="level-item">프론트엔드</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-30T21:04:40.000Z">2021-12-31</time></p><p class="title"><a href="/javascript/%E1%84%8F%E1%85%A9%E1%86%AF%E1%84%87%E1%85%A2%E1%86%A8%E1%84%80%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%86%E1%85%B5%E1%84%89%E1%85%B3%20(Callback%20&amp;%20Promise)/">콜백과 프로미스 (Callback &amp; Promise)</a></p><p class="categories"><a href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-30T12:14:40.000Z">2021-09-30</time></p><p class="title"><a href="/javascript/javascript-howItWorks/">Javascript는 어떻게 작동하는가?</a></p><p class="categories"><a href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Javascript/"><span class="tag">Javascript</span><span class="tag">2</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2021 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+</div></article></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="HoonJoo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">HoonJoo</p><p class="is-size-6 is-block">프론트엔드 개발자</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Seoul, Songpa</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">3</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">2</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/hoonjoo-park" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/CS/"><span class="level-start"><span class="level-item">CS</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/CS/Network/"><span class="level-start"><span class="level-item">Network</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/"><span class="level-start"><span class="level-item">프론트엔드</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-31T11:01:40.000Z">2021-12-31</time></p><p class="title"><a href="/cs/network/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%EC%9D%98%20%EA%B8%B0%EB%B3%B8/">네트워크의 기본</a></p><p class="categories"><a href="/categories/CS/">CS</a> / <a href="/categories/CS/Network/">Network</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-12-30T21:04:40.000Z">2021-12-31</time></p><p class="title"><a href="/javascript/%E1%84%8F%E1%85%A9%E1%86%AF%E1%84%87%E1%85%A2%E1%86%A8%E1%84%80%E1%85%AA%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%86%E1%85%B5%E1%84%89%E1%85%B3%20(Callback%20&amp;%20Promise)/">콜백과 프로미스 (Callback &amp; Promise)</a></p><p class="categories"><a href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a> / <a href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/Javascript/">Javascript</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-09-30T12:14:40.000Z">2021-09-30</time></p><p class="title"><a href="/javascript/javascript-howItWorks/">Javascript는 어떻게 작동하는가?</a></p><p class="categories"><a href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a> / <a href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/Javascript/">Javascript</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%EA%B0%9C%EB%85%90/"><span class="tag">개념</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/"><span class="tag">네트워크</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2021 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
