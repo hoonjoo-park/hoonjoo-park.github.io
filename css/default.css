@@ -10944,7 +10944,7 @@ h1.title {
 img.articleImage {
   display: block;
   height: auto;
-  max-width: 60%;
+  max-width: 80%;
   margin: 0 auto;
   border-radius: 5px;
 }
