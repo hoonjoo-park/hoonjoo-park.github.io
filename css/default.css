@@ -453,7 +453,10 @@ hr {
 }
 img {
   height: auto;
-  max-width: 100%;
+  max-width: 600px;
+  border-radius: 7px;
+  display: block;
+  margin: 0 auto;
 }
 input[type="checkbox"],
 input[type="radio"] {
