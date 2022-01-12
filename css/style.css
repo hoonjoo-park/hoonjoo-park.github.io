@@ -10814,7 +10814,6 @@ article.article .article-tags {
   color: #7a7a7a;
 }
 article.article .article-meta {
-  overflow-x: auto;
   margin-bottom: 2.5rem;
 }
 article.article .content {
@@ -10944,10 +10943,11 @@ h1.title {
   margin-bottom: 2.5rem !important;
   font-weight: 700;
 }
-img.articleImage {
+img {
   display: block;
   height: auto;
-  max-width: 80%;
+  max-width: 100%;
+  width: 600px;
   margin: 0 auto;
   border-radius: 5px;
 }
