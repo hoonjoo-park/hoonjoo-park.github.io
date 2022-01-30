@@ -50,7 +50,7 @@
 <hr>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-01-30T19:28:30.000Z" title="2022. 1. 31. 오전 4:28:30">2022-01-31</time></span><span class="level-item"><a class="link-muted" href="/categories/Github/">Github</a></span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/github/5.merge/">[Github] Merge</a></h1><div class="content"><hr>
 <h2 id="Merge란…"><a href="#Merge란…" class="headerlink" title="Merge란…?"></a>Merge란…?</h2><blockquote>
-<p>우리가 자주 듣는 말이 있다. “**<em>OO님 PR 날렸으니 확인 후에 <code>merge</code> 부탁드릴게요~!!</em>**”</p>
+<p>우리가 자주 듣는 말이 있다. “**OO님 PR 날렸으니 확인 후에 <code>merge</code> 부탁드릴게요~!!**”</p>
 </blockquote>
 <p><strong>그렇다면 merge는 뭘까?</strong></p>
 <p>우선 <code>git merge</code>에 대한 설명을 하기에 앞서, <strong>로컬 → origin → upstream → PR</strong>까지의 과정(머지 직전)에 대해 다시 차근차근 짚어보고자 한다.</p>
@@ -64,7 +64,7 @@
 <p><strong>origin repository</strong>는 <strong>upstream repo</strong>에서 <code>fork</code>해온 레포지토리다. 따라서 <strong>origin</strong>과 <strong>upstream</strong>은 서로 연결되어 있으며, <strong>origin</strong>에서 어떠한 변동사항이 생기면 원본 repository(<strong>upstream</strong>)에 <code>PR</code>을 날려보라고 제시를 한다(비유).</p>
 </li>
 <li><p><strong>upstream repository</strong></p>
-<p>모든 repo의 기준점이 되는 <strong>upstream repo</strong>에는 이에 따라 여러 <code>PR</code>들이 날아온다. A라는 개발자, B라는 개발자, C라는 개발자…. 이들이 “**<em>이것좀 Pull 해주세요!</em>**”하고 <code>PR(Pull Request)</code>를 날린 것들을 하나하나 확인해보고 괜찮다 싶은 것들을 선택해서 나의 원본 repo에 <code>merge</code>(합치다)해줄 수 있는 것이다.</p>
+<p>모든 repo의 기준점이 되는 <strong>upstream repo</strong>에는 이에 따라 여러 <code>PR</code>들이 날아온다. A라는 개발자, B라는 개발자, C라는 개발자…. 이들이 “_이것좀 Pull 해주세요!_”하고 <code>PR(Pull Request)</code>를 날린 것들을 하나하나 확인해보고 괜찮다 싶은 것들을 선택해서 나의 원본 repo에 <code>merge</code>(합치다)해줄 수 있는 것이다.</p>
 </li>
 <li><p><strong>PR (Pull Request) &amp; Merge</strong></p>
 <p>이렇게 PR → Merge가 완료됐다면 나의 upstream repo는 새로 추가된 코드와 합쳐진다.</p>
@@ -91,25 +91,21 @@
 </blockquote>
 <p><img src="https://user-images.githubusercontent.com/67448481/151674821-1872d8af-1487-4476-b8f3-50041b6c6545.png" alt="merge conflict..."></p>
 <h3 id="merge-conflict는-왜-일어날까"><a href="#merge-conflict는-왜-일어날까" class="headerlink" title="merge conflict는 왜 일어날까 ?"></a>merge conflict는 왜 일어날까 ?</h3><blockquote>
-<p>머지하려는 두 branch에 동일한 부분에서의 수정이 발생했을 때 conflict이 일어난다.<br>즉, ”**<em>두 브랜치에서 같은 부분이 수정이 됐는데 각각 수정 내용이 달라, 둘 중에 뭘 선택해야돼?</em>**”라고 생각하면 된다.</p>
+<p>머지하려는 두 branch에 동일한 부분에서의 수정이 발생했을 때 <code>conflict</code>이 일어난다.<br>즉, git이 우리에게 ”**두 브랜치에서 같은 부분이 수정이 됐는데 각각 수정 내용이 달라… 둘 중에 뭘 선택해야돼?**”라고 물어보는 것과 같다고 생각하면 된다.</p>
 </blockquote>
 <h3 id="conflict-해결-방법"><a href="#conflict-해결-방법" class="headerlink" title="conflict 해결 방법"></a>conflict 해결 방법</h3><ol>
 <li><p><strong>수동 해결 방법 (가장 일반적)</strong></p>
 <ol>
-<li>파일을 직접 열어서 merge할 부분을 선택해서 나머지 삭제!<br>⇒ conflict 해결 이외의 수정을 해서는 <strong>절대 절대 안됨!!!</strong></li>
-<li><code>git add</code> [파일명.확장자] or <code>git add .</code> (후자는 진짜 conflict가 난 부분만 수정했을 때)</li>
+<li>파일을 직접 열어서 merge할 부분을 선택, 그리고 버릴 것은 삭제!<br>⇒ 둘 중에 하나를 선택해도 되고, 둘 다 가져와도 된다.<br>⇒ conflict 해결 이외의 수정을 해서는 <strong>절대 절대 안됨!!!</strong></li>
+<li><code>git add .</code> (진짜 conflict가 난 부분만 수정했는지 반드시 체크해야 한다)</li>
 <li><code>git merge —-continue</code></li>
 </ol>
 </li>
 <li><p><strong>tool 활용법 (VS Code)</strong></p>
 <ol>
-<li><p><code>$ git config —global -e</code> 로 세팅 열기</p>
-</li>
-<li><p>아래와 같이 내용 추가</p>
-<p>[merge]<br>tool = vscode<br>[mergetool “vscode”]<br>cmd = code –wait $MERGED</p>
-</li>
-<li><p><code>$ git mergetool</code> 입력 → 머지!</p>
-</li>
+<li>터미널에 <code>$ git config —global -e</code> 입력 후 깃 세팅창 열기</li>
+<li>아래와 같이 내용 추가<br>[merge]<br>tool = vscode<br>[mergetool “vscode”]<br>cmd = code –wait $MERGED</li>
+<li><code>$ git mergetool</code> 입력 → 머지!</li>
 </ol>
 </li>
 <li><p><strong>P4Merge 사용하기 (많은 개발자들이 애용)</strong></p>
