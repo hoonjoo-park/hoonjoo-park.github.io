@@ -47,15 +47,26 @@
 <p><code>useRef</code>를 통해 특정 <code>DOM</code>에 접근하여 참조하는 것은 아래의 코드 방식을 따른다.</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useRef, useEffect &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ToDom</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> domRef = useRef();</span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> divElement = elementRef.current;</span><br><span class="line">    <span class="comment">// // &lt;div&gt;나를 참조해주세요&lt;/div&gt;가 출력될 것이다.</span></span><br><span class="line">    <span class="built_in">console</span>.log(divElement);</span><br><span class="line">  &#125;, []);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;domRef&#125;</span>&gt;</span>나를 참조해주세요<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="위의-코드를-글로써-다시-정리하자면…"><a href="#위의-코드를-글로써-다시-정리하자면…" class="headerlink" title="위의 코드를 글로써 다시 정리하자면…"></a><strong>위의 코드를 글로써 다시 정리하자면…</strong></h3><ol>
+</br>
+
+<h3 id="위의-코드를-글로써-다시-정리하자면…"><a href="#위의-코드를-글로써-다시-정리하자면…" class="headerlink" title="위의 코드를 글로써 다시 정리하자면…"></a>위의 코드를 글로써 다시 정리하자면…</h3><ol>
 <li>우선, <code>**const something = useRef();</code>와 같이 참조값을 정의하고**</li>
 <li><strong>그 참조값을 DOM에 담아준다. <code>&lt;div ref=&#123;something&#125;&gt; &lt;/div&gt;</code></strong></li>
 <li><strong>그리고 컴포넌트가 마운트 되면 우리의 <code>something</code>이라는 <code>ref</code>는 <code>div</code> <code>DOM</code>을 가리키게 된다.</strong></li>
 </ol>
+</br>
+
+<h3 id="타입스크립트에서의-방법-추가"><a href="#타입스크립트에서의-방법-추가" class="headerlink" title="타입스크립트에서의 방법 (추가)"></a>타입스크립트에서의 방법 (추가)</h3><blockquote>
+<p>TODO 앱을 만들다가 <code>input</code>의 자동 포커싱 기능을 구현하려 했는데, 타입스크립트에서의 <code>useRef</code>방식에는 몇 가지 룰이 존재했다… 따라서 이를 추가적으로 기록해보고자 한다.</p>
+</blockquote>
+<p>내가 간과했던 것은 초기 렌더링 시에는 참조값이 <code>null</code>이기에, <code>useEffect</code> 내에서 <code>current</code>가 비어있는지 여부를 우선적으로 체크해줘야 했는데 이를 빼먹었다. 아래의 코드를 봐보자!</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import &#123; useRef, useEffect &#125; from &#x27;react&#x27;;</span><br><span class="line"></span><br><span class="line">function ToDom() &#123;</span><br><span class="line">  // HTMLInputElement 타입을 지정해주고, 초기값을 null로 설정해준다.</span><br><span class="line">  const inputRef = useRef&lt;HTMLInputElement&gt;(null);</span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    // 이렇게 inputRef.current가 비어있는지 아닌지를 체크해야 오류가 나지 않는다. (초기 렌더링 시에는 current가 null로 비어있음)</span><br><span class="line">    if (domRef.current) &#123;</span><br><span class="line">      inputRef.current.focus();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, []);</span><br><span class="line">  return &lt;input type=&#x27;text&#x27; ref=&#123;domRef&#125; /&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <hr>
-<blockquote>
+<h2 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h2><blockquote>
 <p>여기까지가 <code>useRef</code>의 기본 중의 기본이다.<br>참고로 첨언하자면, 참조값을 변화시키고 싶을 때는 함수형 컴포넌트 내에서 바로 변화를 주는 것이 아니라, <code>useEffect</code>나 핸들링 함수 내에서 변화를 주는 것이 좋은 방식이라고 한다!</p>
 </blockquote>
+<p>아직은 너무 기본적인 것들 뿐이고 부족한 것이 많지만… 기본적인 hooks들에 대한 공부를 우선적으로 마치고, 더 깊은 개념들과 활용법들에 대해 공부해볼 계획이다.</p>
 <h3 id="포스팅에-참조한-자료"><a href="#포스팅에-참조한-자료" class="headerlink" title="포스팅에 참조한 자료"></a>포스팅에 참조한 자료</h3><p><a target="_blank" rel="noopener" href="https://dmitripavlutin.com/react-useref-guide/">The Complete Guide to useRef() and Refs in React</a></p>
 <hr>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-02T18:23:40.000Z" title="2022. 2. 3. 오전 3:23:40">2022-02-03</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a><span> / </span><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/React/">React</a></span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/react/3.useEffect/">useEffect 올바르게 사용하기</a></h1><div class="content"><hr>
