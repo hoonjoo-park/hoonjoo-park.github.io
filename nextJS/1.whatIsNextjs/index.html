@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>1. Next.js의 기본 - Hoon&#039;s 블로그</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="Hoon"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="🤔 NextJS에 대한 개괄적 이해"><meta property="og:type" content="blog"><meta property="og:title" content="1. Next.js의 기본"><meta property="og:url" content="https://hoonjoo-park.github.io/nextJS/1.whatIsNextjs/"><meta property="og:site_name" content="Hoon&#039;s 블로그"><meta property="og:description" content="🤔 NextJS에 대한 개괄적 이해"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/152688083-19934d1d-b596-4e01-af1e-a067ed486d3a.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/152688066-d32593e3-b117-4b8f-9411-26edcf0f8cbd.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/152688075-fe58a89c-9cf6-4b72-b817-ec365663cfb6.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/152688080-262c586b-c182-4e52-905a-458047800527.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/152688081-395f49d3-910d-4c46-a845-46a7193f1cf3.png"><meta property="article:published_time" content="2022-02-07T03:35:40.000Z"><meta property="article:modified_time" content="2022-02-06T16:18:23.166Z"><meta property="article:author" content="Hoonjoo"><meta property="article:tag" content="개념"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://user-images.githubusercontent.com/67448481/152688083-19934d1d-b596-4e01-af1e-a067ed486d3a.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoonjoo-park.github.io/nextJS/1.whatIsNextjs/"},"headline":"1. Next.js의 기본","image":["https://user-images.githubusercontent.com/67448481/152688083-19934d1d-b596-4e01-af1e-a067ed486d3a.png","https://user-images.githubusercontent.com/67448481/152688066-d32593e3-b117-4b8f-9411-26edcf0f8cbd.png","https://user-images.githubusercontent.com/67448481/152688075-fe58a89c-9cf6-4b72-b817-ec365663cfb6.png","https://user-images.githubusercontent.com/67448481/152688080-262c586b-c182-4e52-905a-458047800527.png","https://user-images.githubusercontent.com/67448481/152688081-395f49d3-910d-4c46-a845-46a7193f1cf3.png"],"datePublished":"2022-02-07T03:35:40.000Z","dateModified":"2022-02-06T16:18:23.166Z","author":{"@type":"Person","name":"Hoonjoo"},"publisher":{"@type":"Organization","name":"Hoon's 블로그","logo":{"@type":"ImageObject","url":"https://hoonjoo-park.github.io/img/logo.svg"}},"description":"🤔 NextJS에 대한 개괄적 이해"}</script><link rel="canonical" href="https://hoonjoo-park.github.io/nextJS/1.whatIsNextjs/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Roboto" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-0RF6Y2B0CN" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-07T03:35:40.000Z" title="2022. 2. 7. 오후 12:35:40">2022-02-07</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a><span> / </span><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/Next-js/">Next.js</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">1. Next.js의 기본</h1><div class="content"><hr>
+<p><img src="https://user-images.githubusercontent.com/67448481/152688083-19934d1d-b596-4e01-af1e-a067ed486d3a.png" alt="Next.js"></p>
+<h2 id="🤔-NextJS에-대한-개괄적-이해"><a href="#🤔-NextJS에-대한-개괄적-이해" class="headerlink" title="🤔 NextJS에 대한 개괄적 이해"></a>🤔 NextJS에 대한 개괄적 이해</h2><hr>
+<blockquote>
+<p>Next.js는 <strong>SSR</strong>(Server-Side-Rendering)이 가능한 리액트 기반의 프레임워크다.<br>굉장히 빠른 속도와 편의성을 겸비하여, 많은 기업들이 이 Next.js를 채택하여 사용 중이다.</p>
+</blockquote>
+<p>⇒ NextJS의 주된 특징 및 장점은 이하와 같다.</p>
+<ol>
+<li><strong>서버사이드 렌더링이 가능하다.</strong></li>
+<li><strong>검색엔진최적화(SEO)에 유리하다.</strong></li>
+<li><strong>코드 분할 (Code Splitting)</strong></li>
+</ol>
+<p>근데 셋 다 처음 들어본 말들이다… 도대체 무슨 뜻일까?</p>
+<hr>
+<h2 id="⭐️-서버사이드-렌더링-SSR"><a href="#⭐️-서버사이드-렌더링-SSR" class="headerlink" title="⭐️ 서버사이드 렌더링(SSR)?"></a>⭐️ 서버사이드 렌더링(SSR)?</h2><hr>
+<p><img src="https://user-images.githubusercontent.com/67448481/152688066-d32593e3-b117-4b8f-9411-26edcf0f8cbd.png" alt="출처 : **The Benefits of Server Side Rendering Over Client Side Rendering**"></p>
+<p><strong>SSR</strong>이란, <strong>CSR</strong>(Client-Side-Rendering)과 대비되는 개념이다. 기본적으로 CSR은 페이지를 렌더링 할 때, JS 파일들을 로드하여 뷰를 띄워준다. 이에 따라 유저는 JS로드가 끝나기 전까지 빈 화면을 보게 되거나 무거운 웹페이지의 경우 오랜 시간을 대기해야 할 수도 있다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/152688075-fe58a89c-9cf6-4b72-b817-ec365663cfb6.png" alt="출처 : **The Benefits of Server Side Rendering Over Client Side Rendering**"></p>
+<blockquote>
+<p>하지만 <strong>SSR</strong>은 조금 다르다. 쉽게 설명하면 서버에서 사용자에게 보여질 뷰를 미리 그려서 사용자에게 띄워주는 방식을 의미한다.</p>
+</blockquote>
+<p>조금 더 자세히 설명하자면, 초기 렌더링 시에 서버에서 우선적으로 띄워줄 HTML을 클라이언트에게 전달하여 대기시간 없이 뷰를 바로 확인할 수 있도록 하는 것이다. 그리고 이후에 브라우저가 JS파일을 로드하여 React를 실행시킨다. 그리고 이후부터 다른 페이지로의 이동이나 컴포넌트의 변환에 있어서는 브라우저가 CSR 방식으로 작업을 수행한다. 즉, Next.js는 <strong>SSR</strong> + <strong>CSR</strong>의 장점들을 합쳐 놓은 프레임워크라고 볼 수 있는 것이다.</p>
+<hr>
+<h2 id="🔍-검색엔진-최적화-SEO"><a href="#🔍-검색엔진-최적화-SEO" class="headerlink" title="🔍 검색엔진 최적화(SEO)"></a>🔍 검색엔진 최적화(SEO)</h2><hr>
+<blockquote>
+<p>검색엔진 최적화는 말 그대로 “<strong>포털 사이트나 검색 엔진 등에서 쉽게 검색에 노출되도록 함</strong>”을 의미한다.</p>
+</blockquote>
+<p>기본적으로 검색 엔진들은 자바스크립트를 해석할 수 없다. 따라서 빠르게 HTML 파일 내에서 h1, h2 태그 또는 컨텐츠 내용들을 크롤링 하여 검색결과를 반환해주는 것이다.</p>
+<p>하지만 위에서 설명했듯이, CSR은 자바스크립트 파일이 모두 로드 및 실행되기 전까지 HTML이 텅 비어있는 상태를 유지한다. 따라서 검색엔진에 쉽게 노출되기 힘들다는 단점을 안고 있다.</p>
+<p>반대로, SSR은 서버에서 기본적인 프론트 HTML 틀을 그려서 유저에게 보내주기 때문에 초기 렌더링 시에도 바로 기본적인 HTML이 채워져 있다. 따라서 검색 엔진에 보다 쉽게 노출될 수 있는 것이다.</p>
+<hr>
+<h2 id="✂️-코드-분할"><a href="#✂️-코드-분할" class="headerlink" title="✂️ 코드 분할"></a>✂️ 코드 분할</h2><hr>
+<blockquote>
+<p>코드 분할이란 기존의 방식처럼 번들링을 한 번에 처리하는 것이 아닌, 유동적으로 나누어 처리하여 불필요한 코드들이 로드되는 것을 방지하는 기술이다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/152688080-262c586b-c182-4e52-905a-458047800527.png" alt="Bundle"></p>
+<p>번들링이란 사전 뜻 그대로 “<strong>묶는 행위</strong>“이다. 즉, 자바스크립트 코드들을 하나로 묶는 것을 의미한다고 볼 수 있다. 번들링의 주된 이유는 HTTP 요청을 최소화 하기 위함인데, 여러 개의 JS파일들을 일일히 HTTP요청 보내는 것 보다 하나로 묶어서 보내주는 것이 훨씬 효율적이기 때문이다.</p>
+<p>하지만 이런 번들링도 조금 더 효율적일 필요가 있다. 브라우저가 필요로 하는 코드만 전달 받으면 됐지, 필요 없는 코드들 까지 몽땅 전달 받으면 처리 효율성이 떨어질 수 있기 때문이다.</p>
+<p>간단한 예시로, 레스토랑에서 나는 스테이크를 먹고싶어서 스테이크를 주문했는데 웨이터가 레스토랑의 모든 메뉴들을 테이블 위에 올려놓고 “골라서 드세요!” 하는 것과 같다고 볼 수 있는 것이다.</p>
+<blockquote>
+<p>이해가 쉽지 않다면, 아래의 그림을 보면 코드 분할이 뭔지 쉽게 감을 잡을 수 있을 것이다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/152688081-395f49d3-910d-4c46-a845-46a7193f1cf3.png" alt="Code Split"></p>
+<p>이렇듯 우리는 Next.js를 통해 좀 더 빠르고 효율적인 성능을 제공받을 수 있는 것이다.</p>
+<hr>
+<h2 id="📝-정리"><a href="#📝-정리" class="headerlink" title="📝 정리"></a>📝 정리</h2><hr>
+<ol>
+<li><p><strong>Next.js는 SSR을 통해 SEO라는 강력한 장점을 우리에게 부여한다.</strong></p>
+<p>⇒ HTML을 서버에서 미리 그려서 전달해주기 때문!</p>
+</li>
+<li><p><strong>코드 분할을 통해 조금 더 효율적이고 향상된 성능을 우리에게 제공한다.</strong></p>
+<p>⇒ 내가 원하는 코드만 전달 받아 활용할 수 있기 때문!</p>
+</li>
+</ol>
+<hr>
+<h3 id="포스팅에-참고한-자료"><a href="#포스팅에-참고한-자료" class="headerlink" title="포스팅에 참고한 자료"></a>포스팅에 참고한 자료</h3><p><a target="_blank" rel="noopener" href="https://nextjs.org/learn/basics/create-nextjs-app">Next.JS 공식문서</a></p>
+<p><a target="_blank" rel="noopener" href="https://d2.naver.com/helloworld/7804182">네이버 D2 : 어서 와, SSR은 처음이지?</a></p>
+<p><a target="_blank" rel="noopener" href="https://ivorycode.tistory.com/19">ivorycode: Next.js를 사용하는 이유</a></p>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>1. Next.js의 기본</p><p><a href="https://hoonjoo-park.github.io/nextJS/1.whatIsNextjs/">https://hoonjoo-park.github.io/nextJS/1.whatIsNextjs/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Hoonjoo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-02-07</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-02-07</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%EA%B0%9C%EB%85%90/">개념</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61ccb08ffa9c81001d245598&amp;product=sticky-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/projects/preonboard/2.houseDecoration/"><span class="level-item">제 방을 소개합니다</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><script src="https://utteranc.es/client.js" repo="hoonjoo-park/hoonjoo-park.github.io" issue-term="pathname" label="🙋‍♂️" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#🤔-NextJS에-대한-개괄적-이해"><span class="level-left"><span class="level-item">1</span><span class="level-item">🤔 NextJS에 대한 개괄적 이해</span></span></a></li><li><a class="level is-mobile" href="#⭐️-서버사이드-렌더링-SSR"><span class="level-left"><span class="level-item">2</span><span class="level-item">⭐️ 서버사이드 렌더링(SSR)?</span></span></a></li><li><a class="level is-mobile" href="#🔍-검색엔진-최적화-SEO"><span class="level-left"><span class="level-item">3</span><span class="level-item">🔍 검색엔진 최적화(SEO)</span></span></a></li><li><a class="level is-mobile" href="#✂️-코드-분할"><span class="level-left"><span class="level-item">4</span><span class="level-item">✂️ 코드 분할</span></span></a></li><li><a class="level is-mobile" href="#📝-정리"><span class="level-left"><span class="level-item">5</span><span class="level-item">📝 정리</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#포스팅에-참고한-자료"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">포스팅에 참고한 자료</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">총 방문자 <span id="busuanzi_value_site_uv"></span> 명</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
