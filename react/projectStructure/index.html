@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>[React] 프로젝트 구조 설계 - Hoon&#039;s 블로그</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="Hoon"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="✨ 프로젝트 구조의 중요성"><meta property="og:type" content="blog"><meta property="og:title" content="[React] 프로젝트 구조 설계"><meta property="og:url" content="https://hoonjoo-park.github.io/react/projectStructure/"><meta property="og:site_name" content="Hoon&#039;s 블로그"><meta property="og:description" content="✨ 프로젝트 구조의 중요성"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/153773516-462f3ac1-3dee-40f0-8cd1-ebe5cc8ef763.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/153773510-25f9da75-ca35-458a-a347-f40b8986beeb.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/153773511-dad644db-936e-4292-9695-4a93f887d5bc.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/153773512-87ceeeb1-25e9-45e1-8467-7876c572d8b2.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/153773513-a3a76612-5346-47a5-9cf3-a4b69a675b28.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/153773514-119731c8-e0e3-4f68-a54b-393d378c187e.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/153773502-2962a52d-1e1d-44a5-a281-4c62a6b95710.gif"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/153773515-361fd839-d185-433e-bf4d-7eae407cc755.png"><meta property="article:published_time" content="2022-02-13T20:28:40.000Z"><meta property="article:modified_time" content="2022-02-13T20:29:13.601Z"><meta property="article:author" content="Hoonjoo"><meta property="article:tag" content="구조"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://user-images.githubusercontent.com/67448481/153773516-462f3ac1-3dee-40f0-8cd1-ebe5cc8ef763.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoonjoo-park.github.io/react/projectStructure/"},"headline":"[React] 프로젝트 구조 설계","image":["https://user-images.githubusercontent.com/67448481/153773516-462f3ac1-3dee-40f0-8cd1-ebe5cc8ef763.png","https://user-images.githubusercontent.com/67448481/153773510-25f9da75-ca35-458a-a347-f40b8986beeb.png","https://user-images.githubusercontent.com/67448481/153773511-dad644db-936e-4292-9695-4a93f887d5bc.png","https://user-images.githubusercontent.com/67448481/153773512-87ceeeb1-25e9-45e1-8467-7876c572d8b2.png","https://user-images.githubusercontent.com/67448481/153773513-a3a76612-5346-47a5-9cf3-a4b69a675b28.png","https://user-images.githubusercontent.com/67448481/153773514-119731c8-e0e3-4f68-a54b-393d378c187e.png","https://user-images.githubusercontent.com/67448481/153773502-2962a52d-1e1d-44a5-a281-4c62a6b95710.gif","https://user-images.githubusercontent.com/67448481/153773515-361fd839-d185-433e-bf4d-7eae407cc755.png"],"datePublished":"2022-02-13T20:28:40.000Z","dateModified":"2022-02-13T20:29:13.601Z","author":{"@type":"Person","name":"Hoonjoo"},"publisher":{"@type":"Organization","name":"Hoon's 블로그","logo":{"@type":"ImageObject","url":"https://hoonjoo-park.github.io/img/logo.svg"}},"description":"✨ 프로젝트 구조의 중요성"}</script><link rel="canonical" href="https://hoonjoo-park.github.io/react/projectStructure/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Roboto" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-0RF6Y2B0CN" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-13T20:28:40.000Z" title="2022. 2. 14. 오전 5:28:40">2022-02-14</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a><span> / </span><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/React/">React</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">[React] 프로젝트 구조 설계</h1><div class="content"><p><img src="https://user-images.githubusercontent.com/67448481/153773516-462f3ac1-3dee-40f0-8cd1-ebe5cc8ef763.png"></p>
+<hr>
+<h2 id="✨-프로젝트-구조의-중요성"><a href="#✨-프로젝트-구조의-중요성" class="headerlink" title="✨ 프로젝트 구조의 중요성"></a>✨ 프로젝트 구조의 중요성</h2><blockquote>
+<p>사실 개인 프로젝트 개발을 할 때에는 CRA 또는 CNA를 활용하여 내 입맛에 맞게 편하게 개발을 하면 된다.<br>하지만, 만약 협업을 하는 경우나, 대형 프로젝트에 참여하는 경우 얘기가 달라진다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/153773510-25f9da75-ca35-458a-a347-f40b8986beeb.png"></p>
+<p>만약 협업을 하는 상황에서 개발자 개개인이 자신이 원하는대로 경로를 설정하고, 폴더 및 컴포넌트를 생성한다면 어떻게 될까? 프로젝트 초기에는 그 문제가 수면 위로 떠오르지 않겠지만, 점차 프로젝트가 진행되며 사이즈가 커질 수록 에러 발생률이 높아지고 프로젝트 개발 진행속도도 굉장히 느려지게 되며, 종국에는 프로젝트가 중단되며 재정비를 해야하는 상황에 이르를 수도 있다.</p>
+<p>따라서 우리는 프로젝트를 진행하기 전, <strong>명확한 가이드라인과 약속</strong>을 해야 한다. 이러한 가이드라인 하에 여러명의 팀원들로 이루어진 팀이지만, 한 명의 개발자가 <strong>일관된 기준</strong> 하에 코딩을 하듯이 프로젝트가 진행될 수 있도록 청사진을 미리 그려놔야 한다.</p>
+<hr>
+<h2 id="🤝-기본-약속"><a href="#🤝-기본-약속" class="headerlink" title="🤝 기본 약속"></a>🤝 기본 약속</h2><blockquote>
+<p>우선, 본문 작성에 앞서 필자가 추천 또는 주장하는 내용이 보편적이며 최고의 방식이 아닐 수 있음을 밝히고싶다.</p>
+</blockquote>
+<p>이는 그저 주관적으로 선호하는 방식이자 개인적인 선택일 뿐이기 때문에 반드시 이를 따라야 할 필요는 없다!</p>
+<p>즉, 위에서도 설명했듯이 본문의 골자는 ‘<em>협업 친화적이고효율적인 프로젝트 구조를 어떻게 설계할 수 있는가</em>? 이다. 따라서 우리는 우선적으로 프로젝트 설계에 있어 기본적인 약속(컨벤션)을 사전에 정의해둬야 한다.</p>
+<p>= “**정답은 없다!**”</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/153773511-dad644db-936e-4292-9695-4a93f887d5bc.png"></p>
+<table>
+<thead>
+<tr>
+<th align="center">작성법</th>
+<th align="center">예시</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">스네이크 케이스</td>
+<td align="center">snake_case</td>
+</tr>
+<tr>
+<td align="center">파스칼 케이스</td>
+<td align="center">PascalCase</td>
+</tr>
+<tr>
+<td align="center">카멜 케이스</td>
+<td align="center">camelCase</td>
+</tr>
+</tbody></table>
+<p>보통 필자는 위의 기본사항들에 대한 약속을 팀원들에게 제안하는 편이다. 물론 다른 방식의 더 효율적이고 좋은 컨벤션이 존재할 수도 있지만… (나는 이게 편하다…!!)</p>
+<p>중요한 것은 “<strong>일관된 기준</strong>”이기에, 팀원들 간에 어떤 방식의 컨벤션을 정하던 그 기준을 명확히 이해하고 따르는 것에 중점을 둬야 할 것이다.</p>
+<hr>
+<h2 id="🗂-필수-디렉토리"><a href="#🗂-필수-디렉토리" class="headerlink" title="🗂 필수 디렉토리"></a>🗂 필수 디렉토리</h2><blockquote>
+<p>프로젝트를 구성할 때 반드시 필요한 디렉토리 구조다.<br>이는 기본적으로 “<strong>파일 유형에 따른 분리 원칙</strong>”을 따른다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/153773512-87ceeeb1-25e9-45e1-8467-7876c572d8b2.png" alt="필수 디렉토리"></p>
+<h3 id="components"><a href="#components" class="headerlink" title="components"></a>components</h3><blockquote>
+<p>없어서는 안될 폴더다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/153773513-a3a76612-5346-47a5-9cf3-a4b69a675b28.png"></p>
+<p>‘<strong>단일책임 원칙</strong>‘을 따르며 <strong>재사용성</strong>을 항시 고려해야 하는 컴포넌트들을 한 곳에 모아줄 components 폴더를 src 내에 생성해두어야 한다. 이 때 헷갈리지 말아야 할 것은 pages 또는 routes와 component의 차이다. 컴포넌트는 위에서도 설명했듯, 하나의 기능 또는 책임을 위해 존재하는 하나의 레고블록 같은 것이다. 따라서 이러한 컴포넌트들을 조립하여 하나의 페이지를 구성해야 하기 때문에 <strong>page와 component의 차이점</strong>을 분명히 짚고 넘어가야 한다.</p>
+<h3 id="constants"><a href="#constants" class="headerlink" title="constants"></a>constants</h3><blockquote>
+<p>“<em>백그라운드 컬러 #FFFFFF에서 #F9F7F7로 변경해주세요</em>“<br>만약 이 말을 프로젝트가 굉장히 진척된 상황에서 듣게 된다면 어떨까?</p>
+</blockquote>
+<p>백그라운드 컬러 또는 특정 높이나 넓이 값, enum 등 모든 것들을 상수화 하지 않고 일일이 수기로 입력해뒀다면 위와 같은 수정사항을 받았을 때 우리는 하나하나 모든 것들을 수기로 고쳐야 할 것이다.</p>
+<p>이러한 상황을 방지하고, 미세한 오차 또는 실수를 줄이기 위해 우리는 자주 사용되는 값들을 constants에 담아 활용해야 한다. 이에는 대표적으로 색상, 사이즈 등이 있을 수 있다.</p>
+<p>constants는 말 그대로 “상수”다. 따라서 고정된 값을 여러 군데에서 반복적으로 범용해야 할 경우, 반드시 constants에 입력해둔 뒤 <code>import</code>하여 사용하도록 하자.</p>
+<h3 id="hooks"><a href="#hooks" class="headerlink" title="hooks"></a>hooks</h3><blockquote>
+<p>커스텀 훅을 모아두는 폴더다.</p>
+</blockquote>
+<p>프로젝트 사이즈가 굉장히 작을 경우에는 필요 없을 수도 있지만, 어느 정도의 규모라면 반드시 필요할 것이다. <code>useState</code>, <code>useEffect</code> 뿐만 아니라 여러 컴포넌트에서 활용될 수 있는 커스텀 훅이 있다면 <code>hooks</code> 폴더에 입력해둔 뒤 <code>import</code>하여 사용하는 것이 좋다.</p>
+<h3 id="pages"><a href="#pages" class="headerlink" title="pages"></a>pages</h3><blockquote>
+<p>컴포넌트들로 이루어진 하나의 온전한 페이지다.</p>
+</blockquote>
+<p>때에 따라 routes로 명하는 경우도 있지만, 필자는 주로 pages라는 이름을 사용한다. 이러한 pages들을 모아 App.jsx 파일에 <code>import</code> 해주면 된다.</p>
+<h3 id="styles"><a href="#styles" class="headerlink" title="styles"></a>styles</h3><blockquote>
+<p>CSS 파일들이 들어간다</p>
+</blockquote>
+<p>필자는 보통 styled-components를 주로 사용하기 때문에 styles에 많은 파일들을 넣지 않는다. 하지만 Globalstyles와 같은 전역 rest CSS 파일을 넣어둘 때 활용한다.</p>
+<p>하지만 styled-components를 사용한다고 해서 구조를 완전히 무시해도 되는 것은 아니다. CSS 코드가 컴포넌트 내 상단에 위치하게 된다면 굉장히 가독성이 떨어질 수 있기에 jsx 최하단에 배치하거나, 아니면 이 또한 파일로 분리하여 <code>import</code>하여 사용할 수 있도록 구성해야 한다.</p>
+<h3 id="utils"><a href="#utils" class="headerlink" title="utils"></a>utils</h3><blockquote>
+<p>유틸 함수들이 들어가는 폴더다.</p>
+</blockquote>
+<p><code>getApiData()</code>, <code>getDate()</code>와 같이 여러 컴포넌트에서 자주 활용될 수 있는 함수들을 utils 폴더에 담아둔 뒤 전역적으로 활용할 수 있도록 해야한다. 만약 날짜를 변환하는 함수를 8~9개의 함수에 각각 일일이 입력하여 사용한다면 이는 굉장히 비효율적이고 에러 발생 확률 및 유지보수성도 굉장히 떨어질 것이다.</p>
+<p>따라서 반드시 두개 이상의 컴포넌트에서 활용될 수 있는 함수라면, utils 폴더에 담아 활용하도록 하자.</p>
+<hr>
+<h2 id="🪅-아토믹-디자인"><a href="#🪅-아토믹-디자인" class="headerlink" title="🪅 아토믹 디자인"></a>🪅 아토믹 디자인</h2><blockquote>
+<p>“<strong>atomic</strong>”, 즉 원자처럼 쪼갤 수 있을 때 까지 완전히 분해하여 디자인하는 패턴을 의미한다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/153773514-119731c8-e0e3-4f68-a54b-393d378c187e.png"></p>
+<p>이는 기본적으로 위에서 필자가 강조한 “파일 유형에 따른 분리 원칙”에서 더 나아가 컴포넌트가 원자처럼 “<strong>완전히 독립적이고 단일한 기능</strong>“을 담당할 수 있도록 명확히 분리하는 것을 의미한다.</p>
+<p>위의 설명에선, 단순히 components, pages, utils 등등, 유형에 따라 큰 단위로만 분류하는 것에 그쳤었다. 하지만 아토믹 디자인을 따르게 된다면 components 안에서도 그 유형 및 기능별로 조금 더 디렉토리가 세분화되어 구분되어지는 것이다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/153773502-2962a52d-1e1d-44a5-a281-4c62a6b95710.gif" alt="참조 : [http://atomicdesign.bradfrost.com](http://atomicdesign.bradfrost.com/) (Brad Frost)"></p>
+<p>만약, 한 페이지 내에서 하나의 nav바가 존재한다고 가정했을 때 아래와 같이 Nav라는 컴포넌트를 아래와 같이 분해할 수 있을 것이다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/153773515-361fd839-d185-433e-bf4d-7eae407cc755.png" alt="Nav 컴포넌트의 분해 과정"></p>
+<p>Nav 컴포넌트의 분해 과정</p>
+<p>처음에 필자가 위에서 설명한 큰 틀에서의 분리만 진행했다면, 그냥 위의 <code>nav</code>는 하나의 컴포넌트로 구성됐을 수도 있다. 하지만 atomic 패턴을 적용한다면, <code>nav</code>안에서도 독립적인 기능을 하며 재사용성을 고려해야 할 작은 단위의 컴포넌트가 존재할 수 있다. 따라서 위와 같이 컴포넌트 내에서도 또 다른 분류가 필요하다.</p>
+<ol>
+<li><strong>Nav 컴포넌트에 Logo, Menu, SearchBar 컴포넌트를 각각 모아서 조립해준다고 가정하여 구조를 잡는다.</strong></li>
+<li><strong>Nav 안에서 로고는 다른 곳에서 활용될 확률이 높기에 이 또한 하나의 독립된 컴포넌트로 분리한다.</strong></li>
+<li><strong>메뉴바에는 여러 menu list들이 존재할 수 있다. 따라서 독립적 기능을 할 수 있도록 이 또한 분리한다.</strong></li>
+<li><strong>Search바 또한 마찬가지로 하나의 독립된 컴포넌트로 분리한다.</strong></li>
+</ol>
+<p>이처럼 컴포넌트를 하나의 큰 덩어리로 보는 것이 아니라, 컴포넌트 내에서도 세부적인 분리를 하는 것을 아토믹 디자인/패턴 이라고 할 수 있다.</p>
+<blockquote>
+<p>따라서 이와 같이 components 폴더 내에서도 하나의 큰 덩어리가 될 수 있는 컴포넌트에 대한 폴더를 다시 만들고, 그 컴포넌트 내에 세부적 컴포넌트들을 각각 구성시켜야 한다.</p>
+</blockquote>
+<hr>
+<h3 id="참조-링크"><a href="#참조-링크" class="headerlink" title="참조 링크"></a>참조 링크</h3><hr>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ko.reactjs.org/docs/faq-structure.html">https://ko.reactjs.org/docs/faq-structure.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.stevy.dev/react-design-guide">https://www.stevy.dev/react-design-guide</a></li>
+<li><a target="_blank" rel="noopener" href="https://ui.toast.com/weekly-pick/ko_20200213">https://ui.toast.com/weekly-pick/ko_20200213</a></li>
+<li><a target="_blank" rel="noopener" href="https://smoh.tistory.com/385">https://smoh.tistory.com/385</a></li>
+</ul>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>[React] 프로젝트 구조 설계</p><p><a href="https://hoonjoo-park.github.io/react/projectStructure/">https://hoonjoo-park.github.io/react/projectStructure/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Hoonjoo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-02-14</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-02-14</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%EA%B5%AC%EC%A1%B0/">구조</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61ccb08ffa9c81001d245598&amp;product=sticky-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/typescript/5.nullableOptional/"><span class="level-item">[타입스크립트] 느낌표와 물음표</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><script src="https://utteranc.es/client.js" repo="hoonjoo-park/hoonjoo-park.github.io" issue-term="pathname" label="🙋‍♂️" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#✨-프로젝트-구조의-중요성"><span class="level-left"><span class="level-item">1</span><span class="level-item">✨ 프로젝트 구조의 중요성</span></span></a></li><li><a class="level is-mobile" href="#🤝-기본-약속"><span class="level-left"><span class="level-item">2</span><span class="level-item">🤝 기본 약속</span></span></a></li><li><a class="level is-mobile" href="#🗂-필수-디렉토리"><span class="level-left"><span class="level-item">3</span><span class="level-item">🗂 필수 디렉토리</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#components"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">components</span></span></a></li><li><a class="level is-mobile" href="#constants"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">constants</span></span></a></li><li><a class="level is-mobile" href="#hooks"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">hooks</span></span></a></li><li><a class="level is-mobile" href="#pages"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">pages</span></span></a></li><li><a class="level is-mobile" href="#styles"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">styles</span></span></a></li><li><a class="level is-mobile" href="#utils"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">utils</span></span></a></li></ul></li><li><a class="level is-mobile" href="#🪅-아토믹-디자인"><span class="level-left"><span class="level-item">4</span><span class="level-item">🪅 아토믹 디자인</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#참조-링크"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">참조 링크</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">총 방문자 <span id="busuanzi_value_site_uv"></span> 명</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
