@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>브라우저의 동작 원리 - Hoon&#039;s 블로그</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="Hoon"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="당연한 건 없다.필자는 그동안 아무런 궁금증도 갖지 않은채 인터넷과 브라우저를 사용해왔다. 네이버와 구글에 접속하는 것이 너무나도 당연했고, 그냥 물을 마시면 갈증이 해소되는 것과 같이, 이를 하나의 상식이자 명제처럼 당연시 해왔다."><meta property="og:type" content="blog"><meta property="og:title" content="브라우저의 동작 원리"><meta property="og:url" content="https://hoonjoo-park.github.io/cs/browser/howBrowserWorks/"><meta property="og:site_name" content="Hoon&#039;s 블로그"><meta property="og:description" content="당연한 건 없다.필자는 그동안 아무런 궁금증도 갖지 않은채 인터넷과 브라우저를 사용해왔다. 네이버와 구글에 접속하는 것이 너무나도 당연했고, 그냥 물을 마시면 갈증이 해소되는 것과 같이, 이를 하나의 상식이자 명제처럼 당연시 해왔다."><meta property="og:locale" content="en_US"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157312657-21797098-8133-47e3-b624-84d7346e7084.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157312773-c9d873cf-395c-4861-a1d9-f5dab5020878.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157312639-7595f500-9749-47e6-8a24-1c557f75f407.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157312640-9cd040da-a338-4ec9-8a38-eb9ec4d5ab81.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157313064-64cfe14d-b739-41b1-b5f9-060b37eeb71e.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157312643-9da14281-2d92-4d82-9293-2073af09d8a0.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157312645-ae89e267-57f5-425c-bce7-3d6b2b1170d9.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157313329-70de6dbf-6e66-4334-bc5b-7ea3e8bad5f3.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157313419-d04f7583-4f03-4b0d-b4ad-20d242e8eb8d.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/157312655-707a0c5c-5f85-4739-8779-f0953513ac88.png"><meta property="article:published_time" content="2022-03-08T19:45:40.000Z"><meta property="article:modified_time" content="2022-03-08T19:47:47.087Z"><meta property="article:author" content="Hoonjoo"><meta property="article:tag" content="네트워크"><meta property="article:tag" content="브라우저"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://user-images.githubusercontent.com/67448481/157312657-21797098-8133-47e3-b624-84d7346e7084.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoonjoo-park.github.io/cs/browser/howBrowserWorks/"},"headline":"브라우저의 동작 원리","image":["https://user-images.githubusercontent.com/67448481/157312657-21797098-8133-47e3-b624-84d7346e7084.png","https://user-images.githubusercontent.com/67448481/157312773-c9d873cf-395c-4861-a1d9-f5dab5020878.png","https://user-images.githubusercontent.com/67448481/157312639-7595f500-9749-47e6-8a24-1c557f75f407.png","https://user-images.githubusercontent.com/67448481/157312640-9cd040da-a338-4ec9-8a38-eb9ec4d5ab81.png","https://user-images.githubusercontent.com/67448481/157313064-64cfe14d-b739-41b1-b5f9-060b37eeb71e.png","https://user-images.githubusercontent.com/67448481/157312643-9da14281-2d92-4d82-9293-2073af09d8a0.png","https://user-images.githubusercontent.com/67448481/157312645-ae89e267-57f5-425c-bce7-3d6b2b1170d9.png","https://user-images.githubusercontent.com/67448481/157313329-70de6dbf-6e66-4334-bc5b-7ea3e8bad5f3.png","https://user-images.githubusercontent.com/67448481/157313419-d04f7583-4f03-4b0d-b4ad-20d242e8eb8d.png","https://user-images.githubusercontent.com/67448481/157312655-707a0c5c-5f85-4739-8779-f0953513ac88.png"],"datePublished":"2022-03-08T19:45:40.000Z","dateModified":"2022-03-08T19:47:47.087Z","author":{"@type":"Person","name":"Hoonjoo"},"publisher":{"@type":"Organization","name":"Hoon's 블로그","logo":{"@type":"ImageObject","url":"https://hoonjoo-park.github.io/img/logo.svg"}},"description":"당연한 건 없다.필자는 그동안 아무런 궁금증도 갖지 않은채 인터넷과 브라우저를 사용해왔다. 네이버와 구글에 접속하는 것이 너무나도 당연했고, 그냥 물을 마시면 갈증이 해소되는 것과 같이, 이를 하나의 상식이자 명제처럼 당연시 해왔다."}</script><link rel="canonical" href="https://hoonjoo-park.github.io/cs/browser/howBrowserWorks/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Roboto" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-0RF6Y2B0CN" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-03-08T19:45:40.000Z" title="2022. 3. 9. 오전 4:45:40">2022-03-09</time></span><span class="level-item"><a class="link-muted" href="/categories/CS/">CS</a><span> / </span><a class="link-muted" href="/categories/CS/%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80/">브라우저</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">브라우저의 동작 원리</h1><div class="content"><p><img src="https://user-images.githubusercontent.com/67448481/157312657-21797098-8133-47e3-b624-84d7346e7084.png"></p>
+<h2 id="당연한-건-없다"><a href="#당연한-건-없다" class="headerlink" title="당연한 건 없다."></a>당연한 건 없다.</h2><p>필자는 그동안 아무런 궁금증도 갖지 않은채 인터넷과 브라우저를 사용해왔다. 네이버와 구글에 접속하는 것이 너무나도 당연했고, 그냥 물을 마시면 갈증이 해소되는 것과 같이, 이를 하나의 상식이자 명제처럼 당연시 해왔다.</p>
+<p>하지만 웹 개발을 시작하며, 내가 개발한 웹사이트가 어떻게 사용자들의 브라우저에 렌더링 되어 보여지는지 궁금해지기 시작했고, 이에 대해 확실히 이해해보고 싶었다.</p>
+<blockquote>
+<p>그렇다면 브라우저 주소창에 <a target="_blank" rel="noopener" href="https://www.naver.com/">https://www.naver.com</a>을 입력했을 때, 어떤 과정을 거쳐서 네이버 페이지가 렌더링 되는걸까?</p>
+</blockquote>
+<p>이 질문에 대답하기 위해선 <strong>브라우저</strong>, <strong>url</strong>, <strong>렌더링</strong>에 대한 이해가 우선되어야 한다고 생각한다.</p>
+<p>결국 질문에 담긴 핵심은 이 세 개념들이기 때문이다.(<strong>브라우저</strong> 주소창에 <strong>url</strong>을 입력하면 페이지가 어떻게 <strong>렌더링</strong> 되는가?)</p>
+<p>따라서 차례대로, <strong>브라우저란 무엇이며 어떤 기능을 하는지</strong>, <strong>url이란 무엇인지</strong>, 그리고 마지막으로 <strong>렌더링 과정은 어떻게 되는지</strong>에 대해 짚고 넘어가보고자 한다.</p>
+<hr>
+<h2 id="브라우저란"><a href="#브라우저란" class="headerlink" title="브라우저란?"></a>브라우저란?</h2><p><img src="https://user-images.githubusercontent.com/67448481/157312773-c9d873cf-395c-4861-a1d9-f5dab5020878.png"></p>
+<blockquote>
+<p>웹 브라우저는 웹 서버와의 통신을 통해 HTML, 미디어파일 등을 수신 받아 사용자에게 웹페이지를 렌더링해주는 하나의 <strong>응용 소프트웨어</strong>다.</p>
+</blockquote>
+<p>조금 더 쉽게 풀어서 설명을 하면, 브라우저가 <strong>서버에 데이터를 요청</strong>하고 → 서버는 <strong>요청받은 데이터를 응답</strong>하며 → 브라우저는 응답받은 데이터를 처리하여 사용자에게 웹페이지로써 <strong>렌더링</strong> 해주는 것이다.</p>
+<h3 id="브라우저의-기본-구조"><a href="#브라우저의-기본-구조" class="headerlink" title="브라우저의 기본 구조"></a>브라우저의 기본 구조</h3><blockquote>
+<p>그렇다면 브라우저는 어떤 구성요소들로 구성되어 있으며, 각 요소들은 어떤 기능을 담당할까?</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/157312639-7595f500-9749-47e6-8a24-1c557f75f407.png" alt="브라우저 구성 요소"></p>
+<table>
+<thead>
+<tr>
+<th>구성요소</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>유저 인터페이스 (UI)</td>
+<td>URL 검색창, 뒤로가기 앞으로 가기 버튼, 홈 버튼, 새로고침 버튼 등</td>
+</tr>
+<tr>
+<td>브라우저 엔진</td>
+<td>중간에서 유저 인터페이스와 렌더링 엔진 사이의 작업과 동작을 제어한다.</td>
+</tr>
+<tr>
+<td>렌더링 엔진</td>
+<td>HTML과 CSS 등을 파싱하여 콘텐츠들을 화면에 표시하는 역할을 한다.</td>
+</tr>
+<tr>
+<td>통신</td>
+<td>HTTP 요청과 같은 네트워크 호출에 사용</td>
+</tr>
+<tr>
+<td>JS 해석기</td>
+<td>자바스크립트 코드를 해석하여 실행하는 역할을 한다.</td>
+</tr>
+<tr>
+<td>UI 백엔드</td>
+<td>OS 사용자 인터페이스를 기반으로 기본적인 위젯 및 툴을 표시한다.</td>
+</tr>
+<tr>
+<td>자료 저장소</td>
+<td>쿠키, 로컬스토리지, 세션스토리지와 같이 브라우저 자체의 저장소를 의미한다.</td>
+</tr>
+</tbody></table>
+<p>즉, UI는 기본적인 브라우저의 틀을 구성하고, 렌더링 엔진이 HTTP 통신을 통해 응답받은 데이터를 파싱하여 화면에 표시해주는 것이 기본적인 브라우저 동작 원리의 골자인 것이다.</p>
+<p>언뜻 봐도 위 구성요소들 중에 <strong>렌더링 엔진</strong>이 굉장히 큰 역할을 담당하고 있는 것 같다.</p>
+<h3 id="렌더링-엔진"><a href="#렌더링-엔진" class="headerlink" title="렌더링 엔진"></a>렌더링 엔진</h3><blockquote>
+<p>렌더링 엔진은 응답 받은 HTML 문서를 파싱하여 브라우저 상에 페이지를 표시해준다.</p>
+</blockquote>
+<p>참고로 렌더링 엔진의 동작과정을 설명하며 어려운 단어들이 속출될 예정이다. 파싱, DOM 트리, 렌더트리 등등… 모든 용어들을 알기 쉽게 설명하며 자세히 짚고 넘어갈 것이니 너무 겁먹지 말고 차근히 읽어 내려가길 바란다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/157312640-9cd040da-a338-4ec9-8a38-eb9ec4d5ab81.png" alt="돈워리..!!"></p>
+<h3 id="렌더링-엔진의-동작-프로세스"><a href="#렌더링-엔진의-동작-프로세스" class="headerlink" title="렌더링 엔진의 동작 프로세스"></a>렌더링 엔진의 동작 프로세스</h3><p><img src="https://user-images.githubusercontent.com/67448481/157313064-64cfe14d-b739-41b1-b5f9-060b37eeb71e.png" alt="렌더링 엔진이 동작하는 과정"></p>
+<p>우선 여기서 “**잠깐!**”이라는 말을 하고싶다. 필자 또한 해당 내용을 공부하면서 딱 이 때부터 글을 읽기가 싫어졌었다. 도통 모르는 단어들 뿐인지라 이해가 되질 않았다…</p>
+<p>따라서 위에서도 언급했듯, 하나하나 차근히 모든 개념들을 짚어가며 설명을 해보도록 하겠다.</p>
+<hr>
+<ol>
+<li><p><strong>DOM 트리</strong></p>
+<p><img src="https://user-images.githubusercontent.com/67448481/157312643-9da14281-2d92-4d82-9293-2073af09d8a0.png" alt="출처 : GeeksforGeeks"></p>
+<p><strong>DOM트리 === DOM</strong>이라고 생각해도 된다. DOM은 Document Object Model로, 쉽게 말해 <strong>HTML 코드(태그)들이 트리형태로 계층화 + 구조화 된 하나의 문서 또는 객체</strong>다.</p>
+</li>
+<li><p><strong>파싱</strong></p>
+<blockquote>
+<p>브라우저가 코드를 읽고 활용할 수 있도록 데이터를 구조화 하는 것</p>
+</blockquote>
+<p>파싱은 구문 분석으로 정의된다. 이를 풀어 설명하면, 데이터를 분석 및 정제하여 원하는 형태로 가공하는 것이다. 따라서, 위에서 설명했듯, HTML문서(코드)를 DOM 형태로 구조화 또는 가공해야 하는데 이를 “파싱한다”라고 표현한 것이다.</p>
+</li>
+<li><p><strong>렌더트리</strong></p>
+<blockquote>
+<p>진짜 마지막이다!</p>
+</blockquote>
+<p>일단, 렌더트리는 <strong>CSSOM + DOM</strong>의 결과물이다. CSSOM이란 CSS Object Model로, CSS 코드가 DOM과 같이 파싱되어 구조화 된 것이라고 생각하면 된다.</p>
+<p>따라서, 렌더트리란 <strong>HTML이 구조화된 DOM과 CSS가 구조화된 CSSOM이 합쳐진 결과물</strong>인 것이다.</p>
+</li>
+</ol>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/67448481/157312645-ae89e267-57f5-425c-bce7-3d6b2b1170d9.png" alt="DOM트리가 생성되는 과정"></p>
+<blockquote>
+<p>자, 이제 DOM 트리가 생성되기 위해 HTML이 파싱되고, CSS코드 또한 파싱되어 CSSOM이 되며, 두 트리가 합쳐져 렌더트리가 된다는 것 까지는 이해했다.</p>
+</blockquote>
+<p>이렇게 렌더 트리의 생성이 끝나면, 각 노드들(렌더트리의 각 요소들)의 배치가 시작된다. 즉, 포지셔닝이 된다는 것이다. 그리고 노드들의 배치가 완료되면 UI 백엔드가 각 노드들의 형상을 그려낸다.</p>
+<p>이러한 일련의 과정들을 거치며 우리가 작성한 HTML 및 CSS 코드들이 웹상에 표현되는 것이다.</p>
+<h3 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h3><p><img src="https://user-images.githubusercontent.com/67448481/157313329-70de6dbf-6e66-4334-bc5b-7ea3e8bad5f3.png"></p>
+<p>지금까지 설명한 렌더링 엔진의 동작 과정은 위 그림과 같다.</p>
+<p>HTML 및 CSS 코드들이 파싱되어 각자 트리 형태(오브젝트 모델)로 변환되고 → 두 트리가 합쳐져 렌더 트리가 된다 → 그리고 트리의 노드들이 각각 배치되고 그려지며 내가 작성한 코드들이 브라우저에 그려지는 것이다.</p>
+<blockquote>
+<p>이제 마지막으로 <strong>URL이 무엇인지</strong>, 그리고 그 <strong>URL을 통해 서버에 어떻게 요청이 보내지는지</strong>에 대해서만 이해한다면, “_특정 URL을 브라우저에 입력했을 때 해당 페이지가 어떻게 렌더링 되는가?_”에 대한 대답을 해낼 수 있을 것이다.</p>
+</blockquote>
+<hr>
+<h2 id="URL이란"><a href="#URL이란" class="headerlink" title="URL이란?"></a>URL이란?</h2><p><img src="https://user-images.githubusercontent.com/67448481/157313419-d04f7583-4f03-4b0d-b4ad-20d242e8eb8d.png"></p>
+<blockquote>
+<p>url의 구성 요소는 위 사진처럼 <code>스킴 + 호스트 + (패스) + (쿼리)</code>로 이루어져있다.</p>
+</blockquote>
+<p>원래는 포트번호 또한 url의 구성요소이기는 하지만, 스킴에 기본적으로 할당되어 있는 고유 포트번호가 있기 때문에 생략되는 경우가 많다.</p>
+<hr>
+<ol>
+<li><p><strong>스킴 (프로토콜)</strong></p>
+<blockquote>
+<p>한국어에도 문법, 훈민정음, 발음, 상황에 따른 용법 등 다양한 규칙과 기준이 존재하듯, 네트워크 통신에도 이러한 다양한 규칙(프로토콜)들이 존재한다.</p>
+</blockquote>
+<p>즉, <strong>프로토콜은 네트워크 통신을 위한 규약이자 규칙들의 단편</strong>들이다. “_나는 이런 규칙을 따르며 통신할거야!_”</p>
+</li>
+<li><p><strong>도메인</strong></p>
+<blockquote>
+<p>도메인은 컴퓨터의 주소라고 할 수 있는 IP주소가 기억되기 쉽게 변환된 것이다.</p>
+</blockquote>
+<p>192.16X.X.X등을 외우기는 쉽지 않기 때문에, 이러한 IP주소를 외우고 구분하기 쉽도록 <a target="_blank" rel="noopener" href="http://www.naver.com과/">www.naver.com과</a> 같은 형태로 변환한 것이 도메인이다.</p>
+</li>
+<li><p><strong>Path</strong></p>
+<blockquote>
+<p>Path는 조금 더 세분화된 경로이자 파일의 위치라고 할 수 있다.</p>
+</blockquote>
+<p>즉, 내가 찾는 데이터가 웹서버에 저장된 위치다. 특정 디렉토리 또는 파일의 위치를 찾는 것과 동일하다고 볼 수 있다.</p>
+</li>
+<li><p><strong>쿼리 (Query)</strong></p>
+<blockquote>
+<p>만약 위의 정보들로는 부족하고, 조금 더 상세한 조건이나 데이터를 담아서 보내주고싶을 때 쿼리를 사용한다.</p>
+</blockquote>
+<p>예를 들어 <a target="_blank" rel="noopener" href="http://www.naver.com/place?location=seoul%EC%9D%B4%EB%9D%BC%EA%B3%A0">www.naver.com/place?location=seoul이라고</a> 했을 때, 이는 그냥 place를 통틀어 찾고싶은 것이 아닌 seoul이라는 특정 위치에 대해서만 검색을 하고싶을 때 사용됐을 것이다.</p>
+</li>
+</ol>
+<hr>
+<h3 id="URL을-통해-웹서버에-데이터-요청이-일어나는-과정"><a href="#URL을-통해-웹서버에-데이터-요청이-일어나는-과정" class="headerlink" title="URL을 통해 웹서버에 데이터 요청이 일어나는 과정"></a>URL을 통해 웹서버에 데이터 요청이 일어나는 과정</h3><blockquote>
+<p>그럼 이제 URL이 뭔지에 대해서는 개괄적으로 이해가 됐는데, 이러한 URL을 통해 어떻게 웹 서버에 데이터 요청이 일어나는 걸까?</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/157312655-707a0c5c-5f85-4739-8779-f0953513ac88.png" alt="Untitled 9"></p>
+<p>개괄적인 웹서버에 요청을 보내는 과정은 위의 그림과 같다. 이를 조금 더 명료하게 정리를 해보자면 아래와 같이 정리할 수 있을 것이다.</p>
+<hr>
+<ol>
+<li><p><strong>도메인을 IP주소로 변경</strong></p>
+<blockquote>
+<p>DNS 서버에 요청하여 요청 도메인에 대응하는 IP주소를 반환 받는다 (DNS 리졸버)</p>
+</blockquote>
+<p>DNS는 네트워크의 전화번호부 역할을 하는 서버라고 할 수 있다. 따라서 우리는 DNS 서버에 나의 도메인에 대응하는 IP주소를 반환받을 수 있는 것이다.</p>
+</li>
+<li><p><strong>ARP 프로토콜을 통해 MAC주소 반환</strong></p>
+<blockquote>
+<p>이제 IP 주소를 얻었으니, 서버 또는 컴퓨터의 정확한 물리적 주소를 의미하는 MAC 주소를 알아내야 한다.</p>
+</blockquote>
+<p>IP주소는 하나의 네트워크(계층)에 대한 주소이므로, 정확한 컴퓨터에 요청이 도달하도록 하기 위해서는 MAC주소가 필요하다. 따라서 우리는 ARP 프로토콜을 통해 IP주소에 대응하는 MAC 주소를 반환 받아야 한다.</p>
+</li>
+<li><p><strong>IP와 MAC주소를 통해 서버로 요청 전달</strong></p>
+<blockquote>
+<p>이제 IP주소를 통해 특정 네트워크에 접근하고, MAC주소를 통해 정확한 컴퓨터에 접근한다.</p>
+</blockquote>
+<p>즉, 네트워크라는 큰 범위 또는 계층에 IP 주소를 통해 접근하고, 해당 네트워크에서 MAC 주소라는 물리적 주소를 통해 특정한 컴퓨터에 접근할 수 있는 것이다. 이를 통해 우리는 특정 웹 서버에 요청을 보낼 수 있는 것이다.</p>
+</li>
+</ol>
+<hr>
+<p>이를 하나의 문장으로 다시 정리하자면, 도메인(<a target="_blank" rel="noopener" href="http://www.naver.com)을/">www.naver.com)을</a> 통해 IP 주소를 얻어내고, 해당 IP 주소로 내가 원하는 웹서버의 네트워크까지 도달한 후, MAC 주소를 통해 정확한 웹서버의 컴퓨터에 액세스하는 것이다.</p>
+<p>사실 이렇게 간단히 요약될 수 있는 부분이 아니긴 하지만, 이번 포스팅에서는 이정도의 설명만으로도 충분할 것이라 감히 생각해본다. 여기서 OSI 7계층, 4계층에 따른 분류와 ARP 프로토콜, DNS 리졸버 등에 대해 다루면 글이 끝도없이 길어질 것이다. 따라서 해당 내용들은 다음 포스팅에서 다뤄보도록 하겠다.</p>
+<hr>
+<h2 id="정리-및-요약"><a href="#정리-및-요약" class="headerlink" title="정리 및 요약"></a>정리 및 요약</h2><blockquote>
+<p>자, 이제 하나의 요약된 글로써 <a target="_blank" rel="noopener" href="https://www.naver.com/">https://www.naver.com</a>을 입력했을 때 어떻게 해당 페이지가 렌더링 되는지 설명해보도록 하겠다.</p>
+</blockquote>
+<p>브라우저에 해당 url을 입력하면 <strong>렌더링 엔진의 통신 기능을 통해 해당 웹 서버로 GET 요청</strong>을 보낸다. 해당 GET 요청이 가는 과정은 DNS 서버에 요청을 보내 URL의 도메인에 대응하는 <strong>IP 주소를 반환</strong> 받고, ARP 프로토콜을 통해 <strong>MAC 주소까지 반환</strong>받아 웹서버에 요청을 전달하는 것이다. 이렇게 해당 웹서버로 GET요청이 전달되면, 웹서버는 해당 URL에 대응하는 데이터를 응답으로써 반환해준다. 브라우저는 이 때 <strong>반환된 데이터를 파싱</strong>하여 <strong>DOM트리와 CSSOM을 생성</strong>하고, 이를 합쳐 <strong>렌더 트리를 생성</strong>한다. 그리고 생성된 <strong>렌더 트리를 통해 각 노드들을 배치 및 형성하여 페이지가 렌더링</strong> 되는 것이다.</p>
+<hr>
+<h2 id="참조-자료"><a href="#참조-자료" class="headerlink" title="참조 자료"></a>참조 자료</h2><p><a target="_blank" rel="noopener" href="https://d2.naver.com/helloworld/59361">NAVER D2</a></p>
+<p><a target="_blank" rel="noopener" href="https://poiemaweb.com/js-browser">Javascript Environment | PoiemaWeb</a></p>
+<p><a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction?hl=ko">렌더링 트리 생성, 레이아웃 및 페인트 | Web | Google Developers</a></p>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>브라우저의 동작 원리</p><p><a href="https://hoonjoo-park.github.io/cs/browser/howBrowserWorks/">https://hoonjoo-park.github.io/cs/browser/howBrowserWorks/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Hoonjoo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-03-09</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-03-09</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/">네트워크</a><a class="link-muted mr-2" rel="tag" href="/tags/%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80/">브라우저</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61ccb08ffa9c81001d245598&amp;product=sticky-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm/udemy/18.DLL/"><span class="level-item">Udemy - 이중 연결 리스트</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><script src="https://utteranc.es/client.js" repo="hoonjoo-park/hoonjoo-park.github.io" issue-term="pathname" label="🙋‍♂️" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#당연한-건-없다"><span class="level-left"><span class="level-item">1</span><span class="level-item">당연한 건 없다.</span></span></a></li><li><a class="level is-mobile" href="#브라우저란"><span class="level-left"><span class="level-item">2</span><span class="level-item">브라우저란?</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#브라우저의-기본-구조"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">브라우저의 기본 구조</span></span></a></li><li><a class="level is-mobile" href="#렌더링-엔진"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">렌더링 엔진</span></span></a></li><li><a class="level is-mobile" href="#렌더링-엔진의-동작-프로세스"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">렌더링 엔진의 동작 프로세스</span></span></a></li><li><a class="level is-mobile" href="#정리"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">정리</span></span></a></li></ul></li><li><a class="level is-mobile" href="#URL이란"><span class="level-left"><span class="level-item">3</span><span class="level-item">URL이란?</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#URL을-통해-웹서버에-데이터-요청이-일어나는-과정"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">URL을 통해 웹서버에 데이터 요청이 일어나는 과정</span></span></a></li></ul></li><li><a class="level is-mobile" href="#정리-및-요약"><span class="level-left"><span class="level-item">4</span><span class="level-item">정리 및 요약</span></span></a></li><li><a class="level is-mobile" href="#참조-자료"><span class="level-left"><span class="level-item">5</span><span class="level-item">참조 자료</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">총 방문자 <span id="busuanzi_value_site_uv"></span> 명</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
