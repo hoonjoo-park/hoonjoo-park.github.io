@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>프로토타입을 이해해야 자바스크립트를 이해할 수 있다 - Hoon&#039;s 블로그</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="Hoon"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="자바스크립트에는 Class가 없다..?? 무슨 소린가 싶다…분명 class를 사용했던 기억이 있는데 자바스크립트에는 class가 없다니..?"><meta property="og:type" content="blog"><meta property="og:title" content="프로토타입을 이해해야 자바스크립트를 이해할 수 있다"><meta property="og:url" content="https://hoonjoo-park.github.io/javascript/base/prototype/"><meta property="og:site_name" content="Hoon&#039;s 블로그"><meta property="og:description" content="자바스크립트에는 Class가 없다..?? 무슨 소린가 싶다…분명 class를 사용했던 기억이 있는데 자바스크립트에는 class가 없다니..?"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699545-4793aec8-f3bd-4d5a-88e5-455058293665.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699480-e819785e-85ca-4bc0-a442-ba2dbcdabe0d.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699499-e3be975b-27be-4596-8bbe-a6d9c9ffb4ec.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699503-99b57d98-7b58-492d-903a-e879276cf507.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699508-d69b81e8-cdf0-4930-8053-67dc035f163c.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699513-40f07242-fb2c-4937-83f4-3408a5d69ffc.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699516-6c23a2ef-6fbf-4f55-b06e-b7c5ffd95608.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699519-7763e82c-f3a5-4fa8-aa3e-760b24c74b43.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699521-814cf34c-1d08-4654-bdbf-45de415f44a3.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699523-6b4076b4-1bb9-40ce-9d32-93082a7b1fb4.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699527-2ba1dbe3-ba25-47ab-8564-a496bdce84f1.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699533-35aa71a4-337e-4e49-a25f-388f1f30e334.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699537-17fc3b6a-e918-477b-951b-c1d9d8fc94bd.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/160699539-93b4bcdb-44f9-4844-80b9-610d58793f2d.png"><meta property="article:published_time" content="2022-03-29T14:10:40.000Z"><meta property="article:modified_time" content="2022-03-29T20:49:04.717Z"><meta property="article:author" content="Hoonjoo"><meta property="article:tag" content="개념"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://user-images.githubusercontent.com/67448481/160699545-4793aec8-f3bd-4d5a-88e5-455058293665.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoonjoo-park.github.io/javascript/base/prototype/"},"headline":"프로토타입을 이해해야 자바스크립트를 이해할 수 있다","image":["https://user-images.githubusercontent.com/67448481/160699545-4793aec8-f3bd-4d5a-88e5-455058293665.png","https://user-images.githubusercontent.com/67448481/160699480-e819785e-85ca-4bc0-a442-ba2dbcdabe0d.png","https://user-images.githubusercontent.com/67448481/160699499-e3be975b-27be-4596-8bbe-a6d9c9ffb4ec.png","https://user-images.githubusercontent.com/67448481/160699503-99b57d98-7b58-492d-903a-e879276cf507.png","https://user-images.githubusercontent.com/67448481/160699508-d69b81e8-cdf0-4930-8053-67dc035f163c.png","https://user-images.githubusercontent.com/67448481/160699513-40f07242-fb2c-4937-83f4-3408a5d69ffc.png","https://user-images.githubusercontent.com/67448481/160699516-6c23a2ef-6fbf-4f55-b06e-b7c5ffd95608.png","https://user-images.githubusercontent.com/67448481/160699519-7763e82c-f3a5-4fa8-aa3e-760b24c74b43.png","https://user-images.githubusercontent.com/67448481/160699521-814cf34c-1d08-4654-bdbf-45de415f44a3.png","https://user-images.githubusercontent.com/67448481/160699523-6b4076b4-1bb9-40ce-9d32-93082a7b1fb4.png","https://user-images.githubusercontent.com/67448481/160699527-2ba1dbe3-ba25-47ab-8564-a496bdce84f1.png","https://user-images.githubusercontent.com/67448481/160699533-35aa71a4-337e-4e49-a25f-388f1f30e334.png","https://user-images.githubusercontent.com/67448481/160699537-17fc3b6a-e918-477b-951b-c1d9d8fc94bd.png","https://user-images.githubusercontent.com/67448481/160699539-93b4bcdb-44f9-4844-80b9-610d58793f2d.png"],"datePublished":"2022-03-29T14:10:40.000Z","dateModified":"2022-03-29T20:49:04.717Z","author":{"@type":"Person","name":"Hoonjoo"},"publisher":{"@type":"Organization","name":"Hoon's 블로그","logo":{"@type":"ImageObject","url":"https://hoonjoo-park.github.io/img/logo.svg"}},"description":"자바스크립트에는 Class가 없다..?? 무슨 소린가 싶다…분명 class를 사용했던 기억이 있는데 자바스크립트에는 class가 없다니..?"}</script><link rel="canonical" href="https://hoonjoo-park.github.io/javascript/base/prototype/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Roboto" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-0RF6Y2B0CN" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-03-29T14:10:40.000Z" title="2022. 3. 29. 오후 11:10:40">2022-03-29</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a><span> / </span><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/Javascript/">Javascript</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">프로토타입을 이해해야 자바스크립트를 이해할 수 있다</h1><div class="content"><p><img src="https://user-images.githubusercontent.com/67448481/160699545-4793aec8-f3bd-4d5a-88e5-455058293665.png"></p>
+<h2 id="자바스크립트에는-Class가-없다"><a href="#자바스크립트에는-Class가-없다" class="headerlink" title="자바스크립트에는 Class가 없다..??"></a>자바스크립트에는 Class가 없다..??</h2><blockquote>
+<p>무슨 소린가 싶다…<br>분명 <code>class</code>를 사용했던 기억이 있는데 자바스크립트에는 <code>class</code>가 없다니..?</p>
+</blockquote>
+<p>결론부터 말하자면, <strong>자바스크립트는 프로토타입 기반 언어</strong>다. 자바스크립트에는 클래스 개념이 아예 존재하지 않기 때문에, 프로토타입을 통해 클래스를 흉내 내는(?) 방식을 따른다는 것이다. 물론 여기서 혹자는 이렇게 되물을 수도 있다.</p>
+<blockquote>
+<p><em>“분명 ES6에서 클래스가 추가됐는데 그럼 이건 뭐죠?”</em></p>
+</blockquote>
+<p>ES6에서 클래스라는 ‘문법’이 추가됐을 뿐, 자바스크립트가 클래스기반 언어로 변경된 것은 아니다. 즉, 자바스크립트는 여전히 <strong>프로토타입 기반 객체지향 언어이며, 클래스를 ‘흉내’낼 뿐</strong>이다.</p>
+<p>뭐 일단은 알겠는데… 그래서 프로토타입은 뭐고, 클래스를 흉내낸다는 것은 뭘까?</p>
+<h3 id="클래스를-흉내내는-법"><a href="#클래스를-흉내내는-법" class="headerlink" title="클래스를 흉내내는 법"></a>클래스를 흉내내는 법</h3><blockquote>
+<p>ES6 이전에 우리는 <strong>생성자 함수</strong>를 통해 아래와 같이 클래스를 ‘흉내’냈었다.</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 이 함수를 통해 생성된 객체는head=1, eyes=2라는 프로퍼티를 할당 받는다.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.head = <span class="number">1</span>;</span><br><span class="line">  <span class="built_in">this</span>.eyes = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> park = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(park.head); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(park.eyes); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>꽤나 직관적이고 간단한 방법이라고 할 수 있다. 하지만, 보기와는 다르게 이 방법에는 <strong>공간 비효율성</strong>이 존재한다.</p>
+<p>현재는 하나의 <code>Person</code> 객체만 생성했을 뿐이지만, 만약 100개 1,000개의 <code>Person</code> 객체를 생성해야 한다면… 각 객체들에는 두 <strong>변수(head, eyes)가 전부 할당되기에 200개 2,000개의 변수가 생성되는 비효율성을 초래</strong>할 수 있기 때문이다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> one = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> tow = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> three = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> four = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> five = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="comment">// ... x1000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 이런식으로 객체가 많이 생성될 경우,</span></span><br><span class="line"><span class="comment">// 객체에는 각각 두 개의 변수가 계속 할당되는 공간적 비효율성이 발생할 수 있다.</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="프로토타입의-활용성"><a href="#프로토타입의-활용성" class="headerlink" title="프로토타입의 활용성"></a>프로토타입의 활용성</h3><blockquote>
+<p>위의 비효율성 문제에서 프로토타입의 필요성이 드러난다..!!</p>
+</blockquote>
+<p>아래와 같이 프로토타입을 활용하며, 객체 생성 시 <strong>변수의 반복적 할당을 피할 수 있기 때문</strong>이다. 즉, 프로퍼티에 자주 쓰이는 공통 프로퍼티나 메소드를 담아두고, 연결된 자식 객체들에게 이를 상속해줄 수 있다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> park = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Person 함수 자체에 할당되는 것이 아닌, 프로토타입에 할당이 되는 것!</span></span><br><span class="line">Person.prototype.head = <span class="number">1</span>;</span><br><span class="line">Person.prototype.eyes = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(park.head, park.eyes); <span class="comment">// 1 2</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://user-images.githubusercontent.com/67448481/160699480-e819785e-85ca-4bc0-a442-ba2dbcdabe0d.png" alt="그래서 프로토타입이 뭔데요.."></p>
+<p>위의 코드와 프로토타입에 대해서는 아래에서 다시 설명할테니, 그냥 “그렇구나..” 정도로만 이해하고 넘어가도 된다😅</p>
+<hr>
+<h2 id="그래서-프로토타입이-대체-뭘까"><a href="#그래서-프로토타입이-대체-뭘까" class="headerlink" title="그래서 프로토타입이 대체 뭘까?"></a>그래서 프로토타입이 대체 뭘까?</h2><blockquote>
+<p>프로토타입은 하나의 ‘객체’로, <strong>모든 객체들의 원형이자 부모</strong>라고 할 수 있다.<br>그리고 이 원형은 <strong>공통으로 사용할 수 있는 프로퍼티와 메소드를 저장하여 상속</strong>해주는 역할을 한다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/160699499-e3be975b-27be-4596-8bbe-a6d9c9ffb4ec.png"></p>
+<p><img src="https://user-images.githubusercontent.com/67448481/160699503-99b57d98-7b58-492d-903a-e879276cf507.png" alt="부모 객체라고 할 수 있는 프로토타입으로부터 프로퍼티와 메소드를 상속 받는다."></p>
+<p>프로토타입이라는 ‘단어’의 사전적 의미는 ‘원형’이다. 이는 곧, 어떠한 것의 <strong>원래 모양 또는 원래의 형태</strong>라는 것이다. 따라서 자바스크립트에서의 프로토타입은 <strong>객체의 원형 또는, 부모 객체</strong>라고 이해하면 된다. 우리는 이러한 프로토타입 객체로부터 다양한 프로퍼티 또는 메소드들을 <strong>상속 받아 사용</strong>할 수 있다.</p>
+<p>이러한 프로토타입 객체는 <code>[[Prototype]]</code>으로 표기된다. 그리고 이를 우리는 <strong>인터널 슬롯(Internal Slot)</strong> 이라고 부르기도 한다.</p>
+<blockquote>
+<p>프로토타입 객체 = [[Prototype]] = 인터널 슬롯(Internal Slot)</p>
+</blockquote>
+<blockquote>
+<p><em>“object that provides shared properties for other objects”</em><br><em>”프로토타입은 공유된 프로퍼티를 다른 객체에 제공하는 하나의 객체다.”</em> (<a target="_blank" rel="noopener" href="https://262.ecma-international.org/11.0/#sec-terms-and-definitions-prototype">ECMEScript-262</a>)</p>
+</blockquote>
+<h3 id="프로토타입에-커스텀-프로퍼티-및-메소드를-생성하는-법"><a href="#프로토타입에-커스텀-프로퍼티-및-메소드를-생성하는-법" class="headerlink" title="프로토타입에 커스텀 프로퍼티 및 메소드를 생성하는 법"></a>프로토타입에 커스텀 프로퍼티 및 메소드를 생성하는 법</h3><p>그럼 다시 위에서 다뤘던 코드를 통해 <code>[[Prototype]]</code>에 특정 프로퍼티와 메소드를 넣어주는 과정을 다시 봐보도록 하자.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Person의 프로토타입(원형)에 head라는 프로퍼티와 sayHello라는 메소드를 추가해준다.</span></span><br><span class="line">Person.prototype.head = <span class="number">1</span>;</span><br><span class="line">Person.prototype.sayHello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;Hello!!&#x27;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(me.head); <span class="comment">// 1이 반환된다.</span></span><br><span class="line"><span class="built_in">console</span>.log(me.sayHello()); <span class="comment">// Hello!!</span></span><br></pre></td></tr></table></figure>
+
+<p>그러면 아래와 같이 프로토타입에 eyes와 sayHello가 각각 잘 저장된 것을 확인할 수 있다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/160699508-d69b81e8-cdf0-4930-8053-67dc035f163c.png"></p>
+<p>이러한 기본적인 활용법을 토대로 우리는 객체와 객체 간의 연결, 그리고 프로퍼티 또는 메소드의 상속을 구현할 수 있는 것이다.</p>
+<h3 id="프로토타입-체인-Prototype-Chain"><a href="#프로토타입-체인-Prototype-Chain" class="headerlink" title="프로토타입 체인 (Prototype Chain)"></a>프로토타입 체인 (Prototype Chain)</h3><blockquote>
+<p>근데… 위의 코드를 보면 조금 이상하다.<br>분명 <code>Person</code> 함수는 텅 비어있는데 어떻게 <code>me.head</code>가 1을 반환할 수 있었던 걸까?</p>
+</blockquote>
+<p>결론부터 말하자면, 프로토타입 체인이 적용됐기 때문인데.. 아래와 같은 로직을 따른다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.분명 생성자 함수에는 head가 없다.. 텅 비어있는 모습이다.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// 2.head와 eyes는 프로토타입에 할당됐다. Person 함수에 직접적으로 할당된게 아니다..</span></span><br><span class="line">Person.prototype.head = <span class="number">1</span>;</span><br><span class="line">Person.prototype.eyes = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.근데 me.head를 찍으니 1이 반환된 모습이다. 이는 프로토타입 체인이 적용됐기 때문이다.</span></span><br><span class="line"><span class="built_in">console</span>.log(me.head); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://user-images.githubusercontent.com/67448481/160699513-40f07242-fb2c-4937-83f4-3408a5d69ffc.png"></p>
+<blockquote>
+<p>프로토타입 체인은 뒤에서 나올 Prototype Link와 연결되는 개념이니, 반드시 짚고 넘어가도록 하자.</p>
+</blockquote>
+<p>즉, <code>Person.prototype</code>에 우리가 head와 eyes를 생성/할당 해놓았기 때문에, 이를 <strong>프로퍼티 체인</strong>을 통해 상속 받아 사용할 수 있는 것이다.</p>
+<p>위 그림과 연관지어 좀 더 자세히 설명하자면 이하와 같다.</p>
+<hr>
+<ul>
+<li>자바스크립트는 우선적으로 <code>me</code> 객체에서 <code>head</code>를 찾는다.</li>
+<li><code>me</code>에서 찾지 못하면, <code>me</code> 객체의 <code>__proto__</code>라는 내부 프로퍼티를 통해 자신의 부모인 <code>Person</code>의 프로토타입 객체에 접근한다. (<code>__proto__</code>는 뒤에서 설명할 예정)</li>
+<li>그리고 거기에서 <code>head</code>를 찾는다.</li>
+<li>그렇게 <code>Person</code>의 프로토타입 객체에 존재하는 <code>head</code> 값을 찾아 반환 해준다.</li>
+</ul>
+<hr>
+<blockquote>
+<p>이처럼 프로토타입을 통해 객체가 연결되기 때문에, 이를 <strong>프로토타입 체인</strong>이라고 하는 것이다.</p>
+</blockquote>
+<h3 id="중간-정리"><a href="#중간-정리" class="headerlink" title="중간 정리"></a>중간 정리</h3><blockquote>
+<p>여기까지 프로토타입의 기본적인 개념과 간단한 활용법에 대해 다뤘다.<br>이를 다시 간단하게 요약해보도록 하겠다.</p>
+</blockquote>
+<ul>
+<li>자바스크립트는 프로토타입 기반 언어이기 때문에 클래스를 사용할 수 없다. 하지만 프로토타입의 특성을 통해 우리는 클래스를 흉내낼 수 있는 것이다.</li>
+<li>프로토타입이란, 하나의 객체이자 모든 객체들의 원형이다. 이 프로토타입은 생성자 함수를 통해 생성된 객체들에게 공통의 프로퍼티 및 메소드를 제공한다. (공통 프로퍼티 = 위에서의 head, eyes)</li>
+</ul>
+<hr>
+<h2 id="더-깊게-이해하기-Prototype-Object"><a href="#더-깊게-이해하기-Prototype-Object" class="headerlink" title="더 깊게 이해하기 : Prototype Object"></a>더 깊게 이해하기 : Prototype Object</h2><blockquote>
+<p>뭐 사실.. “<strong>프로토타입은 공통의 프로퍼티를 상속해주기 위해 활용되는 객체다</strong>” 정도만 이해해도 되겠지만, 우리는 자바스크립트라는 언어를 통해 밥을 벌어 먹어야 하는 사람들이다…</p>
+</blockquote>
+<p>따라서 우리는 자바스크립트의 핵심 개념이자 근간이라고 할 수 있는 프로토타입에 대해 더 깊이, 자세히 공부해야 할 필요가 있다. 우선 프로토타입은 객체라고 했으니, 자바스크립트에서 객체가 어떻게 생성되는지 먼저 살펴보도록 하자.</p>
+<h3 id="객체는-어떻게-생성되는가"><a href="#객체는-어떻게-생성되는가" class="headerlink" title="객체는 어떻게 생성되는가?"></a>객체는 어떻게 생성되는가?</h3><blockquote>
+<p>자바스크립트에서 객체를 생성하는 방식은 이하와 같다.</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> personObj = <span class="keyword">new</span> Person(); <span class="comment">// 함수를 통해 객체를 생성한 모습</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(); <span class="comment">// new Object()는 자바스크립트에 내장된 기본 객체 생성함수다.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;; <span class="comment">// 자바스크립트에서는 이러한 리터럴을 new Object()와 동일하게 인식한다.</span></span><br></pre></td></tr></table></figure>
+
+<p>이처럼, <strong>모든 객체는 함수로부터 생성</strong>된다. 따라서, 함수의 생성 과정과 연결 지어 객체가 어떻게 생성되는지, 프로토타입은 어떻게 구성되는지 설명해보도록 하겠다. 이러한 과정 속에서 <strong>Prototype Object</strong>의 개념을 자연스럽게 이해할 수 있을 것이다.</p>
+<h3 id="함수와-함께-생성되는-것들-prototype-Prototype-Object"><a href="#함수와-함께-생성되는-것들-prototype-Prototype-Object" class="headerlink" title="함수와 함께 생성되는 것들 (prototype, Prototype Object)"></a>함수와 함께 생성되는 것들 (prototype, Prototype Object)</h3><p><img src="https://user-images.githubusercontent.com/67448481/160699516-6c23a2ef-6fbf-4f55-b06e-b7c5ffd95608.png"></p>
+<blockquote>
+<p>위의 사진과 같이, 특정 함수가 생성됐을 때 <strong>prototype 프로퍼티</strong>와 <strong>Prototype Object([[Prototype]])</strong> 이 함께 세트로 생성된다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/160699519-7763e82c-f3a5-4fa8-aa3e-760b24c74b43.png"></p>
+<blockquote>
+<p>그리고 함수의 프로토타입 프로퍼티, Prototype Object 간의 연결 관계는 위와 같다.</p>
+</blockquote>
+<p>즉, constructor는 생성자 함수를, prototype 프로퍼티는 Prototype Object([[Prototype]])와 연결되어 있는 관계인 것이다.</p>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><blockquote>
+<p>더 나아가, 위 사진에서 유심히 봐야 할 것이 constructor다.<br>이 constructor라는 하나의 자격(?)이 있어야 <code>new OOO</code>을 통해 객체를 생성해 낼 수 있다.</p>
+</blockquote>
+<p>이는 곧, <strong>constructor 프로퍼티가 존재하기 위해선, 해당 함수가 생성자 함수의 자격을 지녀야 함</strong>을 의미한다.</p>
+<p>따라서 당연하게도, 그냥 일반적인 오브젝트는 <code>new</code> 를 통해 객체를 생성해낼 수 없다. (아래 사진 참고)</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/160699521-814cf34c-1d08-4654-bdbf-45de415f44a3.png"></p>
+<p>다시 짚고 넘어가자면, <strong>함수만 constructor의 자격을 부여받는다</strong>고 할 수 있다. 그리고 이를 바꿔 말하면, <strong>constructor는 함수를 가리킨다</strong>. (다음 포스트에서 다루겠지만, 화살표 함수와 메소드 함수는 constructor 자격을 부여받지 못한다)</p>
+<hr>
+<h2 id="프로포타입-링크-Prototype-Link"><a href="#프로포타입-링크-Prototype-Link" class="headerlink" title="프로포타입 링크(Prototype Link)"></a>프로포타입 링크(Prototype Link)</h2><blockquote>
+<p>초반부에서 설명한 프로토타입 체인과 연결되는 부분이자, 프로토타입의 또 다른 핵심 개념 중 하나라고 할 수 있다.</p>
+</blockquote>
+<p>모든 객체에는 <code>__proto__</code>라는 프로퍼티가 존재하는데, 이 프로퍼티를 통해 프로토타입 체인이 적용될 수 있다. 그리고 이 <code>__proto__</code>는 자신의 부모 객체의 프로토타입을 가리킨다. 다시 한 번 그림을 통해 확인해보도록 하자.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/160699523-6b4076b4-1bb9-40ce-9d32-93082a7b1fb4.png"></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.함수를 생성한다.</span></span><br><span class="line"><span class="comment">// 그러면 Prototype Object와 prototype 프로퍼티가 같이 생성된다.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Person.prototype.eyes = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.Person 생성자 함수를 통해 객체를 me에 생성,할당해준다.</span></span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.me.eyes를 찍어본다.</span></span><br><span class="line"><span class="built_in">console</span>.log(me.eyes); <span class="comment">// 그러면 me의 __proto__를 통해 Person의 Prototype Object에 접근한다.</span></span><br></pre></td></tr></table></figure>
+
+<p>마지막으로, 만약 Person의 Prototype Object에도 찾고자 하는 프로퍼티나 메소드가 존재하지 않는다면, 모든 객체의 최상위 객체라고 할 수 있는 Object의 Prototype Object까지 접근해서 검색하고, 없다면 <code>undefined</code>를 반환한다.</p>
+<p>조금 헷갈릴 수도 있는데, 함수도 객체이므로 <code>Function.prototype.__proto__</code>는 자신을 생성해준 객체(Object)의 프로토타입을 가리키게 돼있다.</p>
+<p>그리고 ECMAScript에서도 이 부분을 명확히 설명한다.</p>
+<blockquote>
+<p><em>”Function Prototype Object has a [[Prototype]] internal slot whose value is %Object.prototype%.”</em> (<a target="_blank" rel="noopener" href="https://262.ecma-international.org/11.0/#sec-properties-of-the-function-prototype-object">ECMAScript-262</a>)</p>
+</blockquote>
+<p>결국 함수도 객체이고, 함수 객체의 최상위(조상) 프로토타입 객체는 Object라는 것이다. (이 부분은 다음 포스팅에서 자세히 다뤄보도록 하겠다)</p>
+<hr>
+<h2 id="프로토타입-객체-vs-프로토타입-프로퍼티"><a href="#프로토타입-객체-vs-프로토타입-프로퍼티" class="headerlink" title="프로토타입 객체 vs 프로토타입 프로퍼티"></a>프로토타입 객체 vs 프로토타입 프로퍼티</h2><blockquote>
+<p>함수 또한 객체다.<br>따라서 함수도 마찬가지로 인터널 슬롯(<code>[[Prototype]]</code>)을 보유한다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/160699527-2ba1dbe3-ba25-47ab-8564-a496bdce84f1.png" alt="함수 Apple에는 prototype이 잘 실행되지만, greenApple이란 객체에는 undefined가 반환된다."></p>
+<p>위 사진처럼 함수 객체에 <code>.prototype</code>을 찍어보면, 함수 자신의 프로토타입 객체가 반환되는 것을 확인할 수 있다. 하지만.. 또 일반 객체에서는 <code>undefined</code>가 반환된다.🙊</p>
+<p>이러한 차이점이 발생하는 이유는, <strong>prototype프로퍼티는 함수에만 존재하기 때문</strong>이다. 한 객체 안에서 <strong>프로토타입 프로퍼티와 프로토타입 오브젝트가 가리키는 결과물은 동일</strong>하지만, 그 <strong>용도와 관점에 있어서는 차이점</strong>을 드러낸다.</p>
+<h3 id="프로토타입-객체와-prototype-프로퍼티의-차이점"><a href="#프로토타입-객체와-prototype-프로퍼티의-차이점" class="headerlink" title="프로토타입 객체와 prototype 프로퍼티의 차이점!"></a>프로토타입 객체와 prototype 프로퍼티의 차이점!</h3><blockquote>
+<p>prototype 프로퍼티는 자기 자신의 프로토타입 객체를 가리킨다.</p>
+</blockquote>
+<p>말 장난같이 들릴 수도 있고, 헷갈릴 수도 있다… 하지만 그게 전부다. 아래의 그림을 살펴보자.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/160699533-35aa71a4-337e-4e49-a25f-388f1f30e334.png"></p>
+<p>결과적으로, <code>Apple.property</code>를 찍으면 생성자 함수 Apple의 프로토타입 객체가 반환된다는 의미다. 그리고 Apple의 자식이라고 할 수 있는 greenApple 객체의 <code>__proto__</code>는 자신의 부모인 Apple의 프로토타입 객체를 가리킨다.</p>
+<blockquote>
+<p>즉, <strong>생성자 함수에서의 prototype 프로퍼티는 자기 자신의 프로토타입 객체와 같다. (재차 강조하지만, 가리키는 대상은 같지만 용도와 관점 측면에서의 차이점 존재)</strong></p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/160699537-17fc3b6a-e918-477b-951b-c1d9d8fc94bd.png"></p>
+<p>이를 다시 코드로 표현해보면,</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(Apple.prototype === greenApple.__proto__); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 그리고 이와 같은 개념으로써,</span></span><br><span class="line"><span class="comment">// 생성자 함수 Apple의 __proto__는 자신의 부모인 원시함수 Function의 prototype과 같다고 할 수 있다.</span></span><br><span class="line"><span class="built_in">console</span>.log(Apple.__proto__ === <span class="built_in">Function</span>.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="정리-표"><a href="#정리-표" class="headerlink" title="정리 표"></a>정리 표</h3><p><img src="https://user-images.githubusercontent.com/67448481/160699539-93b4bcdb-44f9-4844-80b9-610d58793f2d.png"></p>
+<hr>
+<h2 id="복습-퀴즈"><a href="#복습-퀴즈" class="headerlink" title="복습 퀴즈!"></a>복습 퀴즈!</h2><blockquote>
+<p>본문을 모두 정독했다면, 아래 퀴즈들을 통해 이해한 내용들을 다시 점검해보도록 하자 :)</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 예제 코드</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> friend = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">Person.prototype.head = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> me = <span class="keyword">new</span> Person();</span><br></pre></td></tr></table></figure>
+
+<details>
+<summary>console.log(me.head)</summary>
+<div markdown="1">= `1` → 프로토타입 체인이 적용된다. me의 <code>__proto__</code> 를 통해 생성자 함수의 프로토타입에 접근하여 head라는 프로퍼티의 값을 get 해온다.</div>
+</details>
+<details>
+<summary>console.log(me.eye)</summary>
+<div markdown="2">= <code>undefined</code> → me에도, Person에도, 심지어 Object에도 eye는 존재하지 않기 때문</div>
+</details>
+<details>
+<summary>console.log(me.__proto__ === Person.prototype)</summary>
+<div markdown="3">= <code>true</code> → Person함수의 prototype프로퍼티는 Person의 프로토타입 객체를 가리킨다. 그리고 me의 프로토는 자신을 생성한 생성자 함수의 프로토타입 객체를 가리킨다.</div>
+</details>
+<details>
+<summary>console.log(friend.__proto__ === Object.constructor)</summary>
+<div markdown="4">= <code>false</code> → friend는 <code>new Object()</code>에 의해 생성됐다. 따라서 friend의 <code>__proto__</code>는 Object() 생성자 함수의 프로토타입 객체를 가리킨다.</div>
+</details>
+<details>
+<summary>console.log(friend.prototype)의 반환 결과는?</summary>
+<div markdown="5">= <code>undefined</code> → friend 자체는 객체다. 이는 함수가 아니기 때문에 prototype 프로퍼티를 보유하지 않는다.</div>
+</details>
+<details>
+<summary>console.log(me.constructor)</summary>
+<div markdown="6">= <code>Person()&#123;&#125;</code> → constructor는 자신을 생성한 생성자(객체)를 가리킨다.</div>
+</details>
+<details>
+<summary>console.log(friend.constructor)</summary>
+<div markdown="7">= <code>Object()&#123;&#125;</code> → 위와 동일하다.</div>
+</details>
+<details>
+<summary>console.log(friend.__proto__ === Object.prototype)</summary>
+<div markdown="8">= <code>true</code> → 위에서 설명했던 바와 동일하다.</div>
+</details>
+<details>
+<summary>console.log(Person.__proto__ === Function.constructor)</summary>
+<div markdown="9">= <code>false</code> → Person의 프로토는 원시 Function의 프로토타입 객체를 가리킨다. 하지만 <code>Function.constructor</code>는 Function 원시함수를 생성한 생성자 객체를 가리키기에 위의 문제는 오답이다.</div>
+</details>
+<details>
+<summary>console.log(Person.prototype.constructor)</summary>
+<div markdown="10">= <code>Person()&#123;&#125;</code> → Person의 prototype 프로퍼티는 Person 자신의 프로토타입 객체를 가리킨다. 따라서 자기 자신의 프로토타입 객체의 생성자 함수는 Person()이기 때문에 답은 Person이 된다.</div>
+</details>
+<details>
+<summary>console.log(Function.prototype.__proto__)</summary>
+<div markdown="11">= <code>Object.prototype</code>과 같다. → Function의 prototype은 자기 자신의 프로토타입 객체를 가리킨다. 그리고 그 프로토타입 객체의 프로토는 자신을 생성한 생성자의 프로토타입 객체와 연결된다. Function은 Object의 하위요소이기 때문에 정답은 Object의 프로토타입 객체를 가리키는 <code>Object.prototype</code>이다.</div>
+</details>
+
+<hr>
+<h2 id="참조한-자료"><a href="#참조한-자료" class="headerlink" title="참조한 자료"></a>참조한 자료</h2><p><a target="_blank" rel="noopener" href="https://medium.com/@bluesh55/javascript-prototype-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-f8e67c286b67">[Javascript ] 프로토타입 이해하기</a></p>
+<p><a target="_blank" rel="noopener" href="https://poiemaweb.com/js-prototype">Prototype | PoiemaWeb</a></p>
+<p><a target="_blank" rel="noopener" href="https://262.ecma-international.org/11.0/">ECMAScript® 2020 Language Specification</a></p>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>프로토타입을 이해해야 자바스크립트를 이해할 수 있다</p><p><a href="https://hoonjoo-park.github.io/javascript/base/prototype/">https://hoonjoo-park.github.io/javascript/base/prototype/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Hoonjoo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-03-29</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-03-30</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%EA%B0%9C%EB%85%90/">개념</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61ccb08ffa9c81001d245598&amp;product=sticky-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/javascript/base/whyFunctionsAreObj/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">왜 함수는 객체인걸까?</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm/programmers/carpet/"><span class="level-item">프로그래머스 - 카펫 (Javascript)</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><script src="https://utteranc.es/client.js" repo="hoonjoo-park/hoonjoo-park.github.io" issue-term="pathname" label="🙋‍♂️" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#자바스크립트에는-Class가-없다"><span class="level-left"><span class="level-item">1</span><span class="level-item">자바스크립트에는 Class가 없다..??</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#클래스를-흉내내는-법"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">클래스를 흉내내는 법</span></span></a></li><li><a class="level is-mobile" href="#프로토타입의-활용성"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">프로토타입의 활용성</span></span></a></li></ul></li><li><a class="level is-mobile" href="#그래서-프로토타입이-대체-뭘까"><span class="level-left"><span class="level-item">2</span><span class="level-item">그래서 프로토타입이 대체 뭘까?</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#프로토타입에-커스텀-프로퍼티-및-메소드를-생성하는-법"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">프로토타입에 커스텀 프로퍼티 및 메소드를 생성하는 법</span></span></a></li><li><a class="level is-mobile" href="#프로토타입-체인-Prototype-Chain"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">프로토타입 체인 (Prototype Chain)</span></span></a></li><li><a class="level is-mobile" href="#중간-정리"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">중간 정리</span></span></a></li></ul></li><li><a class="level is-mobile" href="#더-깊게-이해하기-Prototype-Object"><span class="level-left"><span class="level-item">3</span><span class="level-item">더 깊게 이해하기 : Prototype Object</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#객체는-어떻게-생성되는가"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">객체는 어떻게 생성되는가?</span></span></a></li><li><a class="level is-mobile" href="#함수와-함께-생성되는-것들-prototype-Prototype-Object"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">함수와 함께 생성되는 것들 (prototype, Prototype Object)</span></span></a></li><li><a class="level is-mobile" href="#constructor-NaN"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">constructor</span></span></a></li></ul></li><li><a class="level is-mobile" href="#프로포타입-링크-Prototype-Link"><span class="level-left"><span class="level-item">4</span><span class="level-item">프로포타입 링크(Prototype Link)</span></span></a></li><li><a class="level is-mobile" href="#프로토타입-객체-vs-프로토타입-프로퍼티"><span class="level-left"><span class="level-item">5</span><span class="level-item">프로토타입 객체 vs 프로토타입 프로퍼티</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#프로토타입-객체와-prototype-프로퍼티의-차이점"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">프로토타입 객체와 prototype 프로퍼티의 차이점!</span></span></a></li><li><a class="level is-mobile" href="#정리-표"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">정리 표</span></span></a></li></ul></li><li><a class="level is-mobile" href="#복습-퀴즈"><span class="level-left"><span class="level-item">6</span><span class="level-item">복습 퀴즈!</span></span></a></li><li><a class="level is-mobile" href="#참조한-자료"><span class="level-left"><span class="level-item">7</span><span class="level-item">참조한 자료</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">총 방문자 <span id="busuanzi_value_site_uv"></span> 명</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
