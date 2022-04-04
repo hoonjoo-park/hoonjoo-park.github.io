@@ -10859,6 +10859,10 @@ article.article .content .message.message-immersive {
 article.article .content .message.message-immersive .message-body {
   border: none;
 }
+article.article .content p {
+  font-weight: 500;
+  line-height: 2;
+}
 article.article .article-tags {
   display: flex;
   flex-wrap: wrap;
