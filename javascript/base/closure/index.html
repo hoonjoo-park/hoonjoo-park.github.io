@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>자바스크립트와 클로저 - Hoon&#039;s 블로그</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="Hoon"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="클로저의 기본 개념 “클로저는 함수와 그 함수가 선언된 렉시컬 환경의 조합이다”"><meta property="og:type" content="blog"><meta property="og:title" content="자바스크립트와 클로저"><meta property="og:url" content="https://hoonjoo-park.github.io/javascript/base/closure/"><meta property="og:site_name" content="Hoon&#039;s 블로그"><meta property="og:description" content="클로저의 기본 개념 “클로저는 함수와 그 함수가 선언된 렉시컬 환경의 조합이다”"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784791-5d8dce7b-6fec-4bb5-af54-6ec41975c407.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784722-667a71f8-c867-46dd-a049-3c61dbd72e40.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784730-74ffa42e-4d7e-40ad-a2ee-e40b6f5dc90b.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784739-5dc79622-f814-46ed-b0e3-25e45fb7e1c3.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784745-83796d26-8de0-4508-9c50-73bd222dc82a.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784751-95de08f1-d855-435c-9e1b-4e3839c84c10.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784756-7f910c5c-5a48-4c4a-ab1f-8cde3ca1e81e.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784759-8b6191e6-7e0d-4bf4-9864-774411178c60.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784763-e2bb2e93-c3f3-47a6-a106-c16bcd037688.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784767-02dc2ea9-78a4-4240-bffe-b536b7cb7de7.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784772-ee435d1b-1321-42a9-bba9-26d23ea50ecf.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784774-70f093f3-4230-4108-88c4-634cdff0918a.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784776-eceb181e-4fcd-4065-a549-e77c3491c780.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784780-60b03dce-2430-40c6-81f4-5d01c4806351.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784782-a22739e1-5fc4-45c5-8e3c-bf1e09f453c1.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784786-500e06dd-d881-4e74-ab08-b3c21a45173b.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784788-0577485b-498c-4b0e-851d-f5f5b46d426d.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/163784789-55c1ee28-30ca-46fc-8ae2-d911c48038c4.png"><meta property="article:published_time" content="2022-04-18T09:05:40.000Z"><meta property="article:modified_time" content="2022-04-18T09:45:43.090Z"><meta property="article:author" content="Hoonjoo"><meta property="article:tag" content="개념"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://user-images.githubusercontent.com/67448481/163784791-5d8dce7b-6fec-4bb5-af54-6ec41975c407.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoonjoo-park.github.io/javascript/base/closure/"},"headline":"자바스크립트와 클로저","image":["https://user-images.githubusercontent.com/67448481/163784791-5d8dce7b-6fec-4bb5-af54-6ec41975c407.png","https://user-images.githubusercontent.com/67448481/163784722-667a71f8-c867-46dd-a049-3c61dbd72e40.png","https://user-images.githubusercontent.com/67448481/163784730-74ffa42e-4d7e-40ad-a2ee-e40b6f5dc90b.png","https://user-images.githubusercontent.com/67448481/163784739-5dc79622-f814-46ed-b0e3-25e45fb7e1c3.png","https://user-images.githubusercontent.com/67448481/163784745-83796d26-8de0-4508-9c50-73bd222dc82a.png","https://user-images.githubusercontent.com/67448481/163784751-95de08f1-d855-435c-9e1b-4e3839c84c10.png","https://user-images.githubusercontent.com/67448481/163784756-7f910c5c-5a48-4c4a-ab1f-8cde3ca1e81e.png","https://user-images.githubusercontent.com/67448481/163784759-8b6191e6-7e0d-4bf4-9864-774411178c60.png","https://user-images.githubusercontent.com/67448481/163784763-e2bb2e93-c3f3-47a6-a106-c16bcd037688.png","https://user-images.githubusercontent.com/67448481/163784767-02dc2ea9-78a4-4240-bffe-b536b7cb7de7.png","https://user-images.githubusercontent.com/67448481/163784772-ee435d1b-1321-42a9-bba9-26d23ea50ecf.png","https://user-images.githubusercontent.com/67448481/163784774-70f093f3-4230-4108-88c4-634cdff0918a.png","https://user-images.githubusercontent.com/67448481/163784776-eceb181e-4fcd-4065-a549-e77c3491c780.png","https://user-images.githubusercontent.com/67448481/163784780-60b03dce-2430-40c6-81f4-5d01c4806351.png","https://user-images.githubusercontent.com/67448481/163784782-a22739e1-5fc4-45c5-8e3c-bf1e09f453c1.png","https://user-images.githubusercontent.com/67448481/163784786-500e06dd-d881-4e74-ab08-b3c21a45173b.png","https://user-images.githubusercontent.com/67448481/163784788-0577485b-498c-4b0e-851d-f5f5b46d426d.png","https://user-images.githubusercontent.com/67448481/163784789-55c1ee28-30ca-46fc-8ae2-d911c48038c4.png"],"datePublished":"2022-04-18T09:05:40.000Z","dateModified":"2022-04-18T09:45:43.090Z","author":{"@type":"Person","name":"Hoonjoo"},"publisher":{"@type":"Organization","name":"Hoon's 블로그","logo":{"@type":"ImageObject","url":"https://hoonjoo-park.github.io/img/logo.svg"}},"description":"클로저의 기본 개념 “클로저는 함수와 그 함수가 선언된 렉시컬 환경의 조합이다”"}</script><link rel="canonical" href="https://hoonjoo-park.github.io/javascript/base/closure/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Roboto" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-0RF6Y2B0CN" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-04-18T09:05:40.000Z" title="2022. 4. 18. 오후 6:05:40">2022-04-18</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a><span> / </span><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/Javascript/">Javascript</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">자바스크립트와 클로저</h1><div class="content"><p><img src="https://user-images.githubusercontent.com/67448481/163784791-5d8dce7b-6fec-4bb5-af54-6ec41975c407.png"></p>
+<h2 id="클로저의-기본-개념"><a href="#클로저의-기본-개념" class="headerlink" title="클로저의 기본 개념"></a>클로저의 기본 개념</h2><blockquote>
+<p>“클로저는 함수와 그 함수가 선언된 렉시컬 환경의 조합이다”</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784722-667a71f8-c867-46dd-a049-3c61dbd72e40.png"></p>
+<p>사실, 클로저는 자바스크립트만의 고유 개념이 아니다. 따라서 ECMAScript에 클로저에 대한 내용과 개념이 명세되어 있지도 않다. 외려 이는 함수를 일급 객체로 취급하는 “함수형 프로그래밍 언어”에서 중요한 역할을 하는 개념이다.</p>
+<p>위에서 간략하게 정의한 바와 같이, 클로저는 함수와 그 함수가 선언된 렉시컬 환경의 조합이다. 이전 포스팅(스코프, 실행컨텍스트)에서 함수가 어디서 “정의”됐는지에 따라 스코프가 결정되는 방식을 따르는 것이 렉시컬 스코프의 특징이라고 했었다. 그리고 이 스코프는 실행컨텍스트의 “렉시컬 환경”에 포섭되는 개념이기에, <strong>렉시컬 환경이 결정되는 데에는 함수가 정의된 위치가 굉장히 중요하다는 것</strong>을 다시 한 번 상기해야 한다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784730-74ffa42e-4d7e-40ad-a2ee-e40b6f5dc90b.png"></p>
+<blockquote>
+<p>위의 코드 예시에서 볼 수 있듯, 함수의 렉시컬 환경과 상위 렉시컬 환경에 대한 참조는 함수가 선언된 위치에 따라 결정된다. 그럼 클로저에 대한 본론으로 들어가기 전에 스코프 및 렉시컬 환경에 대해 다시 한 번 짚고 넘어가는 시간을 가져보도록 하자.</p>
+</blockquote>
+<hr>
+<h2 id="Environment-내부슬롯"><a href="#Environment-내부슬롯" class="headerlink" title="[[Environment]] 내부슬롯"></a>[[Environment]] 내부슬롯</h2><blockquote>
+<p>이전 실행 컨텍스트 포스팅에서 간략하게 다뤘듯, 함수는 함수의 평가 과정에서 함수 객체를 즉시 할당한다.<br>그리고 그 함수객체 내에 존재하는 <strong>[[Environment]]</strong> 내부 슬롯에 현재 실행중인 실행컨텍스트의 렉시컬 환경을 저장한다.</p>
+</blockquote>
+<p>우선, 아래의 코드 예시를 통해 <strong>[[Environment]]</strong> 내부슬롯의 역할과 개념을 다시 한 번 정리해보도록 하자.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> x = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://user-images.githubusercontent.com/67448481/163784739-5dc79622-f814-46ed-b0e3-25e45fb7e1c3.png"></p>
+<blockquote>
+<p>그러면 우선 전역 객체가 생성되고 → 전역 실행컨텍스트가 생성되며 → 전역 렉시컬 환경이 구축된다.</p>
+</blockquote>
+<p><code>const</code>로 선언한 변수 <code>x</code>는 선언적 환경 레코드에, 함수 선언문으로 정의된 <code>foo</code>는 객체 환경 레코드에 등록된다. 여기서 주의할 점은, <code>x</code>는 <code>const</code>에 의해 선언됐기 때문에 초기화도 되지 않은채 등록만 된 상태지만, 함수 <code>foo</code>는 평가 즉시 함수 객체가 전역객체에 할당되고, 그 함수 객체 안에 존재하는 [[Environment]] 내부슬롯에 “현재 실행중인 실행 컨텍스트의 렉시컬 환경”을 참조하도록 한다는 것이다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784745-83796d26-8de0-4508-9c50-73bd222dc82a.png"></p>
+<blockquote>
+<p>그러면 결국, 위의 사진과 같이 <code>foo</code> 함수객체의 <strong>[[Environment]]</strong> 내부 슬롯에 참조 될 렉시컬 환경은 전역 렉시컬 환경이 된다.</p>
+</blockquote>
+<p>여기서 다시 한 번, 함수가 정의된 위치가 왜 스코프의 관점에서 중요한지 알 수 있게 된다. <code>foo</code> 함수가 정의된 위치는 “전역”이기에 함수 식별자의 평가는 전역에서 이루어진다. 이에 따라 현재 실행 중인 실행 컨텍스트의 렉시컬 환경인 “전역 렉시컬 환경”이 <code>foo</code> 함수의 <strong>[[Environment]]</strong> 내부 슬롯에게 참조되는 것이다.</p>
+<hr>
+<h2 id="외부-렉시컬-환경에-대한-참조는"><a href="#외부-렉시컬-환경에-대한-참조는" class="headerlink" title="외부 렉시컬 환경에 대한 참조는?"></a>외부 렉시컬 환경에 대한 참조는?</h2><blockquote>
+<p>근데 이쯤에서… 위 내용에 대한 의문점이 생긴다.<br>”분명 상위 렉시컬 환경과의 연결은 <strong>외부 렉시컬 환경에 대한 참조</strong>라는 컴포넌트에 의해 동작하지 않았나..?”</p>
+</blockquote>
+<p>이전 실행 컨텍스트 포스팅에서 각 렉시컬 환경 간의 연결(스코프 체인)은 “외부 렉시컬 환경에 대한 참조”라는 컴포넌트에 의해 이루어진다고 설명했었다. 도대체 “[[Environment]] 내부슬롯”과 “외부 렉시컬 환경에 대한 참조”의 차이점은 뭘까?</p>
+<p>다시 한 번 위의 코드 예시를 이어서 살펴보며 그 차이점을 이해해보도록 하자.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784751-95de08f1-d855-435c-9e1b-4e3839c84c10.png"></p>
+<blockquote>
+<p>우선, 함수가 호출되며 <code>foo</code> 함수의 실행컨텍스트 및 렉시컬 환경이 생성되고 → 함수 코드에 대한 평가가 시작된다.</p>
+</blockquote>
+<p>그러면 식별자 및 this값이 환경 레코드에 등록되고 곧이어 외부 렉시컬 환경에 대한 참조가 결정된다. 이 때, 외부 렉시컬 환경에 대한 참조에 할당되는 것이 <strong>[[Environment]]</strong> 에 저장된 렉시컬 환경에 대한 참조다. 즉, 전역 렉시컬 환경이 <code>foo</code> 함수의 “외부 렉시컬 환경에 대한 참조” 컴포넌트에 할당되는 것이다.</p>
+<p>이를 그림으로 표현하면 아래와 같다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784756-7f910c5c-5a48-4c4a-ab1f-8cde3ca1e81e.png"></p>
+<blockquote>
+<p>결국 <strong>둘이 가리키는 값은 같다</strong>는 것만 이해하고 넘어가도 충분하다.<br>그리고 저 <strong>[[Environment]]</strong> 내부슬롯으로 인해 함수가 정의된 위치에 따라 렉시컬 스코프가 결정된다는 것만 다시 한 번 기억하도록 하자.</p>
+</blockquote>
+<hr>
+<h2 id="클로저와-렉시컬-환경"><a href="#클로저와-렉시컬-환경" class="headerlink" title="클로저와 렉시컬 환경"></a>클로저와 렉시컬 환경</h2><blockquote>
+<p>서론이 조금 길어졌다…<br>이제 위에서 설명한 렉시컬 환경과 클로저의 상관관계, 그리고 클로저가 정확히 무엇을 뜻하는지 설명해보도록 하겠다.</p>
+</blockquote>
+<p>아래와 같은 코드를 통해 우리는 클로저의 핵심 개념을 파악할 수 있다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> x = <span class="number">100</span>;</span><br><span class="line">  <span class="keyword">const</span> inner = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(x);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> inner;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getInner = outer();</span><br><span class="line">getInner(); <span class="comment">// 100</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>위 코드에서 먼저, <code>getInner</code>에 대한 평가 → 할당 프로세스에 의해 <code>outer()</code>함수가 우선적으로 호출된다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784759-8b6191e6-7e0d-4bf4-9864-774411178c60.png"></p>
+<p>그러면 위의 사진과 같이 <code>inner</code> 함수 자체가 <code>getInner</code>에 할당된다. 그리고 곧 <code>getInner()</code>가 호출된다.</p>
+<p>근데 여기서, <code>outer</code>함수의 호출과 실행이 끝났다면 <code>outer</code> 함수의 실행 컨텍스트가 소멸되며 지역변수 <code>x</code> 또한 소멸되어야 하는게 자연스럽게 느껴진다. 하지만, 아래의 <code>getInner()</code> 함수의 호출 결과는 100이 그대로 반환된다. 어떻게 된 일일까?</p>
+<blockquote>
+<p>이는 <code>inner</code>라는 중첩 함수가 “클로저”이기 때문이다.</p>
+</blockquote>
+<p>위에서 우리는 클로저를 함수와 그 함수가 정의된 렉시컬 환경의 조합이라고 했다. 그리고 위의 <code>inner</code>함수는 <code>outer</code>에서 정의됐기 때문에 <code>outer</code> 함수의 렉시컬 환경을 참조한다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784763-e2bb2e93-c3f3-47a6-a106-c16bcd037688.png"></p>
+<blockquote>
+<p>위 사진과 같이 <code>inner</code>라는 중첩 함수는 자신이 정의된 환경(outer)의 “렉시컬 환경”을 참조한다.</p>
+</blockquote>
+<p>이전 포스팅에서 실행컨텍스트가 모든 코드의 실행을 끝내고 소멸하더라도, 그 실행 컨텍스트에 바인딩 됐던 <strong>렉시컬 환경은 자신이 어떠한 곳에서도 참조되지 않을 때 까지는 소멸되지 않는다</strong>고 설명했었다.</p>
+<p>위의 경우도 같은 맥락인데, <code>getInner</code>에 의해 <code>outer</code>함수보다 <code>inner</code> 함수가 오래 생존한다. 이에 따라 <code>outer</code> 함수의 렉시컬 환경은 <code>inner</code>에 의해 참조가 지속되고, 이러한 이유로 가비지 컬렉터는 <code>outer</code> 함수의 렉시컬 환경을 제거하지 않는다.</p>
+<blockquote>
+<p>이 때문에, <code>getInner</code>의 호출 결과는 이미 소멸된 outer의 지역변수인 <code>x = 100</code> 을 참조해 <code>100</code>이 그대로 반환되는 것이다.</p>
+</blockquote>
+<p>이처럼 중첩 함수인데, 상위 함수보다 더 오래 지속되며, 상위 스코프를 참조함에 따라 상위 렉시컬 환경이 제거되는 것을 미루는 함수를 “클로저”라고 한다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784767-02dc2ea9-78a4-4240-bffe-b536b7cb7de7.png"></p>
+<hr>
+<h2 id="클로저는-어디에-어떻게-사용될까"><a href="#클로저는-어디에-어떻게-사용될까" class="headerlink" title="클로저는 어디에 어떻게 사용될까?"></a>클로저는 어디에 어떻게 사용될까?</h2><blockquote>
+<p>클로저는 “상태 은닉” &amp; “캡슐화” &amp; “정보 은닉”을 위해 활용된다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784772-ee435d1b-1321-42a9-bba9-26d23ea50ecf.png"></p>
+<h3 id="상태-은닉"><a href="#상태-은닉" class="headerlink" title="상태 은닉"></a>상태 은닉</h3><blockquote>
+<p>클로저는 상태(state)를 특정 함수를 통해서만 변경 가능하도록 하고, 그 상태를 안전하게 은닉하기 위해 사용된다.</p>
+</blockquote>
+<p>개념이 직관적으로 와닿지 않을 수도 있는데, 아래의 코드를 통해 다시 상태 은닉의 개념을 이해해보도록 하자.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> add = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> ++count;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">count += <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add()); <span class="comment">// 101</span></span><br><span class="line"><span class="built_in">console</span>.log(add()); <span class="comment">// 102</span></span><br><span class="line"><span class="built_in">console</span>.log(add()); <span class="comment">// 103</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>위의 코드 예시는 상태 은닉이 안전하게 된 경우라고 볼 수 없다. 아래와 같은 이유 때문이다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784774-70f093f3-4230-4108-88c4-634cdff0918a.png"></p>
+<p><code>count</code>라는 변수가 <code>add</code>라는 함수에 의해서만 조작 가능하고, 외부에서 해당 상태(count)에 접근 불가능할 때 우리는 “상태가 안전하게 은닉됐다”라고 표현한다. 하지만 위 사진의 경우는 전역에서 언제든지 count라는 변수에 접근 가능하고 조작 가능하다. 따라서 이는 상태 은닉이 안전하게 적용된 사례가 아니다.</p>
+<blockquote>
+<p>상태 은닉을 위해서 우리는 <strong>클로저</strong>를 이하와 같이 활용한다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784776-eceb181e-4fcd-4065-a549-e77c3491c780.png"></p>
+<p>위의 코드 예시에서 우리는 더이상 <code>count</code>라는 상태에 접근할 수 없다. 그리고 <code>add()</code> 함수를 호출하지 않는 이상 우리는 <code>count</code>라는 상태를 변경할 수 없다. 이는 정확히 “<strong>클로저를 통해 상태를 안전하게 은닉한 예시</strong>“다. 그럼 이제 클로저에 의한 상태 은닉의 프로세스를 차근차근 짚고 넘어가보도록 하자.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784780-60b03dce-2430-40c6-81f4-5d01c4806351.png"></p>
+<p>먼저, <code>add</code>에 대한 평가 → 할당 프로세스에 의해 외부 즉시실행 함수가 호출되어 중첩함수가 <code>add</code>에 할당된다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784782-a22739e1-5fc4-45c5-8e3c-bf1e09f453c1.png"></p>
+<p>하지만, 즉시실행 함수는 중첩함수를 반환한 뒤 모든 코드의 실행을 마치고 종료된다. 그리고 이에 따라 즉시실행 함수의 실행컨텍스트 또한 소멸된다.</p>
+<blockquote>
+<p>여기서 주의할 점은, <code>add</code>에 반환된 중첩함수에 의해 중첩함수의 상위 렉시컬 환경이 지속적으로 참조가 되고 있어, 외부 함수의 실행컨텍스트는 소멸됐더라도 외부함수의 렉시컬 환경은 아직 생존해있다는 것이다.</p>
+</blockquote>
+<p>즉, 중첩함수는 클로저의 역할을 하고 있으며, 이 덕분에 클로저를 통해서만 count에 접근하여 그 값을 변환하고 리턴받을 수 있는 것이다. 위의 코드를 보면 알 수 있듯, <code>add()</code>함수를 호출하지 않는 이상 우리는 count라는 상태에 접근하거나 조작할 수 없다.</p>
+<h3 id="캡슐화-amp-정보-은닉"><a href="#캡슐화-amp-정보-은닉" class="headerlink" title="캡슐화 &amp; 정보 은닉"></a>캡슐화 &amp; 정보 은닉</h3><blockquote>
+<p>정보은닉은 상태 은닉과 거의 비슷한 개념을 갖고있다.<br>우선, 캡슐화란 프로퍼티와 메소드를 하나로 묶어 안전하게 은닉하는 것을 의미하는데,<br>이런 캡슐화에 의한 결과와 의도를 “정보 은닉”이라고 한다.</p>
+</blockquote>
+<p>다시 말해, 정보 은닉은 캡슐화에 의해 프로퍼티와 메소드가 하나로 묶여 안전하게 은닉하는 것을 의미한다. 즉, 상태 은닉은 은닉의 대상이 상태라는 것, 정보 은닉은 프로퍼티와 메소드라는 점에서의 미세한 차이점을 보유한다고 볼 수 있는 것이다.</p>
+<p>우리는 정보 은닉을 통해 객체의 정보를 보호하고, 객체 간의 결합도를 낮출 수 있다. 이러한 정보 은닉은 자바와 같은 언어에서 “<code>public</code>, <code>private</code>, <code>protected</code>, <code>default</code>”와 같은 접근 제어자를 통해 구현된다.</p>
+<blockquote>
+<p>하지만, 자바스크립트에서는 위와 같은 접근 제어자가 존재하지 않기 때문에, 객체의 프로퍼티와 메소드는 기본적으로 public하게 공개되어 있다.</p>
+</blockquote>
+<p>아래의 코드를 통해 자바스크립트에서 클로저를 활용하여 어떻게 캡슐화 &amp; 정보은닉을 구현하는지 확인해보도록 하자.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Person = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> _country;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, country</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    _country = country;</span><br><span class="line">  &#125;</span><br><span class="line">  Person.prototype.introduce = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`안녕하세요 저는 <span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>이고 <span class="subst">$&#123;_country&#125;</span>에서 왔습니다.`</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> Person;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> first = <span class="keyword">new</span> Person(<span class="string">&#x27;철수&#x27;</span>, <span class="string">&#x27;한국&#x27;</span>);</span><br><span class="line">first.introduce(); <span class="comment">// 안녕하세요 저는 철수이고 한국에서 왔습니다.</span></span><br><span class="line"><span class="built_in">console</span>.log(first.name); <span class="comment">// 철수</span></span><br><span class="line"><span class="built_in">console</span>.log(first.country); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> second = <span class="keyword">new</span> Person(<span class="string">&#x27;조나단&#x27;</span>, <span class="string">&#x27;콩고&#x27;</span>);</span><br><span class="line">second.introduce(); <span class="comment">// 안녕하세요 저는 조나단이고 콩고에서 왔습니다.</span></span><br><span class="line"><span class="built_in">console</span>.log(second.name); <span class="comment">// 조나단</span></span><br><span class="line"><span class="built_in">console</span>.log(second.country); <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line">first.introduce(); <span class="comment">// 안녕하세요 저는 철수이고 콩고에서 왔습니다.</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>우선 전체 코드는 위와 같다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784786-500e06dd-d881-4e74-ab08-b3c21a45173b.png"></p>
+<p>가장 먼저, <code>Person</code> 변수에 즉시실행 함수가 실행되며 <code>Person</code> <strong>생성자 함수</strong>(클로저)가 할당된다. 그리고 위에서도 설명했듯,</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784788-0577485b-498c-4b0e-851d-f5f5b46d426d.png"></p>
+<p>그리고 위와 같이, 클로저에 의해 <code>country</code>는 <code>_country</code>라는 변수 활용을 통해 은닉된다. 이러한 이유로, <code>Person</code> 중첩 생성자 함수는 클로저인 것이며, 즉시실행 함수가 종료된 이후에도 즉시실행 함수의 지역변수를 참조 가능하도록 해준다. (물론 <code>name</code> 프로퍼티는 은닉된 것이 아니다)</p>
+<blockquote>
+<p>여기까지 봤을 때는, 원하는 정보들이 잘 은닉된 것 처럼 보인다.<br>하지만, 실제로는 정보들이 모두 private하게 은닉되지 못했다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/163784789-55c1ee28-30ca-46fc-8ae2-d911c48038c4.png"></p>
+<p>위의 예시와 같이, <code>second</code>에 의해 인스턴스가 재생성 됨에 따라 철수의 <code>_country</code>가 기존 값을 유지하지 못한 채 변경된 모습을 확인할 수 있다. 이는 <code>prototype.introduce</code>가 단 한번만 생성되기 때문이다.</p>
+<p><code>prototype.introduce</code>는 즉시실행 함수가 실행될 때 딱 한 번 생성된다. 그리고 이 또한 메소드이기 때문에 이 <code>introduce</code> 메소드는 [[Environment]] 내부슬롯에 상위 렉시컬 환경의 참조를 저장한다(즉시 실행 함수의 렉시컬 환경). 따라서, 새로운 인스턴스가 생성될 때마다 이 메소드가 참조하는 <code>_country</code>의 값은 변경된다. 이에 따라, 위의 예시는 완벽한 정보의 은닉이라고 볼 수 없다.</p>
+<blockquote>
+<p>이처럼, 자바스크립트는 완벽한 정보 은닉을 지원하지 않는다.<br><em>(최근 ”private 필드”라는 새로운 사양이 ES에 추가되었다고 한다)</em></p>
+</blockquote>
+<hr>
+<h2 id="정리-및-요약"><a href="#정리-및-요약" class="headerlink" title="정리 및 요약"></a>정리 및 요약</h2><blockquote>
+<p>“클로저는 함수와 그 함수가 정의된 렉시컬 환경의 조합이다”</p>
+</blockquote>
+<ol>
+<li>[[Environment]]와 “외부 렉시컬 환경에 대한 참조”를 통해 스코프 체인 구현이 가능해진다.</li>
+<li>렉시컬 스코프는 함수가 <strong>정의된 위치</strong>에 의해 결정된다.</li>
+<li>클로저를 통해 제거된 실행컨텍스트의 렉시컬 환경을 참조할 수 있다.<ol>
+<li>렉시컬 환경은 피참조되고 있을 때는, 가비지 컬렉터에 의해 제거되지 않는다.</li>
+<li>외부 함수보다 클로저(중첩함수)가 더 오래 지속되어야 하며, 외부함수의 지역변수를 참조해야 한다.</li>
+</ol>
+</li>
+<li>클로저와 즉시실행 함수의 활용을 통해 <strong>상태 은닉</strong>, <strong>캡슐화에 따른 정보 은닉</strong> 구현을 기대할 수 있다.</li>
+</ol>
+<hr>
+<h2 id="참조한-자료"><a href="#참조한-자료" class="headerlink" title="참조한 자료"></a>참조한 자료</h2><p>도서 : 모던 자바스크립트 Deep Dive .이웅모</p>
+<p><a target="_blank" rel="noopener" href="https://262.ecma-international.org/11.0/#sec-lexical-environments">ECMAScript® 2020 Language Specification</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Closures">클로저 - JavaScript | MDN</a></p>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>자바스크립트와 클로저</p><p><a href="https://hoonjoo-park.github.io/javascript/base/closure/">https://hoonjoo-park.github.io/javascript/base/closure/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Hoonjoo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-04-18</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-04-18</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%EA%B0%9C%EB%85%90/">개념</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61ccb08ffa9c81001d245598&amp;product=sticky-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm/leet/matrix/"><span class="level-item">LeetCode - Matrix (Javascript)</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><script src="https://utteranc.es/client.js" repo="hoonjoo-park/hoonjoo-park.github.io" issue-term="pathname" label="🙋‍♂️" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#클로저의-기본-개념"><span class="level-left"><span class="level-item">1</span><span class="level-item">클로저의 기본 개념</span></span></a></li><li><a class="level is-mobile" href="#Environment-내부슬롯"><span class="level-left"><span class="level-item">2</span><span class="level-item">[[Environment]] 내부슬롯</span></span></a></li><li><a class="level is-mobile" href="#외부-렉시컬-환경에-대한-참조는"><span class="level-left"><span class="level-item">3</span><span class="level-item">외부 렉시컬 환경에 대한 참조는?</span></span></a></li><li><a class="level is-mobile" href="#클로저와-렉시컬-환경"><span class="level-left"><span class="level-item">4</span><span class="level-item">클로저와 렉시컬 환경</span></span></a></li><li><a class="level is-mobile" href="#클로저는-어디에-어떻게-사용될까"><span class="level-left"><span class="level-item">5</span><span class="level-item">클로저는 어디에 어떻게 사용될까?</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#상태-은닉"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">상태 은닉</span></span></a></li><li><a class="level is-mobile" href="#캡슐화-amp-정보-은닉"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">캡슐화 &amp; 정보 은닉</span></span></a></li></ul></li><li><a class="level is-mobile" href="#정리-및-요약"><span class="level-left"><span class="level-item">6</span><span class="level-item">정리 및 요약</span></span></a></li><li><a class="level is-mobile" href="#참조한-자료"><span class="level-left"><span class="level-item">7</span><span class="level-item">참조한 자료</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">총 방문자 <span id="busuanzi_value_site_uv"></span> 명</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
