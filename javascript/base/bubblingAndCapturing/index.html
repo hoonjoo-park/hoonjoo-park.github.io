@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>이벤트 버블링과 캡처링, 그리고 이벤트 위임 - Hoon&#039;s 블로그</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="Hoon"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="이벤트 버블링? 캡처링? 우리는 자바스크립트를 통해 이벤트 핸들링을 할 때, 이벤트가 다른 요소로 전파되는 현상을 자주 겪는다.이는 이벤트 버블링 또는 캡처링이라는 “이벤트 전파” 현상 때문이다."><meta property="og:type" content="blog"><meta property="og:title" content="이벤트 버블링과 캡처링, 그리고 이벤트 위임"><meta property="og:url" content="https://hoonjoo-park.github.io/javascript/base/bubblingAndCapturing/"><meta property="og:site_name" content="Hoon&#039;s 블로그"><meta property="og:description" content="이벤트 버블링? 캡처링? 우리는 자바스크립트를 통해 이벤트 핸들링을 할 때, 이벤트가 다른 요소로 전파되는 현상을 자주 겪는다.이는 이벤트 버블링 또는 캡처링이라는 “이벤트 전파” 현상 때문이다."><meta property="og:locale" content="en_US"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/167834157-20189678-598a-4840-bad0-ba6ab7a07853.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/167834132-028ceb61-3ba2-4205-b278-2816c9d777a8.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/167834151-d8e86522-62b7-446f-9c28-605244e4752d.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/167834154-279a3190-d55c-4732-8e32-5de5c48260e0.png"><meta property="article:published_time" content="2022-05-11T10:59:40.000Z"><meta property="article:modified_time" content="2022-05-11T10:59:14.024Z"><meta property="article:author" content="Hoonjoo"><meta property="article:tag" content="개념"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://user-images.githubusercontent.com/67448481/167834157-20189678-598a-4840-bad0-ba6ab7a07853.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoonjoo-park.github.io/javascript/base/bubblingAndCapturing/"},"headline":"이벤트 버블링과 캡처링, 그리고 이벤트 위임","image":["https://user-images.githubusercontent.com/67448481/167834157-20189678-598a-4840-bad0-ba6ab7a07853.png","https://user-images.githubusercontent.com/67448481/167834132-028ceb61-3ba2-4205-b278-2816c9d777a8.png","https://user-images.githubusercontent.com/67448481/167834151-d8e86522-62b7-446f-9c28-605244e4752d.png","https://user-images.githubusercontent.com/67448481/167834154-279a3190-d55c-4732-8e32-5de5c48260e0.png"],"datePublished":"2022-05-11T10:59:40.000Z","dateModified":"2022-05-11T10:59:14.024Z","author":{"@type":"Person","name":"Hoonjoo"},"publisher":{"@type":"Organization","name":"Hoon's 블로그","logo":{"@type":"ImageObject","url":"https://hoonjoo-park.github.io/img/logo.svg"}},"description":"이벤트 버블링? 캡처링? 우리는 자바스크립트를 통해 이벤트 핸들링을 할 때, 이벤트가 다른 요소로 전파되는 현상을 자주 겪는다.이는 이벤트 버블링 또는 캡처링이라는 “이벤트 전파” 현상 때문이다."}</script><link rel="canonical" href="https://hoonjoo-park.github.io/javascript/base/bubblingAndCapturing/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Roboto" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-0RF6Y2B0CN" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-05-11T10:59:40.000Z" title="2022. 5. 11. 오후 7:59:40">2022-05-11</time></span><span class="level-item"><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/">프론트엔드</a><span> / </span><a class="link-muted" href="/categories/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/Javascript/">Javascript</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">이벤트 버블링과 캡처링, 그리고 이벤트 위임</h1><div class="content"><p><img src="https://user-images.githubusercontent.com/67448481/167834157-20189678-598a-4840-bad0-ba6ab7a07853.png"></p>
+<h2 id="이벤트-버블링-캡처링"><a href="#이벤트-버블링-캡처링" class="headerlink" title="이벤트 버블링? 캡처링?"></a>이벤트 버블링? 캡처링?</h2><blockquote>
+<p>우리는 자바스크립트를 통해 이벤트 핸들링을 할 때, 이벤트가 다른 요소로 전파되는 현상을 자주 겪는다.<br>이는 이벤트 버블링 또는 캡처링이라는 “이벤트 전파” 현상 때문이다.</p>
+</blockquote>
+<p>그렇다면 이벤트 버블링과 캡처링은 정확히 무엇을 의미할까?</p>
+<p>이는 생각보다 쉽게 이해하고 기억할 수 있다. <strong>버블 = 거품</strong>을 떠올리면 이벤트 버블링을 쉽게 떠올릴 수 있고, 이벤트 버블링만 잘 기억하면 이와 반대되는 방향성을 가진 캡처링을 쉽게 기억해낼 수 있기 때문이다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/167834132-028ceb61-3ba2-4205-b278-2816c9d777a8.png"></p>
+<blockquote>
+<p>위의 사진처럼, <strong>거품은 위로 솟아 오른다.</strong><br>이와 동일한 맥락으로써, <strong>이벤트 버블링은 이벤트가 상향으로 전파</strong>되는 것을 의미한다.<br>따라서, 이와 반대로 <strong>이벤트 캡처링은 상위 요소에서 하위 요소로 이벤트가 하향 전파</strong>되는 것을 뜻한다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/167834151-d8e86522-62b7-446f-9c28-605244e4752d.png"></p>
+<p>즉, 위의 그림과 같이 이벤트 버블링은 상향 전파되는 방식을, 이벤트 캡처링은 하향 전파되는 이벤트 전파 방식이라고 이해하면 된다.</p>
+<hr>
+<h2 id="캡처링과-버블링의-활용"><a href="#캡처링과-버블링의-활용" class="headerlink" title="캡처링과 버블링의 활용"></a>캡처링과 버블링의 활용</h2><blockquote>
+<p>그렇다면 어떻게 우리는 이벤트 캡처링과 버블링을 활성화 또는 비활성화 하며 활용할 수 있을까?</p>
+</blockquote>
+<p>결론부터 말하자면, <strong>이벤트 버블링은 특정한 경우를 제외하곤 기본적으로 활성화</strong> 되어있다. 하지만 이와 반대로, <strong>이벤트 캡처링은 기본적으로 비활성화</strong>되어 있기 때문에, 캡처링을 활성화 하기 위해선 수동적으로 설정을 해줘야 한다.</p>
+<h3 id="이벤트-버블링이-기본적으로-설정되지-않은-이벤트들"><a href="#이벤트-버블링이-기본적으로-설정되지-않은-이벤트들" class="headerlink" title="이벤트 버블링이 기본적으로 설정되지 않은 이벤트들"></a>이벤트 버블링이 기본적으로 설정되지 않은 이벤트들</h3><blockquote>
+<p>위에서 설명한 바와 같이, 이벤트 버블링이 디폴트로 설정되어 있지 않은 이벤트들은 이하와 같다.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>이벤트 종류</th>
+<th>이벤트</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>포커스 이벤트</td>
+<td>focus/blur</td>
+</tr>
+<tr>
+<td>리소스 이벤트</td>
+<td>load/unload/abort/error</td>
+</tr>
+<tr>
+<td>마우스 이벤트</td>
+<td>mouseenter/mouseleave</td>
+</tr>
+</tbody></table>
+<p>위의 요소들의 버블링을 설정하고 싶다면, 캡처링을 통해 상위 요소에서 해당 이벤트가 캡처될 수 있도록 할 수 있을 것이다. 하지만, 위의 이벤트들을 굳이 캡처링하기 보다는, 그냥 위의 이벤트와 닮은 꼴인 이벤트들을 활용하면 쉽게 버블링을 유도 및 활용할 수 있다.</p>
+<p>focus/blur의 경우 focusin/focusout으로 대체하면 이벤트 버블링을 기본적으로 활용할 수 있고, mouseenter/mouseleave는 mouseover/mouseout으로 대체할 수 있다.</p>
+<h3 id="이벤트-캡처링은-어떻게-설정하는가"><a href="#이벤트-캡처링은-어떻게-설정하는가" class="headerlink" title="이벤트 캡처링은 어떻게 설정하는가?"></a>이벤트 캡처링은 어떻게 설정하는가?</h3><blockquote>
+<p>이제 버블링에 대해서는 알겠는데,<br>그렇다면 이벤트 캡처링은 어떻게 수동적으로 설정하는 걸까?</p>
+</blockquote>
+<p>아래와 같이 세 번째 인자에 <code>true</code>를 작성해주면 된다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1</span></span><br><span class="line">OOOO.addEventListener(</span><br><span class="line">  <span class="string">&#x27;click&#x27;</span>,</span><br><span class="line">  <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">/* 생략 */</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line">OOOO.addEventListener(</span><br><span class="line">  <span class="string">&#x27;click&#x27;</span>,</span><br><span class="line">  <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">/* 생략 */</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">capture</span>: <span class="literal">true</span> &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="이벤트-버블링-막기"><a href="#이벤트-버블링-막기" class="headerlink" title="이벤트 버블링 막기"></a>이벤트 버블링 막기</h3><blockquote>
+<p>이벤트 버블링은 거의 대부분 기본적으로 설정되어 있기 때문에, 이를 수동적으로 해제하는 방법 또한 반드시 짚고 넘어가야 한다.</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleClick = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  e.stopPropagation(); <span class="comment">// stopPropagation의 활용</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">OOO.addEventListener(<span class="string">&#x27;click&#x27;</span>, handleClick);</span><br></pre></td></tr></table></figure>
+
+<p>위의 코드 예시와 같이, <code>event.stopPropagation()</code>을 이벤트 핸들러 내에 작성해주면 이벤트 버블링이 발생하는 것을 수동적으로 차단할 수 있다.</p>
+<h3 id="근데…-이게-왜-필요한걸까"><a href="#근데…-이게-왜-필요한걸까" class="headerlink" title="근데… 이게 왜 필요한걸까?"></a>근데… 이게 왜 필요한걸까?</h3><blockquote>
+<p>솔직히 여기까지의 개념만 놓고 봤을 때에는, 버블링과 캡처링이 도대체 왜 필요한지 모르겠다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/167834154-279a3190-d55c-4732-8e32-5de5c48260e0.png" alt="이걸 왜 만들었지...?"></p>
+<p>각설하고 바로 결론부터 말하자면, “이벤트 위임”을 위해 존재한다고 봐도 과언이 아니다. 이벤트 전파를 통해 이벤트 위임이라는 효율적이고 편리한 기능 또는 동작의 구현을 기대할 수 있기 때문이다. 바로 아래에서 이벤트 위임에 대해 알아가보도록 하자 🙂</p>
+<hr>
+<h2 id="이벤트-위임"><a href="#이벤트-위임" class="headerlink" title="이벤트 위임"></a>이벤트 위임</h2><blockquote>
+<p>우리는 이벤트 위임을 통해, 하위 요소들에 이벤트를 덕지덕지 붙이지 않고 <strong>상위 요소만으로도 쉽게 하위 요소들의 이벤트를 핸들링할 수 있다.</strong></p>
+</blockquote>
+<p>바로 코드를 통해 위 정의를 이해해보도록 하자!</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">&#x27;todoList&#x27;</span>&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&#x27;list1&#x27;</span>&gt;</span>독서<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&#x27;list2&#x27;</span>&gt;</span>조깅하기<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> lists = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;input&#x27;</span>);</span><br><span class="line"></span><br><span class="line">lists.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">list</span>) </span>&#123;</span><br><span class="line">  list.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">/* 생략 */</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>위와 같은 코드가 있었다고 가정하고, 각 <code>&lt;li&gt;</code>들을 클릭하면 이벤트핸들러가 잘 동작할 것이다.</p>
+<blockquote>
+<p>하지만, 만약 나중에 <code>&lt;li class=”listN”&gt;</code>가 동적으로 추가된다면 어떻게 될까?</p>
+</blockquote>
+<p>그 때에는 뒤에 추가된 <code>&lt;li&gt;</code> 태그들에는 이벤트 리스너가 등록되지 않았기 때문에, 수동으로 다시 코드 중간에 이벤트 리스너를 등록해주는 과정을 거쳐야 되는 큰 불편함이 있을 것이다.</p>
+<h3 id="이벤트-위임의-활용"><a href="#이벤트-위임의-활용" class="headerlink" title="이벤트 위임의 활용"></a>이벤트 위임의 활용</h3><blockquote>
+<p>위와 같은 불편사항 또는 문제점이 발생할 수 있기 때문에, 우리는 이벤트 위임을 활용해야 한다.</p>
+</blockquote>
+<p>이벤트 위임은 아래와 같이 활용할 수 있다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> todoList = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.todoList&#x27;</span>);</span><br><span class="line"></span><br><span class="line">todoList.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">/* 생략 */</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>위 코드와 같이, 상위요소 <code>&lt;ul&gt;</code>태그에만 이벤트리스너를 달아두면, 하위 요소인 <code>&lt;li&gt;</code>에서 클릭 이벤트가 발생해도 이벤트 버블링에 의해 <code>&lt;ul&gt;</code>의 이벤트 핸들러가 호출될 수 있다.</p>
+<p>만약 이벤트 버블링이라는 이벤트 전파의 동작이 없었다면, 우리는 새로운 요소들이 추가될 때마다 이벤트 리스너를 계속 수동적으로 할당해줘야 하는 큰 불편함을 겪어야 했을 것이다. 하지만, 이제 우리는 이벤트 위임을 통해 상위 요소에만 이벤트 리스너를 할당한 뒤, 하위 요소들의 이벤트 핸들링을 효율적이고 쉽게 관리할 수 있다 😊</p>
+<h3 id="추가-예제"><a href="#추가-예제" class="headerlink" title="추가 예제"></a>추가 예제</h3><blockquote>
+<p>마지막으로 아래의 예제 코드를 한 번만 더 확인해보자 (HTML 코드는 위와 동일하다)</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> todoList = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.todoList&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handleClick = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.currentTarget); <span class="comment">// ul태그가 출력될 것이다.</span></span><br><span class="line">  <span class="built_in">console</span>.log(e.target); <span class="comment">// 실제로 클릭한 li태그가 출력될 것이다.</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">todoList.addEventListener(<span class="string">&#x27;click&#x27;</span>, handleClick);</span><br></pre></td></tr></table></figure>
+
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>이벤트 버블링과 캡처링, 그리고 이벤트 위임</p><p><a href="https://hoonjoo-park.github.io/javascript/base/bubblingAndCapturing/">https://hoonjoo-park.github.io/javascript/base/bubblingAndCapturing/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Hoonjoo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-05-11</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-05-11</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%EA%B0%9C%EB%85%90/">개념</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61ccb08ffa9c81001d245598&amp;product=sticky-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/javascript/base/closure/"><span class="level-item">자바스크립트와 클로저</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><script src="https://utteranc.es/client.js" repo="hoonjoo-park/hoonjoo-park.github.io" issue-term="pathname" label="🙋‍♂️" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#이벤트-버블링-캡처링"><span class="level-left"><span class="level-item">1</span><span class="level-item">이벤트 버블링? 캡처링?</span></span></a></li><li><a class="level is-mobile" href="#캡처링과-버블링의-활용"><span class="level-left"><span class="level-item">2</span><span class="level-item">캡처링과 버블링의 활용</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#이벤트-버블링이-기본적으로-설정되지-않은-이벤트들"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">이벤트 버블링이 기본적으로 설정되지 않은 이벤트들</span></span></a></li><li><a class="level is-mobile" href="#이벤트-캡처링은-어떻게-설정하는가"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">이벤트 캡처링은 어떻게 설정하는가?</span></span></a></li><li><a class="level is-mobile" href="#이벤트-버블링-막기"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">이벤트 버블링 막기</span></span></a></li><li><a class="level is-mobile" href="#근데…-이게-왜-필요한걸까"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">근데… 이게 왜 필요한걸까?</span></span></a></li></ul></li><li><a class="level is-mobile" href="#이벤트-위임"><span class="level-left"><span class="level-item">3</span><span class="level-item">이벤트 위임</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#이벤트-위임의-활용"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">이벤트 위임의 활용</span></span></a></li><li><a class="level is-mobile" href="#추가-예제"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">추가 예제</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">총 방문자 <span id="busuanzi_value_site_uv"></span> 명</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
