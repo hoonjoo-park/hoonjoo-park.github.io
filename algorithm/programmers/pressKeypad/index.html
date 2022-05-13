@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>프로그래머스 - 키패드 누르기 (Javascript) - Hoon&#039;s 블로그</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="Hoon"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="문제 설명스마트폰 전화 키패드의 각 칸에 다음과 같이 숫자들이 적혀 있습니다."><meta property="og:type" content="blog"><meta property="og:title" content="프로그래머스 - 키패드 누르기 (Javascript)"><meta property="og:url" content="https://hoonjoo-park.github.io/algorithm/programmers/pressKeypad/"><meta property="og:site_name" content="Hoon&#039;s 블로그"><meta property="og:description" content="문제 설명스마트폰 전화 키패드의 각 칸에 다음과 같이 숫자들이 적혀 있습니다."><meta property="og:locale" content="en_US"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/159494976-37fd6646-7e3c-45f4-84cf-fd70772703dd.png"><meta property="og:image" content="https://grepp-programmers.s3.ap-northeast-2.amazonaws.com/files/production/4b69a271-5f4a-4bf4-9ebf-6ebed5a02d8d/kakao_phone1.png"><meta property="article:published_time" content="2022-05-13T14:25:30.000Z"><meta property="article:modified_time" content="2022-05-13T14:26:41.890Z"><meta property="article:author" content="Hoonjoo"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://user-images.githubusercontent.com/67448481/159494976-37fd6646-7e3c-45f4-84cf-fd70772703dd.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoonjoo-park.github.io/algorithm/programmers/pressKeypad/"},"headline":"프로그래머스 - 키패드 누르기 (Javascript)","image":["https://user-images.githubusercontent.com/67448481/159494976-37fd6646-7e3c-45f4-84cf-fd70772703dd.png","https://grepp-programmers.s3.ap-northeast-2.amazonaws.com/files/production/4b69a271-5f4a-4bf4-9ebf-6ebed5a02d8d/kakao_phone1.png"],"datePublished":"2022-05-13T14:25:30.000Z","dateModified":"2022-05-13T14:26:41.890Z","author":{"@type":"Person","name":"Hoonjoo"},"publisher":{"@type":"Organization","name":"Hoon's 블로그","logo":{"@type":"ImageObject","url":"https://hoonjoo-park.github.io/img/logo.svg"}},"description":"문제 설명스마트폰 전화 키패드의 각 칸에 다음과 같이 숫자들이 적혀 있습니다."}</script><link rel="canonical" href="https://hoonjoo-park.github.io/algorithm/programmers/pressKeypad/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Roboto" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-0RF6Y2B0CN" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-05-13T14:25:30.000Z" title="2022. 5. 13. 오후 11:25:30">2022-05-13</time></span><span class="level-item"><a class="link-muted" href="/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/">알고리즘</a><span> / </span><a class="link-muted" href="/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/">프로그래머스</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">프로그래머스 - 키패드 누르기 (Javascript)</h1><div class="content"><p><img src="https://user-images.githubusercontent.com/67448481/159494976-37fd6646-7e3c-45f4-84cf-fd70772703dd.png"></p>
+<h2 id="문제-설명"><a href="#문제-설명" class="headerlink" title="문제 설명"></a><strong>문제 설명</strong></h2><p>스마트폰 전화 키패드의 각 칸에 다음과 같이 숫자들이 적혀 있습니다.</p>
+<p><img src="https://grepp-programmers.s3.ap-northeast-2.amazonaws.com/files/production/4b69a271-5f4a-4bf4-9ebf-6ebed5a02d8d/kakao_phone1.png" alt="https://grepp-programmers.s3.ap-northeast-2.amazonaws.com/files/production/4b69a271-5f4a-4bf4-9ebf-6ebed5a02d8d/kakao_phone1.png"></p>
+<p>이 전화 키패드에서 왼손과 오른손의 엄지손가락만을 이용해서 숫자만을 입력하려고 합니다.맨 처음 왼손 엄지손가락은 <code>*</code> 키패드에 오른손 엄지손가락은 <code>#</code> 키패드 위치에서 시작하며, 엄지손가락을 사용하는 규칙은 다음과 같습니다.</p>
+<ol>
+<li><p>엄지손가락은 상하좌우 4가지 방향으로만 이동할 수 있으며 키패드 이동 한 칸은 거리로 1에 해당합니다.</p>
+</li>
+<li><p>왼쪽 열의 3개의 숫자 <code>1</code>, <code>4</code>, <code>7</code>을 입력할 때는 왼손 엄지손가락을 사용합니다.</p>
+</li>
+<li><p>오른쪽 열의 3개의 숫자 <code>3</code>, <code>6</code>, <code>9</code>를 입력할 때는 오른손 엄지손가락을 사용합니다.</p>
+</li>
+<li><p>가운데 열의 4개의 숫자 <code>2</code>, <code>5</code>, <code>8</code>, <code>0</code>을 입력할 때는 두 엄지손가락의 현재 키패드의 위치에서 더 가까운 엄지손가락을 사용합니다.</p>
+<p>4-1. 만약 두 엄지손가락의 거리가 같다면, 오른손잡이는 오른손 엄지손가락, 왼손잡이는 왼손 엄지손가락을 사용합니다.</p>
+</li>
+</ol>
+<p>순서대로 누를 번호가 담긴 배열 numbers, 왼손잡이인지 오른손잡이인 지를 나타내는 문자열 hand가 매개변수로 주어질 때, 각 번호를 누른 엄지손가락이 왼손인 지 오른손인 지를 나타내는 연속된 문자열 형태로 return 하도록 solution 함수를 완성해주세요.</p>
+<h2 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a><strong>제한사항</strong></h2><ul>
+<li>numbers 배열의 크기는 1 이상 1,000 이하입니다.</li>
+<li>numbers 배열 원소의 값은 0 이상 9 이하인 정수입니다.</li>
+<li>hand는 <code>&quot;left&quot;</code> 또는 <code>&quot;right&quot;</code> 입니다.<ul>
+<li><code>&quot;left&quot;</code>는 왼손잡이, <code>&quot;right&quot;</code>는 오른손잡이를 의미합니다.</li>
+</ul>
+</li>
+<li>왼손 엄지손가락을 사용한 경우는 <code>L</code>, 오른손 엄지손가락을 사용한 경우는 <code>R</code>을 순서대로 이어붙여 문자열 형태로 return 해주세요.</li>
+</ul>
+<hr>
+<h2 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a><strong>입출력 예</strong></h2><table>
+<thead>
+<tr>
+<th>numbers</th>
+<th>hand</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5]</td>
+<td>“right”</td>
+<td>“LRLLLRLLRRL”</td>
+</tr>
+<tr>
+<td>[7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2]</td>
+<td>“left”</td>
+<td>“LRLLRRLLLRR”</td>
+</tr>
+<tr>
+<td>[1, 2, 3, 4, 5, 6, 7, 8, 9, 0]</td>
+<td>“right”</td>
+<td>“LLRLLRLLRL”</td>
+</tr>
+</tbody></table>
+<h2 id="입출력-예에-대한-설명"><a href="#입출력-예에-대한-설명" class="headerlink" title="입출력 예에 대한 설명"></a><strong>입출력 예에 대한 설명</strong></h2><p><strong>입출력 예 #1</strong></p>
+<p>순서대로 눌러야 할 번호가 [1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5]이고, 오른손잡이입니다.</p>
+<table>
+<thead>
+<tr>
+<th>왼손 위치</th>
+<th>오른손 위치</th>
+<th>눌러야 할 숫자</th>
+<th>사용한 손</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>#</td>
+<td>1</td>
+<td>L</td>
+<td>1은 왼손으로 누릅니다.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>#</td>
+<td>3</td>
+<td>R</td>
+<td>3은 오른손으로 누릅니다.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>3</td>
+<td>4</td>
+<td>L</td>
+<td>4는 왼손으로 누릅니다.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3</td>
+<td>5</td>
+<td>L</td>
+<td>왼손 거리는 1, 오른손 거리는 2이므로 왼손으로 5를 누릅니다.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>8</td>
+<td>L</td>
+<td>왼손 거리는 1, 오른손 거리는 3이므로 왼손으로 8을 누릅니다.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>3</td>
+<td>2</td>
+<td>R</td>
+<td>왼손 거리는 2, 오른손 거리는 1이므로 오른손으로 2를 누릅니다.</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2</td>
+<td>1</td>
+<td>L</td>
+<td>1은 왼손으로 누릅니다.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>L</td>
+<td>4는 왼손으로 누릅니다.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>5</td>
+<td>R</td>
+<td>왼손 거리와 오른손 거리가 1로 같으므로, 오른손으로 5를 누릅니다.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>9</td>
+<td>R</td>
+<td>9는 오른손으로 누릅니다.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>9</td>
+<td>5</td>
+<td>L</td>
+<td>왼손 거리는 1, 오른손 거리는 2이므로 왼손으로 5를 누릅니다.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>9</td>
+<td>-</td>
+<td>-</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>따라서 <code>&quot;LRLLLRLLRRL&quot;</code>를 return 합니다.</p>
+<p><strong>입출력 예 #2</strong></p>
+<p>왼손잡이가 [7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2]를 순서대로 누르면 사용한 손은 <code>&quot;LRLLRRLLLRR&quot;</code>이 됩니다.</p>
+<p><strong>입출력 예 #3</strong></p>
+<p>오른손잡이가 [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]를 순서대로 누르면 사용한 손은 <code>&quot;LLRLLRLLRL&quot;</code>이 됩니다.</p>
+<hr>
+<h2 id="소스코드"><a href="#소스코드" class="headerlink" title="소스코드"></a>소스코드</h2><blockquote>
+<p>흠… 일단 한 번에 통과는 했는데<br>하드 코딩으로 푼 것 같아 기분이 조금 찝찝하다ㅜ</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">solution</span>(<span class="params">numbers, hand</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> answer = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> grid = [</span><br><span class="line">    [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">    [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">    [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>],</span><br><span class="line">    [<span class="string">&#x27;*&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;#&#x27;</span>],</span><br><span class="line">  ];</span><br><span class="line">  <span class="keyword">const</span> coordObj = &#123;&#125;;</span><br><span class="line">  <span class="comment">// 각 숫자들의 좌표를 담은 객체를 만든다.</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> row = <span class="number">0</span>; row &lt; grid.length; row++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> col = <span class="number">0</span>; col &lt; grid[<span class="number">0</span>].length; col++) &#123;</span><br><span class="line">      coordObj[grid[row][col]] = [row, col];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 초기 위치는 *과 #이다.</span></span><br><span class="line">  <span class="keyword">let</span> lastLeftCoord = coordObj[<span class="string">&#x27;*&#x27;</span>];</span><br><span class="line">  <span class="keyword">let</span> lastRightCoord = coordObj[<span class="string">&#x27;#&#x27;</span>];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; numbers.length; i++) &#123;</span><br><span class="line">    <span class="comment">// 1, 4, 7은 무조건 왼손으로 터치</span></span><br><span class="line">    <span class="keyword">if</span> ([<span class="number">1</span>, <span class="number">4</span>, <span class="number">7</span>].includes(numbers[i])) leftHand(numbers[i]);</span><br><span class="line">    <span class="comment">// 3, 6, 9는 무조건 오른손으로 터치</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ([<span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>].includes(numbers[i])) rightHand(numbers[i]);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 왼손과 오른손이 target까지 가는데 걸리는 거리를 계산</span></span><br><span class="line">      <span class="keyword">const</span> targetCoord = coordObj[numbers[i]];</span><br><span class="line">      <span class="keyword">const</span> leftDistance =</span><br><span class="line">        <span class="built_in">Math</span>.abs(lastLeftCoord[<span class="number">0</span>] - targetCoord[<span class="number">0</span>]) +</span><br><span class="line">        <span class="built_in">Math</span>.abs(lastLeftCoord[<span class="number">1</span>] - targetCoord[<span class="number">1</span>]);</span><br><span class="line">      <span class="keyword">const</span> rightDistance =</span><br><span class="line">        <span class="built_in">Math</span>.abs(lastRightCoord[<span class="number">0</span>] - targetCoord[<span class="number">0</span>]) +</span><br><span class="line">        <span class="built_in">Math</span>.abs(lastRightCoord[<span class="number">1</span>] - targetCoord[<span class="number">1</span>]);</span><br><span class="line">      <span class="comment">// 계산 결과를 통해 대소비교 -&gt; 알맞은 손을 선택</span></span><br><span class="line">      <span class="keyword">if</span> (leftDistance &lt; rightDistance) leftHand(numbers[i]);</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (leftDistance &gt; rightDistance) rightHand(numbers[i]);</span><br><span class="line">      <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (hand === <span class="string">&#x27;left&#x27;</span>) leftHand(numbers[i]);</span><br><span class="line">        <span class="keyword">else</span> rightHand(numbers[i]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">leftHand</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">      answer += <span class="string">&#x27;L&#x27;</span>;</span><br><span class="line">      lastLeftCoord = coordObj[num];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">rightHand</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">      answer += <span class="string">&#x27;R&#x27;</span>;</span><br><span class="line">      lastRightCoord = coordObj[num];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>프로그래머스 - 키패드 누르기 (Javascript)</p><p><a href="https://hoonjoo-park.github.io/algorithm/programmers/pressKeypad/">https://hoonjoo-park.github.io/algorithm/programmers/pressKeypad/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Hoonjoo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-05-13</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-05-13</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61ccb08ffa9c81001d245598&amp;product=sticky-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm/programmers/getReportResult/"><span class="level-item">프로그래머스 - 신고 결과 받기 (Javascript)</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><script src="https://utteranc.es/client.js" repo="hoonjoo-park/hoonjoo-park.github.io" issue-term="pathname" label="🙋‍♂️" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#문제-설명"><span class="level-left"><span class="level-item">1</span><span class="level-item">문제 설명</span></span></a></li><li><a class="level is-mobile" href="#제한사항"><span class="level-left"><span class="level-item">2</span><span class="level-item">제한사항</span></span></a></li><li><a class="level is-mobile" href="#입출력-예"><span class="level-left"><span class="level-item">3</span><span class="level-item">입출력 예</span></span></a></li><li><a class="level is-mobile" href="#입출력-예에-대한-설명"><span class="level-left"><span class="level-item">4</span><span class="level-item">입출력 예에 대한 설명</span></span></a></li><li><a class="level is-mobile" href="#소스코드"><span class="level-left"><span class="level-item">5</span><span class="level-item">소스코드</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">총 방문자 <span id="busuanzi_value_site_uv"></span> 명</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
