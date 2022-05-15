@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>프로그래머스 - 다트 게임 (Javascript) - Hoon&#039;s 블로그</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="Hoon"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="문제 설명카카오톡에 뜬 네 번째 별! 심심할 땐? 카카오톡 게임별~"><meta property="og:type" content="blog"><meta property="og:title" content="프로그래머스 - 다트 게임 (Javascript)"><meta property="og:url" content="https://hoonjoo-park.github.io/algorithm/programmers/dartGame/"><meta property="og:site_name" content="Hoon&#039;s 블로그"><meta property="og:description" content="문제 설명카카오톡에 뜬 네 번째 별! 심심할 땐? 카카오톡 게임별~"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/159494976-37fd6646-7e3c-45f4-84cf-fd70772703dd.png"><meta property="og:image" content="http://t1.kakaocdn.net/welcome2018/gamestar.png"><meta property="article:published_time" content="2022-05-15T10:35:30.000Z"><meta property="article:modified_time" content="2022-05-15T12:34:24.306Z"><meta property="article:author" content="Hoonjoo"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://user-images.githubusercontent.com/67448481/159494976-37fd6646-7e3c-45f4-84cf-fd70772703dd.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoonjoo-park.github.io/algorithm/programmers/dartGame/"},"headline":"프로그래머스 - 다트 게임 (Javascript)","image":["https://user-images.githubusercontent.com/67448481/159494976-37fd6646-7e3c-45f4-84cf-fd70772703dd.png","http://t1.kakaocdn.net/welcome2018/gamestar.png"],"datePublished":"2022-05-15T10:35:30.000Z","dateModified":"2022-05-15T12:34:24.306Z","author":{"@type":"Person","name":"Hoonjoo"},"publisher":{"@type":"Organization","name":"Hoon's 블로그","logo":{"@type":"ImageObject","url":"https://hoonjoo-park.github.io/img/logo.svg"}},"description":"문제 설명카카오톡에 뜬 네 번째 별! 심심할 땐? 카카오톡 게임별~"}</script><link rel="canonical" href="https://hoonjoo-park.github.io/algorithm/programmers/dartGame/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Roboto" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-0RF6Y2B0CN" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-05-15T10:35:30.000Z" title="2022. 5. 15. 오후 7:35:30">2022-05-15</time></span><span class="level-item"><a class="link-muted" href="/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/">알고리즘</a><span> / </span><a class="link-muted" href="/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4/">프로그래머스</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">프로그래머스 - 다트 게임 (Javascript)</h1><div class="content"><p><img src="https://user-images.githubusercontent.com/67448481/159494976-37fd6646-7e3c-45f4-84cf-fd70772703dd.png"></p>
+<h2 id="문제-설명"><a href="#문제-설명" class="headerlink" title="문제 설명"></a><strong>문제 설명</strong></h2><p>카카오톡에 뜬 네 번째 별! 심심할 땐? 카카오톡 게임별~</p>
+<p><img src="http://t1.kakaocdn.net/welcome2018/gamestar.png" alt="http://t1.kakaocdn.net/welcome2018/gamestar.png"></p>
+<p>카카오톡 게임별의 하반기 신규 서비스로 다트 게임을 출시하기로 했다. 다트 게임은 다트판에 다트를 세 차례 던져 그 점수의 합계로 실력을 겨루는 게임으로, 모두가 간단히 즐길 수 있다.갓 입사한 무지는 코딩 실력을 인정받아 게임의 핵심 부분인 점수 계산 로직을 맡게 되었다. 다트 게임의 점수 계산 로직은 아래와 같다.</p>
+<ol>
+<li>다트 게임은 총 3번의 기회로 구성된다.</li>
+<li>각 기회마다 얻을 수 있는 점수는 0점에서 10점까지이다.</li>
+<li>점수와 함께 Single(<code>S</code>), Double(<code>D</code>), Triple(<code>T</code>) 영역이 존재하고 각 영역 당첨 시 점수에서 1제곱, 2제곱, 3제곱 (점수^1 , 점수^2 , 점수^3 )으로 계산된다.</li>
+<li>옵션으로 스타상(<code>) , 아차상(`#`)이 존재하며 스타상(</code>) 당첨 시 해당 점수와 바로 전에 얻은 점수를 각 2배로 만든다. 아차상(<code>#</code>) 당첨 시 해당 점수는 마이너스된다.</li>
+<li>스타상(<code>)은 첫 번째 기회에서도 나올 수 있다. 이 경우 첫 번째 스타상(</code>)의 점수만 2배가 된다. (예제 4번 참고)</li>
+<li>스타상(<code>)의 효과는 다른 스타상(</code>)의 효과와 중첩될 수 있다. 이 경우 중첩된 스타상(``) 점수는 4배가 된다. (예제 4번 참고)</li>
+<li>스타상(``)의 효과는 아차상(<code>#</code>)의 효과와 중첩될 수 있다. 이 경우 중첩된 아차상(<code>#</code>)의 점수는 -2배가 된다. (예제 5번 참고)</li>
+<li>Single(<code>S</code>), Double(<code>D</code>), Triple(<code>T</code>)은 점수마다 하나씩 존재한다.</li>
+<li>스타상(``), 아차상(<code>#</code>)은 점수마다 둘 중 하나만 존재할 수 있으며, 존재하지 않을 수도 있다.</li>
+</ol>
+<p>0~10의 정수와 문자 S, D, T, *, #로 구성된 문자열이 입력될 시 총점수를 반환하는 함수를 작성하라.</p>
+<h2 id="입력-형식"><a href="#입력-형식" class="headerlink" title="입력 형식"></a><strong>입력 형식</strong></h2><p>“점수|보너스|[옵션]”으로 이루어진 문자열 3세트.예) <code>1S2D*3T</code></p>
+<ul>
+<li>점수는 0에서 10 사이의 정수이다.</li>
+<li>보너스는 S, D, T 중 하나이다.</li>
+<li>옵선은 *이나 # 중 하나이며, 없을 수도 있다.</li>
+</ul>
+<h2 id="출력-형식"><a href="#출력-형식" class="headerlink" title="출력 형식"></a><strong>출력 형식</strong></h2><p>3번의 기회에서 얻은 점수 합계에 해당하는 정수값을 출력한다.예) 37</p>
+<h2 id="입출력-예제"><a href="#입출력-예제" class="headerlink" title="입출력 예제"></a><strong>입출력 예제</strong></h2><table>
+<thead>
+<tr>
+<th>예제</th>
+<th>dartResult</th>
+<th>answer</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1S2D*3T</td>
+<td>37</td>
+<td>11 * 2 + 22 * 2 + 33</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1D2S#10S</td>
+<td>9</td>
+<td>12 + 21 * (-1) + 101</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1D2S0T</td>
+<td>3</td>
+<td>12 + 21 + 03</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1S<em>2T</em>3S</td>
+<td>23</td>
+<td>11 * 2 * 2 + 23 * 2 + 31</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1D#2S*3S</td>
+<td>5</td>
+<td>12 * (-1) * 2 + 21 * 2 + 31</td>
+</tr>
+<tr>
+<td>6</td>
+<td>1T2D3D#</td>
+<td>-4</td>
+<td>13 + 22 + 32 * (-1)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>1D2S3T*</td>
+<td>59</td>
+<td>12 + 21 * 2 + 33 * 2</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="소스-코드"><a href="#소스-코드" class="headerlink" title="소스 코드"></a>소스 코드</h2><blockquote>
+<p>중간에 정수 <code>10</code>이 껴있어서 조금 헤맸다…<br>이 10 때문에 정규표현식을 사용하여 SDT를 기준으로 각 시도(try)들을 3등분 해줬어야 했다.</p>
+</blockquote>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">solution</span>(<span class="params">dartResult</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> answer = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> regex = <span class="regexp">/\d&#123;1,2&#125;[SDT]&#123;1&#125;[*|#]?/g</span>;</span><br><span class="line">  <span class="keyword">const</span> regexArr = dartResult.match(regex);</span><br><span class="line">  <span class="keyword">let</span> pointsArr = [];</span><br><span class="line">  <span class="keyword">let</span> point, bonus, option, tempPoint;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> result <span class="keyword">of</span> regexArr) &#123;</span><br><span class="line">    <span class="keyword">const</span> resultArr = [...result.split(<span class="regexp">/([SDT]&#123;1&#125;)/</span>)];</span><br><span class="line">    point = <span class="built_in">Number</span>(resultArr[<span class="number">0</span>]);</span><br><span class="line">    bonus = resultArr[<span class="number">1</span>];</span><br><span class="line">    option = resultArr[<span class="number">2</span>];</span><br><span class="line">    <span class="comment">// 보너스 계산</span></span><br><span class="line">    <span class="keyword">if</span> (bonus === <span class="string">&#x27;S&#x27;</span>) tempPoint = point;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (bonus === <span class="string">&#x27;D&#x27;</span>) tempPoint = <span class="built_in">Math</span>.pow(point, <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">else</span> tempPoint = <span class="built_in">Math</span>.pow(point, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 옵션 계산</span></span><br><span class="line">    <span class="keyword">if</span> (option === <span class="string">&#x27;#&#x27;</span>) &#123;</span><br><span class="line">      tempPoint *= -<span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (option === <span class="string">&#x27;*&#x27;</span>) &#123;</span><br><span class="line">      tempPoint *= <span class="number">2</span>;</span><br><span class="line">      pointsArr[pointsArr.length - <span class="number">1</span>] *= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pointsArr.push(tempPoint);</span><br><span class="line">  &#125;</span><br><span class="line">  answer = pointsArr.reduce(<span class="function">(<span class="params">prev, cur</span>) =&gt;</span> prev + cur);</span><br><span class="line">  <span class="keyword">return</span> answer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="사용한-정규표현식-풀이"><a href="#사용한-정규표현식-풀이" class="headerlink" title="사용한 정규표현식 풀이"></a>사용한 정규표현식 풀이</h3><blockquote>
+<p><code>/\d&#123;1,2&#125;[SDT]&#123;1&#125;[*|#]?/g</code> 이 정규표현식을 표를 통해 정리해보겠다.</p>
+</blockquote>
+<p>| 패턴  | 의미                                                          |<br>| —– | ————————————————————- | ————- |<br>| \d    | 숫자(digit)                                                   |<br>| {n,m} | 왼쪽의 패턴이 n 이상 m 이하 일치                              |<br>| [abc] | a or b or c와 일치 (괄호 안에서는 *, . 등을 문자로 인식한다) |<br>| a     | b                                                             | a or b와 일치 |</p>
+<p>즉, 위의 식은 <code>1~2개의 숫자 + SDT 중 하나의 문자열 + *# 이 있을 수도 있고 없을 수도 있음</code> 이라는 패턴을 찾는 정규표현식이 될 수 있는 것이다.</p>
+<hr>
+<h2 id="참조"><a href="#참조" class="headerlink" title="참조"></a>참조</h2><p><a target="_blank" rel="noopener" href="https://hanamon.kr/javascript-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-%EA%B0%9C%EB%85%90%ED%8E%B8/"></a></p>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>프로그래머스 - 다트 게임 (Javascript)</p><p><a href="https://hoonjoo-park.github.io/algorithm/programmers/dartGame/">https://hoonjoo-park.github.io/algorithm/programmers/dartGame/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Hoonjoo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-05-15</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-05-15</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61ccb08ffa9c81001d245598&amp;product=sticky-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm/programmers/secretMap/"><span class="level-item">프로그래머스 - 비밀지도 (Javascript)</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><script src="https://utteranc.es/client.js" repo="hoonjoo-park/hoonjoo-park.github.io" issue-term="pathname" label="🙋‍♂️" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#문제-설명"><span class="level-left"><span class="level-item">1</span><span class="level-item">문제 설명</span></span></a></li><li><a class="level is-mobile" href="#입력-형식"><span class="level-left"><span class="level-item">2</span><span class="level-item">입력 형식</span></span></a></li><li><a class="level is-mobile" href="#출력-형식"><span class="level-left"><span class="level-item">3</span><span class="level-item">출력 형식</span></span></a></li><li><a class="level is-mobile" href="#입출력-예제"><span class="level-left"><span class="level-item">4</span><span class="level-item">입출력 예제</span></span></a></li><li><a class="level is-mobile" href="#소스-코드"><span class="level-left"><span class="level-item">5</span><span class="level-item">소스 코드</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#사용한-정규표현식-풀이"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">사용한 정규표현식 풀이</span></span></a></li></ul></li><li><a class="level is-mobile" href="#참조"><span class="level-left"><span class="level-item">6</span><span class="level-item">참조</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">총 방문자 <span id="busuanzi_value_site_uv"></span> 명</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
