@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>REST API에 대해 알아보자 - Hoon&#039;s 블로그</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="Hoon"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Hoon"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="REST? REST는 Representational State Transfer의 약자로, 하나의 소프트웨어 아키텍처 형식이라고 볼 수 있다."><meta property="og:type" content="blog"><meta property="og:title" content="REST API에 대해 알아보자"><meta property="og:url" content="https://hoonjoo-park.github.io/cs/network/restapi/"><meta property="og:site_name" content="Hoon&#039;s 블로그"><meta property="og:description" content="REST? REST는 Representational State Transfer의 약자로, 하나의 소프트웨어 아키텍처 형식이라고 볼 수 있다."><meta property="og:locale" content="en_US"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/169296515-2332ea68-9249-4866-bc0a-cfa0432fd245.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/169296481-1ed81cf2-a7aa-4566-929e-ba226527a920.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/169296502-9d4f7a1d-bd5d-40fc-a3c5-1e751098be68.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/169296504-dc6d7ab6-7208-4f62-be90-8d5022abb9be.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/169296506-6732e5fa-cd71-40ed-ba03-37641a2f475e.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/169296510-f7173a0b-b336-4ff4-a295-233650e3cc54.png"><meta property="og:image" content="https://user-images.githubusercontent.com/67448481/169296512-b4805db8-1834-472b-966d-534e0c8b578e.png"><meta property="article:published_time" content="2022-05-19T12:53:40.000Z"><meta property="article:modified_time" content="2022-05-19T12:51:55.255Z"><meta property="article:author" content="Hoonjoo"><meta property="article:tag" content="네트워크"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://user-images.githubusercontent.com/67448481/169296515-2332ea68-9249-4866-bc0a-cfa0432fd245.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://hoonjoo-park.github.io/cs/network/restapi/"},"headline":"REST API에 대해 알아보자","image":["https://user-images.githubusercontent.com/67448481/169296515-2332ea68-9249-4866-bc0a-cfa0432fd245.png","https://user-images.githubusercontent.com/67448481/169296481-1ed81cf2-a7aa-4566-929e-ba226527a920.png","https://user-images.githubusercontent.com/67448481/169296502-9d4f7a1d-bd5d-40fc-a3c5-1e751098be68.png","https://user-images.githubusercontent.com/67448481/169296504-dc6d7ab6-7208-4f62-be90-8d5022abb9be.png","https://user-images.githubusercontent.com/67448481/169296506-6732e5fa-cd71-40ed-ba03-37641a2f475e.png","https://user-images.githubusercontent.com/67448481/169296510-f7173a0b-b336-4ff4-a295-233650e3cc54.png","https://user-images.githubusercontent.com/67448481/169296512-b4805db8-1834-472b-966d-534e0c8b578e.png"],"datePublished":"2022-05-19T12:53:40.000Z","dateModified":"2022-05-19T12:51:55.255Z","author":{"@type":"Person","name":"Hoonjoo"},"publisher":{"@type":"Organization","name":"Hoon's 블로그","logo":{"@type":"ImageObject","url":"https://hoonjoo-park.github.io/img/logo.svg"}},"description":"REST? REST는 Representational State Transfer의 약자로, 하나의 소프트웨어 아키텍처 형식이라고 볼 수 있다."}</script><link rel="canonical" href="https://hoonjoo-park.github.io/cs/network/restapi/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&amp;family=Roboto" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=G-0RF6Y2B0CN" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+    
+        gtag('config', 'G-0RF6Y2B0CN');</script><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-05-19T12:53:40.000Z" title="2022. 5. 19. 오후 9:53:40">2022-05-19</time></span><span class="level-item"><a class="link-muted" href="/categories/CS/">CS</a><span> / </span><a class="link-muted" href="/categories/CS/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/">네트워크</a></span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>&nbsp;visits</span></div></div><h1 class="title is-3 is-size-4-mobile">REST API에 대해 알아보자</h1><div class="content"><p><img src="https://user-images.githubusercontent.com/67448481/169296515-2332ea68-9249-4866-bc0a-cfa0432fd245.png"></p>
+<h2 id="REST"><a href="#REST" class="headerlink" title="REST?"></a>REST?</h2><blockquote>
+<p>REST는 Representational State Transfer의 약자로, 하나의 소프트웨어 아키텍처 형식이라고 볼 수 있다.</p>
+</blockquote>
+<p>말이 조금 어려울 수 있는데, “<strong>자원을 특정 표현 또는 이름으로써 구분하여, 해당 자원의 상태 및 정보를 주고 받는 구조</strong>”을 의미한다고 이해하면 된다. 즉, <strong>특정 규칙에 따라 이름을 지어서 자원의 상태를 구분짓는 것</strong>이다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/169296481-1ed81cf2-a7aa-4566-929e-ba226527a920.png"></p>
+<p>하지만… 글만 읽어선 여전히 REST의 개념이 모호하고 이해가 되지 않을 것이다. 따라서 REST의 구성요소와 핵심개념, 형태, REST의 특징 등을 하나 하나 짚어가며 학습해보도록 하자.</p>
+<hr>
+<h2 id="REST의-구성요소"><a href="#REST의-구성요소" class="headerlink" title="REST의 구성요소"></a>REST의 구성요소</h2><blockquote>
+<p>우선, REST의 주요 구성 요소는 “자원, 행위, 표현”으로 이루어진다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/169296502-9d4f7a1d-bd5d-40fc-a3c5-1e751098be68.png" alt="자원, 행위, 표현!"></p>
+<ol>
+<li><strong>자원(Resource)</strong> : URI</li>
+<li><strong>행위(Verb)</strong> : HTTP 메소드 (GET, POST, PUT, DELETE)</li>
+<li><strong>표현(Representations)</strong></li>
+</ol>
+<p>자원과 행위는 우리가 개발을 하며 자주 접해봤던 개념들이라 이해하는 데 어렵지는 않을 것이다. 하지만 여기서 “표현”은 무엇을 의미하는걸까?</p>
+<p>여기서 자원의 “표현”은 <strong>자원(정보)이 JSON, XML, TEXT, RSS 등으로 표현</strong>됨을 뜻한다. 즉, 데이터가 특정 형태로 정리 및 정제되어 우리에게 보여지는 형태를 설명하는 개념이 “자원의 표현”이라고 이해하면 된다.</p>
+<hr>
+<h2 id="REST의-특징-6가지"><a href="#REST의-특징-6가지" class="headerlink" title="REST의 특징 (6가지)"></a>REST의 특징 (6가지)</h2><blockquote>
+<p>사실 REST를 공부하며 이 부분이 가장 이해가 안가고 어려웠다…<br>최대한 이해하기 쉽게 설명해보도록 하겠다 😇</p>
+</blockquote>
+<p>우선 REST의 대표적인 특징 6개는 아래 사진과 같다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/169296504-dc6d7ab6-7208-4f62-be90-8d5022abb9be.png" alt="이제 이 특징들을 한 놈 한 놈 듬뿍 찍어 먹어보도록 하자!"></p>
+<h3 id="무상태성-Stateless-🥹"><a href="#무상태성-Stateless-🥹" class="headerlink" title="무상태성 (Stateless) 🥹"></a>무상태성 (Stateless) 🥹</h3><blockquote>
+<p>HTTP는 무상태성을 띄는 프로토콜, REST는 무상태성을 띄는 ‘설계 구조’다.</p>
+</blockquote>
+<p>여기서 무상태성이란, 서버와 클라이언트의 통신 사이에 상태 및 정보의 저장이 이루어지지 않는 것을 의미한다. 즉, 서버와 클라이언트 모두 “요청”을 통해서만 정보를 주고받는 것이다. 좀 더 자세히 설명하면, 서버는 세션정보, 쿠키, 인증정보 등을 따로 저장하지 않는다.</p>
+<p>이는 곧 서버가 요청을 이행하는 데에 필요한 모든 정보가 요청에 담겨있어야 함을 의미한다. 서버는 어떠한 요청에 담긴 정보도 저장하지 않고 “응답”만을 이행하기 때문이다. 이에 따라 모든 요청과 응답은 독립적이며, 같은 요청에 대해서는 항상 같은 결과가 반환될 수밖에 없다.</p>
+<p>이러한 무상태성을 통해 서버의 메모리 효율성이 제고될 수 있고, 그로 인해 서버의 부하가 줄어들 수 있다는 장점을 취할 수 있다. 심지어 응답결과가 일관될 수 있다는 안정성 또한 기대할 수 있을 것이다. 하지만 반대로, 무상태성 하에서 서버는 어떠한 정보도 저장하지 않기 때문에, 매 요청마다 모든 정보를 다 꼼꼼히 담아서 보내줘야 한다는 까다로움 또한 존재한다.</p>
+<p><img src="https://user-images.githubusercontent.com/67448481/169296506-6732e5fa-cd71-40ed-ba03-37641a2f475e.png" alt="이해를 돕기 위해 고안해본 무상태성의 비유적 표현(?)"></p>
+<hr>
+<h3 id="유니폼-인터페이스-Uniform"><a href="#유니폼-인터페이스-Uniform" class="headerlink" title="유니폼 인터페이스 (Uniform)"></a>유니폼 인터페이스 (Uniform)</h3><blockquote>
+<p>이 부분은 그리 어렵지 않은 부분이기에 간단하게 설명하고 넘어가도록 하겠다.</p>
+</blockquote>
+<p>유니폼 인터페이스는 GET, POST, PUT, DELETE라는 HTTP 메소드를 통해 URI에 통일성 있고 한정된 방식으로 요청을 보내는 아키텍처 스타일이다. 즉, HTTP 메소드만을 통해서 URI로 지정한 리소스에 접근할 수 있는 일관된 통신방식을 유니폼 인터페이스라고 하는 것이다.</p>
+<h3 id="캐시-가능-Cacheable"><a href="#캐시-가능-Cacheable" class="headerlink" title="캐시 가능 (Cacheable)"></a>캐시 가능 (Cacheable)</h3><blockquote>
+<p>REST는 HTTP 프로토콜을 그대로 따르기 때문에, 캐싱 기능을 그대로 적용할 수 있다는 장점을 갖는다.</p>
+</blockquote>
+<p>HTTP 프로토콜 표준에서 사용되는 <code>Last-Modified</code> 태그나 <code>E-Tag</code>를 활용하면 캐싱을 똑같이 구현할 수 있다. 하지만 필자는 여기서 조금 의아함이 들었었다.</p>
+<blockquote>
+<p><em>분명히 REST는 무상태성을 띈다고 했는데 캐싱이 어떻게 된다는거지..?</em></p>
+</blockquote>
+<p>여기서 주의해야 할 점은, 캐싱은 서버에서 처리하는 것이 아니라 브라우저에서 처리된다는 것이다. 즉, 브라우저 내에 존재하는 저장소에 캐싱을 하기 때문에, 이는 무상태성을 저해하는 개념이 절대 아니다!</p>
+<h3 id="자체-표현-구조-Self-Descriptiveness"><a href="#자체-표현-구조-Self-Descriptiveness" class="headerlink" title="자체 표현 구조 (Self-Descriptiveness)"></a>자체 표현 구조 (Self-Descriptiveness)</h3><blockquote>
+<p>한 줄로도 설명이 가능한 부분이다.<br>사람이 REST API 메시지만 봐도 이게 무슨 요청을 하는 것인지 직관적으로 쉽게 이해할 수 있도록 하는 특징을 자체 표현 구조라고 한다 🙂</p>
+</blockquote>
+<h3 id="클라이언트-서버-구조"><a href="#클라이언트-서버-구조" class="headerlink" title="클라이언트 - 서버 구조"></a>클라이언트 - 서버 구조</h3><blockquote>
+<p>무상태성과 연결되는 개념이다.</p>
+</blockquote>
+<p>무상태성에서 설명했듯, REST 구조에서 서버와 클라언트의 역할은 독립적이고 각자 맡은 역할이 명확하다. 이에 따라 우리는 서버와 클라이언트 사이의 의존성을 줄이며 안정성을 기대할 수 있게된다.</p>
+<h3 id="계층형-구조"><a href="#계층형-구조" class="headerlink" title="계층형 구조"></a>계층형 구조</h3><blockquote>
+<p>클라이언트가 요청을 보내는 것은 API 서버 하나지만, API 서버 자체는 다중화된 계층으로 구성될 수 있음을 의미하는 개념이다.</p>
+</blockquote>
+<p>즉, 클라이언트는 단순히 API 서버에만 요청을 보내는 것이지만, 요청을 받는 REST 서버는 로드 밸런싱, 암호화, 유저 인증 등의 계층을 두며 더 다양하고 넓은 기능의 활용을 기대할 수 있는 것이다.</p>
+<hr>
+<h2 id="그래서-핵심이-뭔가요"><a href="#그래서-핵심이-뭔가요" class="headerlink" title="그래서 핵심이 뭔가요..?"></a>그래서 핵심이 뭔가요..?</h2><blockquote>
+<p>뭐 이제 대충 REST에 대한 개괄적인 개념은 잡았으니, 조금 더 간단명료하게 REST를 정리해보도록 하자.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/169296510-f7173a0b-b336-4ff4-a295-233650e3cc54.png"></p>
+<p>REST란, HTTP URI를 통해 자원을 가독성 좋게 명시하고, HTTP 메소드(GET, POST, PUT, DELETE)를 통해 해당 자원(URI)에 대한 CRUD 오퍼레이션을 적용하는 것이다.</p>
+<h3 id="REST의-장점-😇"><a href="#REST의-장점-😇" class="headerlink" title="REST의 장점 😇"></a>REST의 장점 😇</h3><ol>
+<li>HTTP의 인프라를 그대로 사용하기에, 따로 인프라를 구축하는 수고를 하지 않아도 된다.</li>
+<li>HTTP 표준 프로토콜을 따르는 플랫폼에서 모두 사용 가능하다는 범용성 측면의 장점을 갖는다.</li>
+<li>요청의 의미를 파악하기 굉장히 쉽다.</li>
+<li>서버와 클라이언트의 역할이 명확하게 분리되어 있다.</li>
+</ol>
+<h3 id="REST의-단점-👿"><a href="#REST의-단점-👿" class="headerlink" title="REST의 단점 👿"></a>REST의 단점 👿</h3><ol>
+<li>명확한 표준(약속)이 규정되어있지 않다.</li>
+<li>사용 가능한 메소드가 4개로 한정적이다.</li>
+<li>구형 브라우저에 대한 호환성이 낮다.</li>
+</ol>
+<hr>
+<h2 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h2><blockquote>
+<p>REST API는 뭐..<br>”REST의 구조를 잘 따르는 API를 의미한다” ^^</p>
+</blockquote>
+<p>뜻은 굉장히 쉽지만, REST API를 설계할 때에는 반드시 주의해야할 점이 몇 가지 존재한다.</p>
+<p>물론 위에서 REST에는 명확한 표준 또는 약속이 규정되어 있지 않다고는 했지만, 그래도 어느정도 지켜야 하는 최소한의 표준은 존재한다!</p>
+<hr>
+<ol>
+<li><p>URI에는 명사만을 사용한다.</p>
+<p><strong><a target="_blank" rel="noopener" href="http://www.hoonjoo.com/studying">www.hoonjoo.com/studying</a> (X)</strong></p>
+</li>
+<li><p>대문자 사용을 최대한 지양한다.</p>
+</li>
+<li><p>언더바(_)를 사용하지 않고, 하이픈(-)을 사용한다.</p>
+</li>
+<li><p>파일 확장자를 포함하지 않는다.</p>
+</li>
+<li><p>마지막에 슬래시(’/’)를 포함시키지 않는다.</p>
+<p><strong><a target="_blank" rel="noopener" href="http://www.hoonjoo.com/profile/general/">www.hoonjoo.com/profile/general/</a> (X)</strong></p>
+</li>
+<li><p>URI에 HTTP 메소드가 들어가면 안된다.</p>
+<p><strong><a target="_blank" rel="noopener" href="http://www.hoonjoo.com/profile/delete">www.hoonjoo.com/profile/delete</a> (X)</strong></p>
+</li>
+</ol>
+<hr>
+<h3 id="Restful"><a href="#Restful" class="headerlink" title="Restful?"></a>Restful?</h3><blockquote>
+<p>위의 REST API 설계 원칙을 잘 따르고, REST 구조의 원리를 잘 준수하고 있는 서비스는 RESTful하다고 표현할 수 있다.</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/67448481/169296512-b4805db8-1834-472b-966d-534e0c8b578e.png"></p>
+<p>우리는 RESTful한 API를 통해 요청과 통신 등을 쉽고 좀 더 명확하게 이해할 수 있다 🙂</p>
+<hr>
+<h2 id="참조-자료"><a href="#참조-자료" class="headerlink" title="참조 자료"></a>참조 자료</h2><p><a target="_blank" rel="noopener" href="https://restfulapi.net/">What is REST - REST API Tutorial</a></p>
+<hr>
+</div><div class="article-licensing box"><div class="licensing-title"><p>REST API에 대해 알아보자</p><p><a href="https://hoonjoo-park.github.io/cs/network/restapi/">https://hoonjoo-park.github.io/cs/network/restapi/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>Hoonjoo</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2022-05-19</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2022-05-19</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/">네트워크</a></div><div class="sharethis-inline-share-buttons"></div><script src="https://platform-api.sharethis.com/js/sharethis.js#property=61ccb08ffa9c81001d245598&amp;product=sticky-share-buttons" defer></script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/algorithm/programmers/openChat/"><span class="level-item">프로그래머스 - 오픈채팅방 (Javascript)</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><script src="https://utteranc.es/client.js" repo="hoonjoo-park/hoonjoo-park.github.io" issue-term="pathname" label="🙋‍♂️" theme="github-light" crossorigin="anonymous" async></script></div></div></div><div class="column column-left is-3-tablet is-3-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#REST"><span class="level-left"><span class="level-item">1</span><span class="level-item">REST?</span></span></a></li><li><a class="level is-mobile" href="#REST의-구성요소"><span class="level-left"><span class="level-item">2</span><span class="level-item">REST의 구성요소</span></span></a></li><li><a class="level is-mobile" href="#REST의-특징-6가지"><span class="level-left"><span class="level-item">3</span><span class="level-item">REST의 특징 (6가지)</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#무상태성-Stateless-🥹"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">무상태성 (Stateless) 🥹</span></span></a></li><li><a class="level is-mobile" href="#유니폼-인터페이스-Uniform"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">유니폼 인터페이스 (Uniform)</span></span></a></li><li><a class="level is-mobile" href="#캐시-가능-Cacheable"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">캐시 가능 (Cacheable)</span></span></a></li><li><a class="level is-mobile" href="#자체-표현-구조-Self-Descriptiveness"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">자체 표현 구조 (Self-Descriptiveness)</span></span></a></li><li><a class="level is-mobile" href="#클라이언트-서버-구조"><span class="level-left"><span class="level-item">3.5</span><span class="level-item">클라이언트 - 서버 구조</span></span></a></li><li><a class="level is-mobile" href="#계층형-구조"><span class="level-left"><span class="level-item">3.6</span><span class="level-item">계층형 구조</span></span></a></li></ul></li><li><a class="level is-mobile" href="#그래서-핵심이-뭔가요"><span class="level-left"><span class="level-item">4</span><span class="level-item">그래서 핵심이 뭔가요..?</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#REST의-장점-😇"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">REST의 장점 😇</span></span></a></li><li><a class="level is-mobile" href="#REST의-단점-👿"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">REST의 단점 👿</span></span></a></li></ul></li><li><a class="level is-mobile" href="#REST-API"><span class="level-left"><span class="level-item">5</span><span class="level-item">REST API</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#Restful"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">Restful?</span></span></a></li></ul></li><li><a class="level is-mobile" href="#참조-자료"><span class="level-left"><span class="level-item">6</span><span class="level-item">참조 자료</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Hoon&#039;s 블로그" height="28"></a><p class="is-size-7"><span>&copy; 2022 Hoonjoo</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a><br><span id="busuanzi_container_site_uv">총 방문자 <span id="busuanzi_value_site_uv"></span> 명</span></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/hoonjoo-park"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
